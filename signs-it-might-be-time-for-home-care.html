@@ -25,6 +25,9 @@
     --ink:#16324F; --ink-deep:#0E2338; --paper:#FBF9F5; --paper-dim:#F2EEE6;
     --heart:#B23A48; --heart-deep:#8E2C38; --sage:#5E7268; --line:#DCD5C9;
     --white:#FFFFFF; --radius:14px; --shadow:0 10px 30px rgba(22,50,79,.10);
+    --shadow-lift:0 16px 34px rgba(22,50,79,.16);
+    --ease:cubic-bezier(.16,.84,.44,1); --ease-in:cubic-bezier(.55,0,.85,.35);
+    --dur-fast:180ms; --dur:260ms; --dur-slow:460ms;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -32,13 +35,16 @@
   h1,h2,h3{font-family:'Fraunces',serif;line-height:1.15;letter-spacing:-.01em}
   a{color:var(--heart)}
   .wrap{max-width:720px;margin:0 auto;padding:0 22px}
-  nav{position:sticky;top:0;z-index:50;background:rgba(251,249,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,249,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:0 0 0 rgba(22,50,79,0);transition:box-shadow var(--dur) var(--ease)}
+  nav.scrolled{box-shadow:0 6px 24px rgba(22,50,79,.08)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;max-width:1080px;margin:0 auto}
   .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;text-decoration:none;color:var(--ink)}
-  .logo svg{width:26px;height:26px}
+  .logo svg{width:26px;height:26px;transition:transform var(--dur) var(--ease)}
+  .logo:hover svg{transform:scale(1.1) rotate(-4deg)}
   .logo em{font-style:normal;color:var(--heart)}
-  .btn{display:inline-block;background:var(--heart);color:#fff;text-decoration:none;font-weight:800;padding:12px 24px;border-radius:999px;font-size:.95rem}
-  .btn:hover{background:var(--heart-deep)}
+  .btn{display:inline-block;background:var(--heart);color:#fff;text-decoration:none;font-weight:800;padding:12px 24px;border-radius:999px;font-size:.95rem;touch-action:manipulation;transition:transform var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease)}
+  .btn:hover{background:var(--heart-deep);transform:translateY(-2px);box-shadow:0 10px 22px rgba(178,58,72,.28)}
+  .btn:active{transform:translateY(0) scale(.97);box-shadow:none}
   a:focus-visible{outline:3px solid var(--heart);outline-offset:2px}
   .page-head{text-align:center;padding:56px 22px 10px;max-width:760px;margin:0 auto}
   .page-head .kicker{font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--heart);margin-bottom:12px}
@@ -75,19 +81,39 @@
   .suggest{margin:52px 0 0;padding-top:36px;border-top:1px solid var(--line)}
   .suggest h2{font-size:1.35rem;font-weight:900;margin-bottom:20px}
   .suggest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
-  .spost{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .15s ease}
-  .spost:hover{transform:translateY(-3px)}
+  .spost{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+  .spost:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
   .spost .cat{margin-bottom:10px}
   .spost h3{font-size:1rem;font-weight:700;line-height:1.35;margin:0 0 8px}
   .spost h3 a{text-decoration:none;color:var(--ink)}
   .spost h3 a:hover{color:var(--heart)}
   .spost p{font-size:.85rem;color:#3C5166;margin-bottom:14px}
-  .spost .read{margin-top:auto;font-weight:800;font-size:.85rem;color:var(--heart);text-decoration:none}
+  .spost .read{margin-top:auto;font-weight:800;font-size:.85rem;color:var(--heart);text-decoration:none;transition:color var(--dur-fast) var(--ease)}
   .spost .read:hover{text-decoration:underline}
+  .toc a{transition:color var(--dur-fast) var(--ease)}
+  .back-top{transition:color var(--dur-fast) var(--ease)}
+
+  /* ---------- reading progress ---------- */
+  .progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--heart);z-index:60;transition:width 80ms linear}
+
+  /* ---------- reveal on scroll ---------- */
+  /* uses the standalone `translate` property so it never fights with hover/press `transform` */
+  .reveal{opacity:0;translate:0 16px;transition:opacity .6s var(--ease),translate .6s var(--ease)}
+  .reveal.in-view{opacity:1;translate:0 0}
+  .suggest .spost{opacity:0;translate:0 18px;transition:opacity .55s var(--ease),translate .55s var(--ease)}
+  .suggest.in-view .spost{opacity:1;translate:0 0}
+  .suggest.in-view .spost:nth-child(1){transition-delay:.04s}
+  .suggest.in-view .spost:nth-child(2){transition-delay:.12s}
+  .suggest.in-view .spost:nth-child(3){transition-delay:.2s}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001s!important;transition:none!important}
+  }
 </style>
 </head>
 <body>
 
+<div class="progress-bar" id="progress-bar"></div>
 <nav>
   <div class="nav-inner">
     <a class="logo" href="index.html">
@@ -188,6 +214,34 @@
     <p>© 2026 TrueHeart Home Care. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  // Reading progress bar
+  const progressBar = document.getElementById('progress-bar');
+  const updateProgress = () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = (scrolled || 0) + '%';
+  };
+  addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // Nav scroll shadow
+  const navEl = document.querySelector('nav');
+  const onNavScroll = () => navEl.classList.toggle('scrolled', window.scrollY > 8);
+  addEventListener('scroll', onNavScroll, {passive:true});
+  onNavScroll();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.page-head, .toc, article h2, .callout, .cta-box, .suggest, table').forEach(el => {
+    if (el.tagName === 'H2' && el.closest('.cta-box, .suggest')) return; // container already reveals as one block
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+</script>
 
 </body>
 </html>
