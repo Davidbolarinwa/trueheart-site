@@ -158,9 +158,12 @@
   .nav-cta-wrap{display:flex;flex-direction:column;gap:12px;padding:16px 18px 22px;border-top:1px solid var(--line)}
   .nav-cta-wrap .nav-phone{font-weight:700;font-size:.92rem;text-decoration:none;color:var(--ink)}
   .nav-cta-wrap .nav-phone:hover{color:var(--heart)}
-  .nav-cta{text-align:center}
+  .nav-cta{text-align:center;white-space:nowrap;flex-shrink:0}
   @media (min-width:901px){
     .nav-toggle{display:none}
+    .nav-inner{justify-content:flex-start;column-gap:36px}
+    .nav-menu{flex:1 1 auto}
+    .nav-cta-wrap{margin-left:auto}
     .nav-menu{position:static;max-height:none;overflow:visible;background:none;border:none;box-shadow:none;display:flex;align-items:center;gap:10px}
     .nav-list{flex-direction:row;align-items:center;padding:0;gap:2px}
     .nav-item{border-bottom:none}
@@ -174,7 +177,7 @@
     .nav-dropdown-nested.open{opacity:1;visibility:visible;translate:0 0}
     .nested-btn .caret{transform:rotate(-90deg)}
     .nested-btn[aria-expanded="true"] .caret{transform:rotate(-90deg)}
-    .nav-cta-wrap{flex-direction:row;align-items:center;padding:0;border-top:none;gap:14px}
+    .nav-cta-wrap{flex-direction:row;align-items:center;padding:0;border-top:none;gap:14px;flex-shrink:0}
   }
   @media (prefers-reduced-motion:reduce){
     .nav-menu,.nav-dropdown,.nav-dropdown-nested,.caret{transition:none!important}
@@ -248,7 +251,7 @@
       </ul>
       <div class="nav-cta-wrap">
         <a class="nav-phone" href="tel:+12045550137">(204) 555-0137</a>
-        <a class="btn small nav-cta" href="/get-in-touch">Free In-Home Consultation</a>
+        <a class="btn small nav-cta" href="/get-in-touch">Free Consultation</a>
       </div>
     </div>
   </div>
