@@ -40,7 +40,7 @@
   h1,h2,h3{font-family:'Fraunces',serif;line-height:1.15;letter-spacing:-.01em}
   a{color:var(--heart)}
   .wrap{max-width:720px;margin:0 auto;padding:0 22px}
-  nav{position:sticky;top:0;z-index:50;background:rgba(251,249,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:0 0 0 rgba(22,50,79,0);transition:box-shadow var(--dur) var(--ease)}
+  nav{position:sticky;top:64px;z-index:50;background:rgba(251,249,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:0 0 0 rgba(22,50,79,0);transition:box-shadow var(--dur) var(--ease)}
   nav.scrolled{box-shadow:0 6px 24px rgba(22,50,79,.08)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;max-width:1080px;margin:0 auto;position:relative}
   .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;text-decoration:none;color:var(--ink)}
@@ -123,9 +123,43 @@
     .nav-menu,.nav-dropdown,.nav-dropdown-nested,.caret{transition:none!important}
   }
 
+  /* ---------- announcement banner ---------- */
+  .announcement-banner{
+    position:fixed;top:0;left:0;right:0;z-index:9999;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    height:64px;padding:0 22px;
+    background:#5B1AEF;color:#fff;text-decoration:none;
+    cursor:pointer;
+    transition:background var(--dur-fast) var(--ease);
+  }
+  .announcement-banner:hover,.announcement-banner:focus-visible{background:#4A14C4}
+  .ann-badge{
+    flex:none;background:#fff;color:#5B1AEF;
+    font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.02em;
+    padding:4px 10px;border-radius:999px;
+  }
+  .ann-text{font-size:.92rem;color:#fff;line-height:1.3}
+  .ann-text strong{font-weight:800}
+  .ann-text-short{display:none}
+  .ann-arrow{flex:none;color:#fff;transition:transform var(--dur-fast) var(--ease)}
+  .announcement-banner:hover .ann-arrow{transform:translateX(4px)}
+  body{padding-top:64px}
+  @media(max-width:767px){
+    .ann-text-full{display:none}
+    .ann-text-short{display:inline}
+    .ann-text{font-size:.83rem}
+    .announcement-banner{gap:8px;padding:0 16px}
+  }
 </style>
 </head>
 <body>
+<a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg families for Fall 2026 — see if your loved one qualifies">
+  <span class="ann-badge">New</span>
+  <span class="ann-text ann-text-full"><strong>Now Accepting New Winnipeg Families for Fall 2026</strong> — See If Your Loved One Qualifies</span>
+  <span class="ann-text ann-text-short"><strong>Now Accepting Fall 2026 Families</strong></span>
+  <svg class="ann-arrow" width="28" height="14" viewBox="0 0 28 14" fill="none" aria-hidden="true"><path d="M0 7h24M17 1l7 6-7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+
 
 <nav aria-label="Primary">
   <div class="nav-inner">
