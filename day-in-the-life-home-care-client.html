@@ -61,8 +61,8 @@
   nav.scrolled{box-shadow:0 6px 24px rgba(22,50,79,.08)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;max-width:1080px;margin:0 auto}
   .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;text-decoration:none;color:var(--ink)}
-  .logo svg{width:26px;height:26px;transition:transform var(--dur) var(--ease)}
-  .logo:hover svg{transform:scale(1.1) rotate(-4deg)}
+  .logo svg,.logo img{width:26px;height:26px;transition:transform var(--dur) var(--ease);object-fit:contain}
+  .logo:hover svg,.logo:hover img{transform:scale(1.1) rotate(-4deg)}
   .logo em{font-style:normal;color:var(--heart)}
   .btn{display:inline-block;background:var(--heart);color:#fff;text-decoration:none;font-weight:800;padding:12px 24px;border-radius:999px;font-size:.95rem;touch-action:manipulation;transition:transform var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease)}
   .btn:hover{background:var(--heart-deep);transform:translateY(-2px);box-shadow:0 10px 22px rgba(178,58,72,.28)}
@@ -131,23 +131,131 @@
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.001s!important;transition:none!important}
   }
+
+  /* ---------- primary nav (mega menu) — added by nav build script ---------- */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:transparent;border:1px solid var(--line);border-radius:10px;color:var(--ink);cursor:pointer;flex:none;touch-action:manipulation}
+  .nav-toggle:hover{background:var(--paper-dim)}
+  .nav-toggle svg{width:20px;height:20px}
+  .nav-toggle .icon-close{display:none}
+  .nav-toggle[aria-expanded="true"] .icon-burger{display:none}
+  .nav-toggle[aria-expanded="true"] .icon-close{display:block}
+  .nav-menu{position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:var(--shadow);max-height:0;overflow:hidden;transition:max-height var(--dur-slow) var(--ease)}
+  .nav-menu.open{max-height:80vh;overflow-y:auto}
+  .nav-list{list-style:none;padding:10px 18px;display:flex;flex-direction:column;margin:0}
+  .nav-item{border-bottom:1px solid var(--line);position:relative}
+  .nav-item:last-child{border-bottom:none}
+  .nav-link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 4px;text-decoration:none;color:var(--ink);font-weight:700;font-size:.98rem;background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:'Public Sans',system-ui,sans-serif}
+  .nav-link:hover{color:var(--heart)}
+  a.nav-link[aria-current="page"]{color:var(--heart)}
+  .caret{width:10px;height:8px;flex:none;transition:transform var(--dur-fast) var(--ease)}
+  .nav-drop-btn[aria-expanded="true"] > .caret{transform:rotate(180deg)}
+  .nav-dropdown{list-style:none;margin:0;padding:0 0 10px 14px;display:none}
+  .nav-dropdown.open{display:block}
+  .nav-dropdown li a,.nav-dropdown li .nested-btn{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 4px;text-decoration:none;color:#3C5166;font-weight:600;font-size:.92rem;width:100%;background:none;border:none;text-align:left;cursor:pointer;font-family:inherit}
+  .nav-dropdown li a:hover,.nav-dropdown li .nested-btn:hover{color:var(--heart)}
+  .nav-dropdown-nested{padding-left:16px}
+  .nav-cta-wrap{display:flex;flex-direction:column;gap:12px;padding:16px 18px 22px;border-top:1px solid var(--line)}
+  .nav-cta-wrap .nav-phone{font-weight:700;font-size:.92rem;text-decoration:none;color:var(--ink)}
+  .nav-cta-wrap .nav-phone:hover{color:var(--heart)}
+  .nav-cta{text-align:center}
+  @media (min-width:901px){
+    .nav-toggle{display:none}
+    .nav-menu{position:static;max-height:none;overflow:visible;background:none;border:none;box-shadow:none;display:flex;align-items:center;gap:10px}
+    .nav-list{flex-direction:row;align-items:center;padding:0;gap:2px}
+    .nav-item{border-bottom:none}
+    .nav-link{padding:10px 12px;border-radius:8px;white-space:nowrap}
+    .nav-link:hover{background:var(--paper-dim)}
+    .nav-dropdown{display:block;position:absolute;top:100%;left:0;min-width:260px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-lift);padding:8px;margin-top:4px;opacity:0;visibility:hidden;translate:0 6px;transition:opacity var(--dur-fast) var(--ease),translate var(--dur-fast) var(--ease),visibility var(--dur-fast)}
+    .nav-dropdown.open{opacity:1;visibility:visible;translate:0 0}
+    .nav-dropdown li a,.nav-dropdown li .nested-btn{padding:10px 12px;border-radius:8px}
+    .nav-dropdown li a:hover,.nav-dropdown li .nested-btn:hover{background:var(--paper-dim)}
+    .nav-dropdown-nested{position:absolute;left:100%;top:-8px;padding-left:0;margin-left:6px;min-width:250px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-lift);padding:8px;display:block;opacity:0;visibility:hidden;translate:0 6px;transition:opacity var(--dur-fast) var(--ease),translate var(--dur-fast) var(--ease),visibility var(--dur-fast)}
+    .nav-dropdown-nested.open{opacity:1;visibility:visible;translate:0 0}
+    .nested-btn .caret{transform:rotate(-90deg)}
+    .nested-btn[aria-expanded="true"] .caret{transform:rotate(-90deg)}
+    .nav-cta-wrap{flex-direction:row;align-items:center;padding:0;border-top:none;gap:14px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .nav-menu,.nav-dropdown,.nav-dropdown-nested,.caret{transition:none!important}
+  }
+
 </style>
 </head>
 <body>
 
 <div class="progress-bar" id="progress-bar"></div>
-<nav>
+<nav aria-label="Primary">
   <div class="nav-inner">
-    <a class="logo" href="index.html">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21C12 21 3 15.5 3 9.5C3 6.4 5.4 4 8.2 4C9.8 4 11.2 4.8 12 6C12.8 4.8 14.2 4 15.8 4C18.6 4 21 6.4 21 9.5C21 15.5 12 21 12 21Z" fill="#B23A48"/><path d="M6 12H9L10.5 9.5L12.5 14L14 11.5H18" stroke="#FBF9F5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <a class="logo" href="index.html#top">
+      <img src="bonhearts-logo.gif" alt="" aria-hidden="true">
       <span>Bon<em>Heart</em></span>
     </a>
-    <a class="btn" href="index.html#get-started">Get my rate</a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+      <svg class="icon-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="nav-menu" id="nav-menu">
+      <ul class="nav-list">
+        <li class="nav-item"><a class="nav-link" href="index.html#top">Home</a></li>
+        <li class="nav-item">
+          <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-services">Services<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-dropdown" id="menu-services">
+            <li><a href="personal-care-services.html">Personal Care Services</a></li>
+            <li><a href="post-hospital-convalescent-care.html">Post-Hospital &amp; Convalescent Care</a></li>
+            <li><a href="overnight-respite-care.html">Overnight &amp; Respite Care</a></li>
+            <li><a href="senior-care.html">Senior Care</a></li>
+            <li><a href="companionship-outings.html">Companionship &amp; Outings</a></li>
+            <li><a href="household-support.html">Household Support</a></li>
+            <li><a href="specialized-care.html">Specialized Care</a></li>
+            <li><a href="disability-support-services.html">Disability Support Services</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-about">About Us<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-dropdown" id="menu-about">
+            <li><a href="our-story.html">Our Story</a></li>
+            <li><a href="index.html#founders">Meet the Founders</a></li>
+            <li><a href="our-approach-values.html">Our Approach &amp; Values</a></li>
+            <li><a href="careers.html">Careers</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-locations">Locations<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-dropdown" id="menu-locations">
+            <li>
+              <button type="button" class="nested-btn nav-drop-btn" aria-expanded="false" aria-controls="menu-manitoba">Manitoba<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <ul class="nav-dropdown nav-dropdown-nested" id="menu-manitoba">
+                <li><a href="manitoba.html">All Manitoba Locations</a></li>
+                <li><a href="manitoba-winnipeg.html">Winnipeg</a></li>
+                <li><a href="manitoba-headingley.html">Headingley</a></li>
+                <li><a href="manitoba-interlake-eastern-region.html">Interlake Eastern Region</a></li>
+                <li><a href="manitoba-northern-health-region.html">Northern Health Region</a></li>
+                <li><a href="manitoba-southern-health-region.html">Southern Health Region</a></li>
+              </ul>
+            </li>
+            <li><a href="british-columbia.html">British Columbia</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-resources">Resources<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-dropdown" id="menu-resources">
+            <li><a href="/blogs">Our Blog</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+      </ul>
+      <div class="nav-cta-wrap">
+        <a class="nav-phone" href="tel:+12045550137">(204) 555-0137</a>
+        <a class="btn small nav-cta" href="/get-in-touch">Free In-Home Consultation</a>
+      </div>
+    </div>
   </div>
 </nav>
 
 <div class="wrap">
-  <p style="padding:26px 0 0;font-size:.85rem"><a href="index.html#blog" style="text-decoration:none;font-weight:700">← Back to all care guides</a></p>
+  <p style="padding:26px 0 0;font-size:.85rem"><a href="/blogs" style="text-decoration:none;font-weight:700">← Back to all care guides</a></p>
   <article id="day-in-life">
 
   <span class="cat">What it's really like</span>
@@ -186,7 +294,7 @@
   <div class="cta-box">
     <h2>Wondering what a care day would look like in your family's home?</h2>
     <p>That's a 15-minute conversation. Request your rate and we'll book your free discovery call.</p>
-    <a class="btn" href="index.html#get-started">Request my rate</a>
+    <a class="btn" href="/get-in-touch">Request my rate</a>
   </div>
 
 
@@ -252,5 +360,89 @@
   });
 </script>
 
+<script>
+(function(){
+  var nav = document.querySelector('nav[aria-label="Primary"]');
+  if (!nav) return;
+  var toggle = document.getElementById('nav-toggle');
+  var menu = document.getElementById('nav-menu');
+  var dropBtns = Array.prototype.slice.call(nav.querySelectorAll('.nav-drop-btn'));
+
+  function isDesktop(){ return window.matchMedia('(min-width:901px)').matches; }
+
+  function closeDropdown(btn){
+    var id = btn.getAttribute('aria-controls');
+    var list = document.getElementById(id);
+    btn.setAttribute('aria-expanded','false');
+    if (list){
+      list.classList.remove('open');
+      var nested = list.querySelectorAll('.nav-drop-btn');
+      for (var i=0;i<nested.length;i++){ closeDropdown(nested[i]); }
+    }
+  }
+  function openDropdown(btn){
+    var id = btn.getAttribute('aria-controls');
+    var list = document.getElementById(id);
+    btn.setAttribute('aria-expanded','true');
+    if (list) list.classList.add('open');
+  }
+
+  dropBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var nested = btn.classList.contains('nested-btn');
+      if (isDesktop() && !nested){
+        dropBtns.forEach(function(b){ if (b !== btn) closeDropdown(b); });
+      }
+      if (expanded){ closeDropdown(btn); } else { openDropdown(btn); }
+    });
+  });
+
+  document.addEventListener('click', function(e){
+    if (!nav.contains(e.target)) dropBtns.forEach(closeDropdown);
+  });
+
+  nav.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    var openBtn = dropBtns.filter(function(b){ return b.getAttribute('aria-expanded') === 'true'; }).pop();
+    if (openBtn){
+      closeDropdown(openBtn);
+      openBtn.focus();
+      e.stopPropagation();
+    } else if (menu.classList.contains('open')){
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.focus();
+    }
+  });
+
+  if (toggle){
+    toggle.addEventListener('click', function(){
+      var open = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (!open) dropBtns.forEach(closeDropdown);
+    });
+  }
+
+  var lastDesktop = isDesktop();
+  window.addEventListener('resize', function(){
+    var d = isDesktop();
+    if (d !== lastDesktop){
+      lastDesktop = d;
+      dropBtns.forEach(closeDropdown);
+      if (menu) menu.classList.remove('open');
+      if (toggle) toggle.setAttribute('aria-expanded','false');
+    }
+  });
+
+  var here = location.pathname.split('/').pop() || 'index.html';
+  var navLinks = nav.querySelectorAll('a[href]');
+  for (var i=0;i<navLinks.length;i++){
+    var a = navLinks[i];
+    var hrefPath = a.getAttribute('href').split('#')[0].replace(/^\//, '') || 'index.html';
+    if (hrefPath === here) a.setAttribute('aria-current','page');
+  }
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Your Personalized Rate | BonHeart Home Care</title>
+<meta name="description" content="Answer 7 quick questions and BonHeart Home Care will follow up with your personalized rate and a link to book a free 15-minute discovery call.">
+<link rel="canonical" href="https://trueheartshomecare.ca/get-in-touch">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16324F; --ink-deep:#0E2338; --paper:#FBF9F5; --paper-dim:#F2EEE6;
+    --heart:#B23A48; --heart-deep:#8E2C38; --sage:#5E7268; --line:#DCD5C9;
+    --white:#FFFFFF; --radius:14px; --shadow:0 10px 30px rgba(22,50,79,.10);
+    --shadow-lift:0 16px 34px rgba(22,50,79,.16);
+    --ease:cubic-bezier(.16,.84,.44,1); --ease-in:cubic-bezier(.55,0,.85,.35);
+    --dur-fast:180ms; --dur:260ms; --dur-slow:460ms;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Public Sans',system-ui,sans-serif;background:var(--ink);color:var(--ink);line-height:1.6;font-size:17px}
+  h1,h2,h3{font-family:'Fraunces',serif;line-height:1.12;letter-spacing:-.01em}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .btn{display:inline-block;background:var(--heart);color:#fff;text-decoration:none;font-weight:800;padding:13px 26px;border-radius:999px;border:none;cursor:pointer;font-size:1rem;font-family:'Public Sans',sans-serif;touch-action:manipulation;transition:transform var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease)}
+  .btn:hover{background:var(--heart-deep);transform:translateY(-2px);box-shadow:0 10px 22px rgba(178,58,72,.28)}
+  .btn:active{transform:translateY(0) scale(.97);box-shadow:none}
+  .btn:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--heart);outline-offset:2px}
+  .kicker{font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#E7A0AA;margin-bottom:14px}
+  h2.section-title{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:900;max-width:700px;margin-bottom:18px;color:#fff}
+  .center{text-align:center}
+  .center .lede,.center h2{margin-left:auto;margin-right:auto}
+  .mt-40{margin-top:40px}
+
+  .minimal-brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:32px 22px 0;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;color:var(--paper)}
+  .minimal-brand img{width:28px;height:28px;object-fit:contain}
+  .minimal-brand em{font-style:normal;color:var(--heart)}
+
+  /* ---------- form (moved verbatim from the homepage) ---------- */
+  .form-band{background:var(--ink);color:var(--paper);padding:56px 0 80px}
+  .form-card{
+    max-width:640px;margin:40px auto 0;background:var(--white);color:var(--ink);
+    border-radius:20px;padding:42px 38px;box-shadow:0 20px 50px rgba(0,0,0,.25);
+  }
+  .form-card label{display:block;font-weight:700;font-size:.95rem;margin:0 0 14px}
+  .form-card input[type=text],.form-card input[type=tel],.form-card input[type=email],.form-card select,.form-card textarea{
+    width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;
+    font-family:'Public Sans',sans-serif;font-size:1rem;background:var(--paper);color:var(--ink);
+  }
+  .form-card textarea{min-height:96px;resize:vertical}
+  .form-card input:focus,.form-card select:focus,.form-card textarea:focus{border-color:var(--heart);outline:none}
+  .progress{height:6px;background:var(--paper-dim);border-radius:999px;overflow:hidden;margin-bottom:8px}
+  .progress-fill{height:100%;width:0%;background:var(--heart);border-radius:999px;transition:width var(--dur-slow) var(--ease)}
+  .step-count{font-size:.78rem;font-weight:700;color:var(--sage);margin-bottom:22px}
+  .fstep{display:none}
+  .fstep.active{display:block;animation:fadein .25s ease}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .fstep .hint{font-size:.85rem;color:var(--sage);margin:-6px 0 14px}
+  .opt-grid{display:grid;gap:10px}
+  .opt{
+    display:block;border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;
+    font-size:.97rem;font-weight:600;background:var(--paper);
+    transition:border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  }
+  .opt:hover{border-color:var(--heart);transform:translateY(-1px)}
+  .opt:active{transform:translateY(0) scale(.99)}
+  .opt input{position:absolute;opacity:0;pointer-events:none}
+  .opt.selected{border-color:var(--heart);background:rgba(178,58,72,.06);animation:optpop .28s var(--ease)}
+  @keyframes optpop{0%{transform:scale(.97)}60%{transform:scale(1.015)}100%{transform:scale(1)}}
+  .opt small{display:block;font-weight:500;color:var(--sage);font-size:.82rem;margin-top:2px}
+  .wizard-nav{display:flex;gap:12px;margin-top:24px}
+  .wizard-nav .btn{flex:1;text-align:center}
+  .btn-back{
+    background:transparent;color:var(--ink);border:1.5px solid var(--line);
+    font-weight:700;padding:13px 26px;border-radius:999px;cursor:pointer;font-size:1rem;
+    font-family:'Public Sans',sans-serif;touch-action:manipulation;
+    transition:border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  }
+  .btn-back:hover{border-color:var(--ink)}
+  .btn-back:active{transform:scale(.97)}
+  .ferr{display:none;color:var(--heart);font-size:.85rem;font-weight:700;margin-top:10px}
+  .form-promise{color:#C4D2DE;font-size:.85rem;margin-top:18px;text-align:center}
+  .form-success{display:none;text-align:center;padding:30px 0 10px}
+  .form-success h3{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:10px}
+
+  @media (max-width:640px){
+    .form-card{padding:32px 22px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001s!important;transition:none!important}
+  }
+
+</style>
+</head>
+<body>
+
+<div class="minimal-brand" aria-hidden="false">
+  <img src="bonhearts-logo.gif" alt="BonHeart Home Care" width="28" height="28">
+  <span>Bon<em>Heart</em></span>
+</div>
+
+<section class="form-band reveal" id="get-started">
+  <div class="wrap center">
+    <p class="kicker">Get your personalized rate</p>
+    <h2 class="section-title" style="margin-left:auto;margin-right:auto">Answer 7 quick questions.<br>We'll reach out to book your free discovery call.</h2>
+    <div class="form-card" style="text-align:left">
+      <form id="lead-form" novalidate>
+        <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+        <p class="step-count" id="step-count">Step 1 of 7</p>
+
+        <!-- STEP 1: Service area gate -->
+        <div class="fstep active" data-step="1">
+          <label for="f-postal">What's the postal code where care is needed?</label>
+          <p class="hint">We'll instantly confirm you're in our service area.</p>
+          <input id="f-postal" name="postal" type="text" placeholder="e.g., R3M 2X4" autocomplete="postal-code" maxlength="7">
+          <p class="ferr" id="err-1">Please enter a valid postal code (e.g., R3M 2X4).</p>
+        </div>
+
+        <!-- STEP 2: Who needs care + decision role -->
+        <div class="fstep" data-step="2">
+          <label>Who needs care?</label>
+          <div class="opt-grid" data-name="relationship">
+            <label class="opt"><input type="radio" name="relationship" value="My mom">My mom</label>
+            <label class="opt"><input type="radio" name="relationship" value="My dad">My dad</label>
+            <label class="opt"><input type="radio" name="relationship" value="My spouse">My spouse</label>
+            <label class="opt"><input type="radio" name="relationship" value="Myself">Myself</label>
+            <label class="opt"><input type="radio" name="relationship" value="Another family member">Another family member</label>
+          </div>
+          <p class="ferr" id="err-2">Please choose one.</p>
+        </div>
+
+        <!-- STEP 3: Decision maker -->
+        <div class="fstep" data-step="3">
+          <label>Who will be making the final decision about care?</label>
+          <p class="hint">This helps us make sure the right people are on the call.</p>
+          <div class="opt-grid" data-name="decision">
+            <label class="opt"><input type="radio" name="decision" value="me">Me — I can make this decision</label>
+            <label class="opt"><input type="radio" name="decision" value="me-plus-family">Me, together with family<small>We'll suggest including them on the discovery call</small></label>
+            <label class="opt"><input type="radio" name="decision" value="person-receiving">The person receiving care decides</label>
+            <label class="opt"><input type="radio" name="decision" value="gathering">I'm gathering information for someone else</label>
+          </div>
+          <p class="ferr" id="err-3">Please choose one.</p>
+        </div>
+
+        <!-- STEP 4: Care type + hours -->
+        <div class="fstep" data-step="4">
+          <label>What kind of help, and roughly how much?</label>
+          <div class="opt-grid" data-name="care" style="margin-bottom:16px">
+            <label class="opt"><input type="radio" name="care" value="comfort">Everyday support at home (Comfort Care)</label>
+            <label class="opt"><input type="radio" name="care" value="respite">A break for the family caregiver (Respite)</label>
+            <label class="opt"><input type="radio" name="care" value="recovery">Recovery after surgery or hospital</label>
+            <label class="opt"><input type="radio" name="care" value="disability">Disability support</label>
+            <label class="opt"><input type="radio" name="care" value="overnight">Overnight or live-in care</label>
+            <label class="opt"><input type="radio" name="care" value="unsure">Not sure yet — help me figure it out</label>
+          </div>
+          <div class="opt-grid" data-name="hours">
+            <label class="opt"><input type="radio" name="hours" value="1-8">A few hours (1–8 hrs/week)</label>
+            <label class="opt"><input type="radio" name="hours" value="9-20">Part-time support (9–20 hrs/week)</label>
+            <label class="opt"><input type="radio" name="hours" value="21-40">Daily support (21–40 hrs/week)</label>
+            <label class="opt"><input type="radio" name="hours" value="24-7">Around-the-clock / live-in</label>
+            <label class="opt"><input type="radio" name="hours" value="unsure">Not sure yet</label>
+          </div>
+          <p class="ferr" id="err-4">Please answer both questions.</p>
+        </div>
+
+        <!-- STEP 5: Timing -->
+        <div class="fstep" data-step="5">
+          <label>How soon is care needed?</label>
+          <div class="opt-grid" data-name="timing">
+            <label class="opt"><input type="radio" name="timing" value="this-week">Right away — this week</label>
+            <label class="opt"><input type="radio" name="timing" value="this-month">Within the next month</label>
+            <label class="opt"><input type="radio" name="timing" value="1-3-months">1–3 months from now</label>
+            <label class="opt"><input type="radio" name="timing" value="researching">Just researching for now</label>
+          </div>
+          <p class="ferr" id="err-5">Please choose one.</p>
+        </div>
+
+        <!-- STEP 6: Funding reality check -->
+        <div class="fstep" data-step="6">
+          <label>Private home care in Winnipeg typically runs $30–45/hr. How would your family fund care?</label>
+          <p class="hint">Several programs can offset part or all of the cost — we'll help you with the paperwork.</p>
+          <div class="opt-grid" data-name="funding">
+            <label class="opt"><input type="radio" name="funding" value="private">Private pay — family funds<small>Comfortable in the range above</small></label>
+            <label class="opt"><input type="radio" name="funding" value="sfmc">WRHA Self &amp; Family Managed Care<small>Approved or applying</small></label>
+            <label class="opt"><input type="radio" name="funding" value="vac">Veterans Affairs Canada</label>
+            <label class="opt"><input type="radio" name="funding" value="insurance">Long-term care insurance</label>
+            <label class="opt"><input type="radio" name="funding" value="help">Not sure — help me find funding</label>
+            <label class="opt"><input type="radio" name="funding" value="outside-budget">That range is outside our budget</label>
+          </div>
+          <p class="ferr" id="err-6">Please choose one.</p>
+        </div>
+
+        <!-- STEP 7: Situation + contact -->
+        <div class="fstep" data-step="7">
+          <label for="f-situation">Briefly, what's going on?</label>
+          <p class="hint">Two or three sentences is perfect — it helps us prepare for your call so you don't repeat yourself.</p>
+          <textarea id="f-situation" name="situation" placeholder="e.g., Mom is 82, still at home in St. Vital, but she's had two falls this winter and Dad is exhausted…"></textarea>
+          <div style="margin-top:16px">
+            <label for="f-name" style="margin-bottom:6px">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g., Sarah">
+          </div>
+          <div style="margin-top:16px">
+            <label for="f-phone" style="margin-bottom:6px">Best number to reach you</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="(204) 555-0000">
+          </div>
+          <div style="margin-top:16px">
+            <label for="f-email" style="margin-bottom:6px">Your email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+          </div>
+          <p class="ferr" id="err-7">Please tell us a little about the situation and how to reach you.</p>
+        </div>
+
+        <div class="wizard-nav">
+          <button type="button" class="btn-back" id="btn-back" style="display:none">← Back</button>
+          <button type="button" class="btn big" id="btn-next">Continue →</button>
+        </div>
+        <p class="form-promise">No spam, no pressure. We'll text and email you a link to book a free 15-minute discovery call — that's it.<br><strong style="color:var(--heart)">Founder-led = limited spots.</strong> If our roster is full, we'll tell you honestly and offer the waitlist.</p>
+      </form>
+
+      <!-- Qualified -->
+      <div class="form-success" id="success-qualified">
+        <h3>Thank you — check your phone and inbox. 📱✉️</h3>
+        <p>We're sending a text and email with a link to book your free 15-minute discovery call. From there: your care package, a free in-home assessment with a case coordinator, and the right caregiver matched to your family.</p>
+      </div>
+
+      <!-- Nurture (researching) -->
+      <div class="form-success" id="success-nurture">
+        <h3>Smart to research early. 📚</h3>
+        <p>We'll email you our most useful guides — starting with the signs checklist and the Manitoba funding guide — and check in gently. No pressure, no phone calls you didn't ask for. When the time comes, you'll know exactly what to do.</p>
+      </div>
+
+      <!-- Out of area -->
+      <div class="form-success" id="success-out-of-area">
+        <h3>We're not in your area yet. 🗺️</h3>
+        <p>BonHeart currently serves Winnipeg and immediate surrounding communities. We've saved your details and will reach out the moment we expand to your area. In the meantime, your regional health authority's home care office is the best starting point.</p>
+      </div>
+
+      <!-- Budget mismatch -->
+      <div class="form-success" id="success-budget">
+        <h3>Let's point you somewhere genuinely useful. 💛</h3>
+        <p>If private rates are out of reach right now, you may still qualify for publicly funded home care through the WRHA — call their intake line at <strong>204-788-8330</strong>. And read our <a href="home-care-funding-manitoba.html">Manitoba funding guide</a>: programs like Self &amp; Family Managed Care surprise many families. We'll email it to you now.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ══════════ Multi-step qualification form ══════════
+  // CONFIG — edit these:
+  const FORM_ENDPOINT = "https://hook.us2.make.com/9c9o12ehfi4o7vvdtzjywuthaje3b81p";  // Make.com webhook
+  const IN_AREA_FSA_PREFIXES = ["R2", "R3"];          // Winnipeg proper
+  const IN_AREA_FSA_EXACT = ["R1A", "R1B", "R4A"];    // surrounding: Selkirk, Lockport, Stonewall — edit to taste
+
+  const form = document.getElementById('lead-form');
+  const steps = [...form.querySelectorAll('.fstep')];
+  const fill = document.getElementById('progress-fill');
+  const stepCount = document.getElementById('step-count');
+  const btnNext = document.getElementById('btn-next');
+  const btnBack = document.getElementById('btn-back');
+  let cur = 0;
+
+  // option-card selection styling
+  form.querySelectorAll('.opt input').forEach(inp => {
+    inp.addEventListener('change', () => {
+      inp.closest('.opt-grid').querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      inp.closest('.opt').classList.add('selected');
+    });
+  });
+
+  // Pre-fill the care package from a ?care= query param (set by pricing card links)
+  const careParam = new URLSearchParams(location.search).get('care');
+  if (careParam) {
+    const radio = form.querySelector('input[name="care"][value="' + careParam + '"]');
+    if (radio) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event('change', {bubbles: true}));
+    }
+  }
+
+  function show(i){
+    steps.forEach((s,idx) => s.classList.toggle('active', idx === i));
+    fill.style.width = ((i+1)/steps.length*100) + '%';
+    stepCount.textContent = 'Step ' + (i+1) + ' of ' + steps.length;
+    btnBack.style.display = i === 0 ? 'none' : 'block';
+    btnNext.textContent = i === steps.length-1 ? 'Request my rate →' : 'Continue →';
+    form.querySelectorAll('.ferr').forEach(e => e.style.display='none');
+  }
+
+  function val(name){
+    const el = form.querySelector('[name="'+name+'"]:checked');
+    return el ? el.value : (form.querySelector('[name="'+name+'"]') ? form.querySelector('[name="'+name+'"]').value.trim() : '');
+  }
+
+  function validate(i){
+    const err = document.getElementById('err-'+(i+1));
+    let ok = true;
+    if (i === 0) ok = /^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$/.test(val('postal'));
+    if (i === 1) ok = !!val('relationship');
+    if (i === 2) ok = !!val('decision');
+    if (i === 3) ok = !!val('care') && !!val('hours');
+    if (i === 4) ok = !!val('timing');
+    if (i === 5) ok = !!val('funding');
+    if (i === 6){
+      const reasons = [];
+      if (val('situation').length < 15) reasons.push('a few words about the situation (at least 15 characters)');
+      if (!val('name')) reasons.push('your name');
+      if (val('phone').replace(/\D/g,'').length < 10) reasons.push('a valid 10-digit phone number');
+      if (!/.+@.+\..+/.test(val('email'))) reasons.push('a valid email address');
+      ok = reasons.length === 0;
+      if (err) err.textContent = ok ? '' : 'Please add: ' + reasons.join(', ') + '.';
+      if (!ok){
+        console.log('Step 7 field check:', {
+          situation: val('situation') + ' (length ' + val('situation').length + ', needs 15+)',
+          name: val('name') || '(empty)',
+          phone: val('phone') + ' (' + val('phone').replace(/\D/g,'').length + ' digits, needs 10)',
+          email: val('email') || '(empty)'
+        });
+        console.log('Missing/invalid:', reasons);
+      }
+    }
+    if (err) err.style.display = ok ? 'none' : 'block';
+    if (!ok) console.log('Step ' + (i+1) + ' blocked — not all fields valid yet.');
+    return ok;
+  }
+
+  function inServiceArea(postal){
+    const fsa = postal.replace(/\s/g,'').toUpperCase().slice(0,3);
+    return IN_AREA_FSA_PREFIXES.some(p => fsa.startsWith(p)) || IN_AREA_FSA_EXACT.includes(fsa);
+  }
+
+  function scoreLead(d){
+    if (!d.in_area) return 'out-of-area';
+    if (d.funding === 'outside-budget') return 'budget-mismatch';
+    if (d.timing === 'researching') return 'nurture';
+    if (d.timing === 'this-week' || d.timing === 'this-month') return 'hot';
+    return 'warm';
+  }
+
+  btnBack.addEventListener('click', () => { if (cur > 0){ cur--; show(cur); } });
+
+  btnNext.addEventListener('click', async () => {
+    if (!validate(cur)) return;
+    if (cur < steps.length - 1){ cur++; show(cur); return; }
+
+    // Final submit: assemble payload
+    const data = {
+      postal: val('postal').toUpperCase(),
+      relationship: val('relationship'),
+      decision: val('decision'),
+      care: val('care'),
+      hours: val('hours'),
+      timing: val('timing'),
+      funding: val('funding'),
+      situation: val('situation'),
+      name: val('name'),
+      phone: val('phone'),
+      email: val('email'),
+      submitted_at: new Date().toISOString(),
+      source: 'trueheart-website'
+    };
+    data.in_area = inServiceArea(data.postal);
+    data.lead_score = scoreLead(data);
+
+    // Send to Make.com
+    if (FORM_ENDPOINT){
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) console.error('Make.com webhook returned status', res.status);
+      } catch(e){ console.error('Make.com webhook submission failed:', e); }
+    } else {
+      console.log('Lead (configure FORM_ENDPOINT to send):', data);
+    }
+
+    // Submission complete — send the visitor back to the homepage
+    location.href = 'index.html';
+  });
+
+  show(0);
+  console.log('BonHeart form loaded and ready. Fill it out to see the lead payload logged here.');
+</script>
+
+</body>
+</html>
