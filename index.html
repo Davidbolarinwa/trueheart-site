@@ -133,16 +133,19 @@
     padding:80px 0;text-align:center;
     background-color:var(--paper);
   }
-  /* real <img> instead of a CSS background so the photo can be shown in full at
-     its natural proportions (object-fit:scale-down) — cover would crop it to
-     fill the header, and contain can still upscale past the source's own size */
   .hero-bg{
     position:absolute;inset:0;z-index:0;
     width:100%;height:100%;
-    object-fit:scale-down;object-position:center;
+    object-fit:cover;object-position:center 25%;
   }
   header.hero>.wrap{position:relative;z-index:1}
-  .hero h1{font-size:clamp(2.3rem,5.4vw,3.9rem);font-weight:900;max-width:820px;margin:0 auto 10px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6),0 8px 26px rgba(0,0,0,.35)}
+  /* vignette sits only behind the headline/subhead so it stays legible over the
+     brightest parts of the photo — the rest of the image is left un-tinted */
+  .hero-textbg{
+    width:fit-content;max-width:100%;margin:0 auto;padding:36px 56px;border-radius:28px;
+    background:radial-gradient(ellipse at center,rgba(0,0,0,.6) 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,0) 100%);
+  }
+  .hero h1{font-size:clamp(2.3rem,5.4vw,3.9rem);font-weight:900;max-width:820px;margin:0 auto 10px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6),0 8px 26px rgba(0,0,0,.4)}
   .hero h1 .accent{color:#FFB4BD}
   .hero .sub{font-size:clamp(1.05rem,2vw,1.25rem);max-width:640px;margin:22px auto 34px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.7),0 10px 28px rgba(0,0,0,.5)}
   .hero .sub strong{color:#fff;font-weight:800}
@@ -519,18 +522,19 @@
     position:fixed;top:0;left:0;right:0;z-index:9999;
     display:flex;align-items:center;justify-content:center;gap:10px;
     height:64px;padding:0 22px;
-    background:#5B1AEF;color:#fff;text-decoration:none;
+    background:#B5541A;color:#fff;text-decoration:none;
     cursor:pointer;
     transition:background var(--dur-fast) var(--ease);
   }
-  .announcement-banner:hover,.announcement-banner:focus-visible{background:#4A14C4}
+  .announcement-banner:hover,.announcement-banner:focus-visible{background:#94420F}
   .ann-badge{
-    flex:none;background:#fff;color:#5B1AEF;
+    flex:none;background:#fff;color:#B5541A;
     font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.02em;
     padding:4px 10px;border-radius:999px;
   }
   .ann-text{font-size:.92rem;color:#fff;line-height:1.3}
   .ann-text strong{font-weight:800}
+  .ann-leaf{font-size:1.5em;display:inline-block;vertical-align:-.2em}
   .ann-text-short{display:none}
   .ann-arrow{flex:none;color:#fff;transition:transform var(--dur-fast) var(--ease)}
   .announcement-banner:hover .ann-arrow{transform:translateX(4px)}
@@ -546,8 +550,8 @@
 <body>
 <a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg families for Fall 2026 — see if your loved one qualifies">
   <span class="ann-badge">New</span>
-  <span class="ann-text ann-text-full"><strong>Now Accepting New Winnipeg Families for Fall 2026 🍁</strong> — See If Your Loved One Qualifies</span>
-  <span class="ann-text ann-text-short"><strong>Now Accepting Fall 2026 Families 🍁</strong></span>
+  <span class="ann-text ann-text-full"><strong>Now Accepting New Winnipeg Families for Fall 2026 <span class="ann-leaf">🍁</span></strong> — See If Your Loved One Qualifies</span>
+  <span class="ann-text ann-text-short"><strong>Now Accepting Fall 2026 Families <span class="ann-leaf">🍁</span></strong></span>
   <svg class="ann-arrow" width="28" height="14" viewBox="0 0 28 14" fill="none" aria-hidden="true"><path d="M0 7h24M17 1l7 6-7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
 
@@ -622,11 +626,13 @@
 </nav>
 
 <header class="hero reveal" id="top">
-  <img class="hero-bg" src="hero 1-Photoroom.webp" alt="" aria-hidden="true">
+  <img class="hero-bg" src="hero3.webp" alt="A caregiver in a white uniform sits with a smiling senior woman in a wheelchair at a sunlit dining table, reviewing a tablet together in her home">
   <div class="wrap">
-    <h1>Your loved one deserves better.</h1>
-    <p class="sub">Bonhearts matches families with certified, background-checked care Givers — guaranteed fit or you don't pay.</p>
-    <a class="btn big" href="/get-in-touch">Find Their Caregiver</a>
+    <div class="hero-textbg">
+      <h1>Your loved one<br>deserves better.</h1>
+      <p class="sub">Bonhearts matches families with certified, background-checked care Givers — guaranteed fit or you don't pay.</p>
+    </div>
+    <a class="btn big" href="/get-in-touch">Find Your Caregiver</a>
   </div>
 </header>
 
