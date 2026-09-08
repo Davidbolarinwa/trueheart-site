@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://trueheartshomecare.ca/sitemap.xml
+Sitemap: https://bonhearts.ca/sitemap.xml

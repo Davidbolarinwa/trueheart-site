@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VSHVVJWYRF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VSHVVJWYRF');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get Your Personalized Rate | BonHeart Home Care</title>
 <meta name="description" content="Answer 7 quick questions and BonHeart Home Care will follow up with your personalized rate and a link to book a free 15-minute discovery call.">
-<link rel="canonical" href="https://trueheartshomecare.ca/get-in-touch">
+<link rel="canonical" href="https://bonhearts.ca/get-in-touch">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -32,11 +39,32 @@
   .btn:hover{background:var(--heart-deep);transform:translateY(-2px);box-shadow:0 10px 22px rgba(178,58,72,.28)}
   .btn:active{transform:translateY(0) scale(.97);box-shadow:none}
   .btn:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--heart);outline-offset:2px}
+  .btn.big{padding:17px 38px;font-size:1.1rem}
   .kicker{font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--heart);margin-bottom:14px}
-  h2.section-title{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:900;max-width:700px;margin-bottom:18px;color:var(--ink)}
+  h1.section-title,h2.section-title{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:900;max-width:700px;margin-bottom:18px;color:var(--ink)}
   .center{text-align:center}
   .center .lede,.center h2{margin-left:auto;margin-right:auto}
   .mt-40{margin-top:40px}
+
+  /* ---------- how it works (step zero) ---------- */
+  #how-it-works{padding:64px 0 8px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:44px;counter-reset:step}
+  .step{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 22px;counter-increment:step;box-shadow:var(--shadow);text-align:left;
+    transition:transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .step:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
+  .step::before{
+    content:counter(step);display:inline-flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:50%;background:var(--heart);color:#fff;
+    font-family:'Fraunces',serif;font-weight:900;font-size:1.1rem;margin-bottom:14px;
+    transition:transform var(--dur) var(--ease);
+  }
+  .step:hover::before{transform:scale(1.1)}
+  .step h3{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+  .step p{font-size:.9rem;color:#3C5166}
+  .step .time{display:inline-block;margin-top:12px;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--heart)}
 
   .minimal-brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:32px 22px 0;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;color:var(--ink)}
   .minimal-brand img{width:28px;height:28px;object-fit:contain}
@@ -76,14 +104,6 @@
   .opt small{display:block;font-weight:500;color:var(--sage);font-size:.82rem;margin-top:2px}
   .wizard-nav{display:flex;gap:12px;margin-top:24px}
   .wizard-nav .btn{flex:1;text-align:center}
-  .btn-back{
-    background:transparent;color:var(--ink);border:1.5px solid var(--line);
-    font-weight:700;padding:13px 26px;border-radius:999px;cursor:pointer;font-size:1rem;
-    font-family:'Public Sans',sans-serif;touch-action:manipulation;
-    transition:border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
-  }
-  .btn-back:hover{border-color:var(--ink)}
-  .btn-back:active{transform:scale(.97)}
   .ferr{display:none;color:var(--heart);font-size:.85rem;font-weight:700;margin-top:10px}
   .form-promise{color:var(--sage);font-size:.85rem;margin-top:18px;text-align:center;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
   .form-success{display:none;text-align:center;padding:30px 0 10px}
@@ -105,10 +125,40 @@
   <span>Bon<em>Heart</em></span>
 </div>
 
-<section class="form-band reveal" id="get-started">
+<section id="how-it-works" class="center">
+  <div class="wrap">
+    <p class="kicker">How it works</p>
+    <h2 class="section-title" style="margin-left:auto;margin-right:auto">From "we need help" to care in place — in four steps.</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>Request your rate</h3>
+        <p>60-second form: who they are, where they live, what kind of help. We confirm you're in our service area instantly.</p>
+        <span class="time">Takes 1 minute</span>
+      </div>
+      <div class="step">
+        <h3>Book your discovery call</h3>
+        <p>We text and email you a link to book a free 15-minute call — a real conversation, not a sales pitch, to understand your family's situation.</p>
+        <span class="time">Within 24 hours</span>
+      </div>
+      <div class="step">
+        <h3>In-home assessment</h3>
+        <p>A case coordinator visits your loved one at home, walks the space, and builds your family's personalized care package around what actually matters.</p>
+        <span class="time">Scheduled on the call</span>
+      </div>
+      <div class="step">
+        <h3>Matched &amp; care begins</h3>
+        <p>We match your care package with the right Health Care Aide for your family's needs, and the first visit is backed by our guarantee.</p>
+        <span class="time">Care starts within days</span>
+      </div>
+    </div>
+    <p class="mt-40"><button type="button" class="btn big" id="btn-get-started">Get Started</button></p>
+  </div>
+</section>
+
+<section class="form-band" id="get-started" style="display:none">
   <div class="wrap center">
     <p class="kicker">Get your personalized rate</p>
-    <h2 class="section-title" style="margin-left:auto;margin-right:auto">Answer 7 quick questions.<br>We'll reach out to book your free discovery call.</h2>
+    <h1 class="section-title" style="margin-left:auto;margin-right:auto">Answer 7 quick questions.<br>We'll reach out to book your free discovery call.</h1>
     <div class="form-card" style="text-align:left">
       <form id="lead-form" novalidate>
         <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
@@ -217,10 +267,10 @@
         </div>
 
         <div class="wizard-nav">
-          <button type="button" class="btn-back" id="btn-back" style="display:none">← Back</button>
           <button type="button" class="btn big" id="btn-next">Continue →</button>
         </div>
         <p class="form-promise">No spam, no pressure. We'll text and email you a link to book a free 15-minute discovery call — that's it.<br><strong style="color:var(--heart)">Founder-led = limited spots.</strong> If our roster is full, we'll tell you honestly and offer the waitlist.</p>
+        <p class="ferr" id="err-submit">Something went wrong sending your info. Please try again, or call us directly at <strong><a href="tel:+14312771311" style="color:inherit">(431) 277-1311</a></strong>.</p>
       </form>
 
       <!-- Qualified -->
@@ -262,8 +312,13 @@
   const fill = document.getElementById('progress-fill');
   const stepCount = document.getElementById('step-count');
   const btnNext = document.getElementById('btn-next');
-  const btnBack = document.getElementById('btn-back');
   let cur = 0;
+
+  // Step zero: "How it works" gives way to the form, no navigation
+  document.getElementById('btn-get-started').addEventListener('click', () => {
+    document.getElementById('how-it-works').style.display = 'none';
+    document.getElementById('get-started').style.display = 'block';
+  });
 
   // option-card selection styling
   form.querySelectorAll('.opt input').forEach(inp => {
@@ -287,7 +342,6 @@
     steps.forEach((s,idx) => s.classList.toggle('active', idx === i));
     fill.style.width = ((i+1)/steps.length*100) + '%';
     stepCount.textContent = 'Step ' + (i+1) + ' of ' + steps.length;
-    btnBack.style.display = i === 0 ? 'none' : 'block';
     btnNext.textContent = i === steps.length-1 ? 'Request my rate →' : 'Continue →';
     form.querySelectorAll('.ferr').forEach(e => e.style.display='none');
   }
@@ -342,11 +396,19 @@
     return 'warm';
   }
 
-  btnBack.addEventListener('click', () => { if (cur > 0){ cur--; show(cur); } });
+  const errSubmit = document.getElementById('err-submit');
+  const SUCCESS_ID_BY_SCORE = {
+    hot: 'success-qualified',
+    warm: 'success-qualified',
+    nurture: 'success-nurture',
+    'out-of-area': 'success-out-of-area',
+    'budget-mismatch': 'success-budget'
+  };
 
   btnNext.addEventListener('click', async () => {
     if (!validate(cur)) return;
     if (cur < steps.length - 1){ cur++; show(cur); return; }
+    errSubmit.style.display = 'none';
 
     // Final submit: assemble payload
     const data = {
@@ -375,14 +437,19 @@
           headers:{'Content-Type':'application/json'},
           body: JSON.stringify(data)
         });
-        if (!res.ok) console.error('Make.com webhook returned status', res.status);
-      } catch(e){ console.error('Make.com webhook submission failed:', e); }
+        if (!res.ok) throw new Error('Make.com webhook returned status ' + res.status);
+      } catch(e){
+        console.error('Make.com webhook submission failed:', e);
+        errSubmit.style.display = 'block';
+        return;
+      }
     } else {
       console.log('Lead (configure FORM_ENDPOINT to send):', data);
     }
 
-    // Submission complete — send the visitor back to the homepage
-    location.href = 'index.html';
+    // Submission complete — swap the wizard for the matching outcome screen
+    form.style.display = 'none';
+    document.getElementById(SUCCESS_ID_BY_SCORE[data.lead_score] || 'success-qualified').style.display = 'block';
   });
 
   show(0);

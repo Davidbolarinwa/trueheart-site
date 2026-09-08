@@ -1,69 +1,193 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://trueheartshomecare.ca/</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
   <url>
-    <loc>https://trueheartshomecare.ca/home-care-assessment-what-to-expect.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/personal-care-services.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/post-hospital-convalescent-care.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/overnight-respite-care.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/senior-care.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/companionship-outings.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/household-support.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/specialized-care.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/disability-support-services.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://bonhearts.ca/blogs</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/home-care-assessment-what-to-expect.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://trueheartshomecare.ca/home-care-funding-manitoba.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/home-care-funding-manitoba.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://trueheartshomecare.ca/in-home-care-vs-long-term-care-winnipeg.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/in-home-care-vs-long-term-care-winnipeg.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://trueheartshomecare.ca/veterans-hiring-home-care-mistakes.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/veterans-hiring-home-care-mistakes.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://trueheartshomecare.ca/prepare-home-for-personal-care-services.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/prepare-home-for-personal-care-services.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://trueheartshomecare.ca/signs-it-might-be-time-for-home-care.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/signs-it-might-be-time-for-home-care.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://trueheartshomecare.ca/aging-in-place-home-safety-seniors.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/aging-in-place-home-safety-seniors.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://trueheartshomecare.ca/home-care-agency-vs-private-caregiver.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/home-care-agency-vs-private-caregiver.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://trueheartshomecare.ca/recovering-at-home-after-surgery.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/recovering-at-home-after-surgery.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://trueheartshomecare.ca/day-in-the-life-home-care-client.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://bonhearts.ca/day-in-the-life-home-care-client.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://bonhearts.ca/manitoba.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/manitoba-winnipeg.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/manitoba-headingley.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/manitoba-interlake-eastern-region.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/manitoba-northern-health-region.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/manitoba-southern-health-region.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/british-columbia.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://bonhearts.ca/our-story.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/our-approach-values.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/careers.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/contact.html</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
