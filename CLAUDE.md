@@ -41,3 +41,9 @@ Static marketing site + blog for **BonHeart Home Care** (Winnipeg, MB), recently
   - `.detail-list` — one `<p>` per service item, bold lead phrase running into the sentence, no bullets/cards. Copy is scoped to what an HCA/support worker can actually do (no clinical/diagnostic claims).
   - `.cross-grid` — 2-column (1-column mobile) links to the other 7 service pages, each with a small original line-art icon (24×24, `stroke-width:1.8`, round caps, `currentColor` — one icon per service: heart/house/moon/person/sun/checklist/pulse/compass) plus a `.read` "Learn more →" link. No borders/shadows on cards.
   - Nav, announcement banner, and footer are the same shared components as every other page — see the note above about hand-editing all 11+8 files together.
+
+## Session continuity notes
+
+This section is a running handoff log so a new Claude Code session (desktop app, web app, or another terminal) can pick up where the last one left off without needing the old chat transcript pasted in. Keep entries short; prune old ones once they're no longer relevant.
+
+- **2026-09-15**: No code changes made this session — just previewed the site locally (`python3 -m http.server 8000`, verified `index.html` serves 200 OK). Repo was clean at session start and remains clean; `main` is even with `origin/main`. Remote: `origin` → `https://github.com/Davidbolarinwa/trueheart-site.git`. Nothing pending/in-progress to resume.
