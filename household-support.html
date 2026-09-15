@@ -71,18 +71,6 @@
     .reveal{opacity:1!important;translate:0!important;transition:none!important}
   }
 
-  /* ---------- heartline signature (accent underline stroke) ---------- */
-  .heartline{display:block;width:100%;max-width:150px;margin:2px auto 0;height:20px}
-  .heartline path{
-    fill:none;stroke:var(--heart);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;
-    stroke-dasharray:600;stroke-dashoffset:600;
-  }
-  .in-view .heartline path{animation:beatdraw 1.6s ease forwards}
-  @keyframes beatdraw{to{stroke-dashoffset:0}}
-  @media (prefers-reduced-motion:reduce){
-    .heartline path{stroke-dashoffset:0;animation:none!important}
-  }
-
   /* ---------- service hero ---------- */
   .service-hero{position:relative;height:45vh;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
   .service-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
@@ -93,7 +81,6 @@
   .promise{padding:64px 22px 56px;text-align:center}
   .promise h2{font-size:clamp(2rem,4.6vw,2.9rem);font-weight:900;max-width:760px;margin:0 auto}
   .promise .sub{max-width:600px;margin:18px auto 0;color:#3C5166;font-size:1rem}
-  .band .sub{max-width:600px;margin:0 auto 24px;color:#3C5166;font-size:1rem}
 
   /* ---------- bands ---------- */
   .band{padding:56px 0}
@@ -105,17 +92,6 @@
   .detail-list{max-width:700px;margin:0 auto;display:grid;gap:22px;text-align:left}
   .detail-list p{color:#2C4257}
   .detail-list em{color:var(--heart);font-style:italic}
-
-  /* ---------- contact options ---------- */
-  .contact-list{max-width:640px;margin:0 auto;display:grid;gap:14px;text-align:left}
-  @media(min-width:641px){
-    .contact-list{grid-template-columns:1fr 1fr}
-  }
-  .contact-row{display:flex;align-items:flex-start;gap:14px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
-  .contact-row svg{width:24px;height:24px;flex:none;color:var(--heart);margin-top:2px}
-  .contact-row span{display:block;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);margin-bottom:4px}
-  .contact-row a,.contact-row p{font-weight:700;color:var(--ink);text-decoration:none;font-size:1.02rem}
-  .contact-row a:hover{color:var(--heart)}
 
   /* ---------- guarantee (copied verbatim from index.html) ---------- */
   .guarantee{
@@ -364,7 +340,6 @@
 <section class="promise reveal">
   <div class="wrap">
     <h2>A safer, easier home</h2>
-    <svg class="heartline" viewBox="0 0 340 34" aria-hidden="true"><path d="M2 20 H90 L104 20 L114 6 L128 30 L138 14 L146 20 H180 C180 20 186 8 198 8 C210 8 214 16 214 16 C214 16 218 8 230 8 C242 8 248 20 248 20 L338 20"/></svg>
     <p class="sub">A tidy, functional home lowers fall risk and daily stress &mdash; we help keep it that way without adding one more thing to your list.</p>
     <p style="margin-top:28px"><a class="btn big" href="/get-in-touch">Book a FREE local in-home consultation</a></p>
   </div>
@@ -385,12 +360,14 @@
   </div>
 </section>
 
-<section class="band dim center reveal">
+<section class="band reveal">
   <div class="wrap">
-    <h2 class="section-title" style="margin-left:auto;margin-right:auto">Ready to talk about household support?</h2>
-    <p class="sub">Tell us a little about your situation and we&rsquo;ll follow up with your personalized rate and a free 15-minute discovery call &mdash; no pressure, no obligation.</p>
-    <p><a class="btn big" href="/get-in-touch">Get Started</a></p>
-    <p style="margin-top:16px"><a href="tel:+14312771311">Or call/text (431) 277-1311</a></p>
+    <div class="guarantee">
+      <svg class="seal" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21C12 21 3 15.5 3 9.5C3 6.4 5.4 4 8.2 4C9.8 4 11.2 4.8 12 6C12.8 4.8 14.2 4 15.8 4C18.6 4 21 6.4 21 9.5C21 15.5 12 21 12 21Z" fill="#B23A48"/><path d="M8.5 12L11 14.5L15.5 9.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h2>The BonHeart First-Visit Guarantee</h2>
+      <p>If you're not completely satisfied after your first care visit, <strong>you don't pay for it.</strong> No forms, no argument, no hard feelings. We take the risk so your family doesn't have to.</p>
+      <a class="btn big" href="/get-in-touch">Try us risk-free</a>
+    </div>
   </div>
 </section>
 
@@ -485,50 +462,6 @@
       </button>
       <div class="carousel-fade carousel-fade-left" aria-hidden="true"></div>
       <div class="carousel-fade carousel-fade-right" aria-hidden="true"></div>
-    </div>
-  </div>
-</section>
-
-<section class="band center reveal">
-  <div class="wrap">
-    <h2 class="section-title" style="margin-left:auto;margin-right:auto">Let us come to you.</h2>
-    <p class="sub">Care happens right at home, wherever that is &mdash; across Winnipeg and the surrounding area.</p>
-    <p><a class="btn big" href="/get-in-touch">Book a FREE local in-home consultation</a></p>
-  </div>
-</section>
-
-<section class="band dim center reveal">
-  <div class="wrap">
-    <h2 class="section-title" style="margin-left:auto;margin-right:auto">Ways to reach us.</h2>
-    <!-- TODO: no street/mailing address found anywhere in the repo (JSON-LD address has only city/region/country) -- add a physical address row here if BonHeart wants one listed. -->
-    <div class="contact-list">
-      <div class="contact-row">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h3l2 5-2 2c1 2.5 3 4.5 5.5 5.5l2-2 5 2v3c0 1-1 2-2 2C10.5 20.5 3.5 13.5 3.5 5c0-1 1-2 2-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
-        <div><span>Phone</span><a href="tel:+14312771311">(431) 277-1311</a></div>
-      </div>
-      <div class="contact-row">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 6.5l8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><span>Email</span><a href="mailto:hello@bonhearts.ca">hello@bonhearts.ca</a></div>
-      </div>
-      <div class="contact-row">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        <div><span>Service Area</span><p>Winnipeg &amp; area, Manitoba &middot; British Columbia</p></div>
-      </div>
-      <div class="contact-row">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l4 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><span>Hours</span><p>Monday&ndash;Friday, 8:00am&ndash;6:00pm<br>Evenings &amp; weekends by appointment</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band reveal">
-  <div class="wrap">
-    <div class="guarantee">
-      <svg class="seal" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21C12 21 3 15.5 3 9.5C3 6.4 5.4 4 8.2 4C9.8 4 11.2 4.8 12 6C12.8 4.8 14.2 4 15.8 4C18.6 4 21 6.4 21 9.5C21 15.5 12 21 12 21Z" fill="#B23A48"/><path d="M8.5 12L11 14.5L15.5 9.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <h2>The BonHeart First-Visit Guarantee</h2>
-      <p>If you're not completely satisfied after your first care visit, <strong>you don't pay for it.</strong> No forms, no argument, no hard feelings. We take the risk so your family doesn't have to.</p>
-      <a class="btn big" href="/get-in-touch">Try us risk-free</a>
     </div>
   </div>
 </section>
