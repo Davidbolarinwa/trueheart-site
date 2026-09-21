@@ -11,8 +11,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Your Personalized Rate | BonHeart Home Care</title>
-<meta name="description" content="Answer 7 quick questions and BonHeart Home Care will follow up with your personalized rate and a link to book a free 15-minute discovery call.">
+<title>Get in Touch | BonHeart Home Care</title>
+<meta name="description" content="Tell us about your family and book a free consultation. A case coordinator calls at a time that works for you, then visits for a free in-home assessment.">
 <link rel="canonical" href="https://bonhearts.ca/get-in-touch">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -103,12 +103,18 @@
   .opt.selected{border-color:var(--heart);background:rgba(178,58,72,.06);animation:optpop .28s var(--ease)}
   @keyframes optpop{0%{transform:scale(.97)}60%{transform:scale(1.015)}100%{transform:scale(1)}}
   .opt small{display:block;font-weight:500;color:var(--sage);font-size:.82rem;margin-top:2px}
-  .wizard-nav{display:flex;gap:12px;margin-top:24px}
+  .wizard-nav{display:flex;align-items:center;gap:12px;margin-top:24px}
   .wizard-nav .btn{flex:1;text-align:center}
+  .btn-back{background:none;border:none;color:var(--sage);font-weight:700;font-size:.92rem;cursor:pointer;padding:10px 4px;font-family:'Public Sans',sans-serif;touch-action:manipulation;flex:none}
+  .btn-back:hover{color:var(--heart)}
+  .btn-back:focus-visible{outline:3px solid var(--heart);outline-offset:2px}
+  .btn-back[hidden]{display:none}
   .ferr{display:none;color:var(--heart);font-size:.85rem;font-weight:700;margin-top:10px}
   .form-promise{color:var(--sage);font-size:.85rem;margin-top:18px;text-align:center;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
   .form-success{display:none;text-align:center;padding:30px 0 10px}
   .form-success h3{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:10px}
+  #cal-embed-wrap{width:100%;min-height:500px;margin-top:20px}
+  #qualified-booking[hidden],#qualified-confirmed[hidden]{display:none}
 
   @media (max-width:640px){
     .form-card{padding:32px 22px}
@@ -132,24 +138,24 @@
     <h2 class="section-title" style="margin-left:auto;margin-right:auto">From "we need help" to care in place — in four steps.</h2>
     <div class="steps">
       <div class="step">
-        <h3>Request your rate</h3>
-        <p>60-second form: who they are, where they live, what kind of help. We confirm you're in our service area instantly.</p>
+        <h3>Tell us about your family</h3>
+        <p>Sixty seconds. Who needs care, their postal code, and what help looks like. That's it.</p>
         <span class="time">Takes 1 minute</span>
       </div>
       <div class="step">
-        <h3>Book your discovery call</h3>
-        <p>We text and email you a link to book a free 15-minute call — a real conversation, not a sales pitch, to understand your family's situation.</p>
-        <span class="time">Within 24 hours</span>
+        <h3>Our team calls you</h3>
+        <p>Pick a time that works. Your case coordinator talks through what your family needs and books your free in-home assessment.</p>
+        <span class="time">You pick the time</span>
       </div>
       <div class="step">
-        <h3>In-home assessment</h3>
-        <p>A case coordinator visits your loved one at home, walks the space, and builds your family's personalized care package around what actually matters.</p>
+        <h3>Free in-home assessment</h3>
+        <p>We walk the home, run a safety check, and go over the care plan with you in person.</p>
         <span class="time">Scheduled on the call</span>
       </div>
       <div class="step">
         <h3>Matched &amp; care begins</h3>
-        <p>We match your care package with the right Health Care Aide for your family's needs, and the first visit is backed by our guarantee.</p>
-        <span class="time">Care starts within days</span>
+        <p>If the aide isn't the right fit, we replace them and that shift is on us.</p>
+        <span class="time">Backed by our fit guarantee</span>
       </div>
     </div>
     <p class="mt-40"><button type="button" class="btn big" id="btn-get-started">Get Started</button></p>
@@ -158,12 +164,10 @@
 
 <section class="form-band" id="get-started" style="display:none">
   <div class="wrap center">
-    <p class="kicker">Get your personalized rate</p>
-    <h1 class="section-title" style="margin-left:auto;margin-right:auto">Answer 7 quick questions.<br>We'll reach out to book your free discovery call.</h1>
     <div class="form-card" style="text-align:left">
       <form id="lead-form" novalidate>
         <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
-        <p class="step-count" id="step-count">Step 1 of 7</p>
+        <p class="step-count" id="step-count">Step 1 of 6</p>
 
         <!-- STEP 1: Service area gate -->
         <div class="fstep active" data-step="1">
@@ -173,21 +177,37 @@
           <p class="ferr" id="err-1">Please enter a valid postal code (e.g., R3M 2X4).</p>
         </div>
 
-        <!-- STEP 2: Who needs care + decision role -->
+        <!-- STEP 2: Contact details -->
         <div class="fstep" data-step="2">
-          <label>Who needs care?</label>
-          <div class="opt-grid" data-name="relationship">
-            <label class="opt"><input type="radio" name="relationship" value="My mom">My mom</label>
-            <label class="opt"><input type="radio" name="relationship" value="My dad">My dad</label>
-            <label class="opt"><input type="radio" name="relationship" value="My spouse">My spouse</label>
-            <label class="opt"><input type="radio" name="relationship" value="Myself">Myself</label>
-            <label class="opt"><input type="radio" name="relationship" value="Another family member">Another family member</label>
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g., Sarah">
+          <div style="margin-top:16px">
+            <label for="f-email" style="margin-bottom:6px">Your email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
           </div>
-          <p class="ferr" id="err-2">Please choose one.</p>
+          <div style="margin-top:16px">
+            <label for="f-phone" style="margin-bottom:6px">Best number to reach you (optional)</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="(204) 555-0000">
+          </div>
+          <p class="ferr" id="err-2">Please add your name and a valid email address.</p>
         </div>
 
-        <!-- STEP 3: Decision maker -->
+        <!-- STEP 3: Who needs care -->
         <div class="fstep" data-step="3">
+          <label>Who needs care?</label>
+          <p class="hint">Select all that apply.</p>
+          <div class="opt-grid" data-name="relationship">
+            <label class="opt"><input type="checkbox" name="relationship" value="My mom">My mom</label>
+            <label class="opt"><input type="checkbox" name="relationship" value="My dad">My dad</label>
+            <label class="opt"><input type="checkbox" name="relationship" value="My spouse">My spouse</label>
+            <label class="opt"><input type="checkbox" name="relationship" value="Myself">Myself</label>
+            <label class="opt"><input type="checkbox" name="relationship" value="Another family member">Another family member</label>
+          </div>
+          <p class="ferr" id="err-3">Please select at least one.</p>
+        </div>
+
+        <!-- STEP 4: Decision maker -->
+        <div class="fstep" data-step="4">
           <label>Who will be making the final decision about care?</label>
           <p class="hint">This helps us make sure the right people are on the call.</p>
           <div class="opt-grid" data-name="decision">
@@ -196,32 +216,29 @@
             <label class="opt"><input type="radio" name="decision" value="person-receiving">The person receiving care decides</label>
             <label class="opt"><input type="radio" name="decision" value="gathering">I'm gathering information for someone else</label>
           </div>
-          <p class="ferr" id="err-3">Please choose one.</p>
+          <p class="ferr" id="err-4">Please choose one.</p>
         </div>
 
-        <!-- STEP 4: Care type + hours -->
-        <div class="fstep" data-step="4">
-          <label>What kind of help, and roughly how much?</label>
-          <div class="opt-grid" data-name="care" style="margin-bottom:16px">
-            <label class="opt"><input type="radio" name="care" value="comfort">Everyday support at home (Comfort Care)</label>
-            <label class="opt"><input type="radio" name="care" value="respite">A break for the family caregiver (Respite)</label>
-            <label class="opt"><input type="radio" name="care" value="recovery">Recovery after surgery or hospital</label>
-            <label class="opt"><input type="radio" name="care" value="disability">Disability support</label>
-            <label class="opt"><input type="radio" name="care" value="overnight">Overnight or live-in care</label>
-            <label class="opt"><input type="radio" name="care" value="unsure">Not sure yet — help me figure it out</label>
-          </div>
-          <div class="opt-grid" data-name="hours">
-            <label class="opt"><input type="radio" name="hours" value="1-8">A few hours (1–8 hrs/week)</label>
-            <label class="opt"><input type="radio" name="hours" value="9-20">Part-time support (9–20 hrs/week)</label>
-            <label class="opt"><input type="radio" name="hours" value="21-40">Daily support (21–40 hrs/week)</label>
-            <label class="opt"><input type="radio" name="hours" value="24-7">Around-the-clock / live-in</label>
-            <label class="opt"><input type="radio" name="hours" value="unsure">Not sure yet</label>
-          </div>
-          <p class="ferr" id="err-4">Please answer both questions.</p>
-        </div>
-
-        <!-- STEP 5: Timing -->
+        <!-- STEP 5: Type of care -->
         <div class="fstep" data-step="5">
+          <label>What type of care do they need?</label>
+          <p class="hint">Select all that apply.</p>
+          <div class="opt-grid" data-name="care">
+            <label class="opt"><input type="checkbox" name="care" value="Personal Care Services">Personal Care Services</label>
+            <label class="opt"><input type="checkbox" name="care" value="Post-Hospital and Convalescent Care">Post-Hospital and Convalescent Care</label>
+            <label class="opt"><input type="checkbox" name="care" value="Overnight and Respite Care">Overnight and Respite Care</label>
+            <label class="opt"><input type="checkbox" name="care" value="Senior Care">Senior Care</label>
+            <label class="opt"><input type="checkbox" name="care" value="Companionship and Outings">Companionship and Outings</label>
+            <label class="opt"><input type="checkbox" name="care" value="Household Support">Household Support</label>
+            <label class="opt"><input type="checkbox" name="care" value="Specialized Care">Specialized Care</label>
+            <label class="opt"><input type="checkbox" name="care" value="Disability Support Services">Disability Support Services</label>
+            <label class="opt"><input type="checkbox" name="care" value="Not sure yet — help me figure it out">Not sure yet — help me figure it out</label>
+          </div>
+          <p class="ferr" id="err-5">Please select at least one.</p>
+        </div>
+
+        <!-- STEP 6: Timing -->
+        <div class="fstep" data-step="6">
           <label>How soon is care needed?</label>
           <div class="opt-grid" data-name="timing">
             <label class="opt"><input type="radio" name="timing" value="this-week">Right away — this week</label>
@@ -229,55 +246,29 @@
             <label class="opt"><input type="radio" name="timing" value="1-3-months">1–3 months from now</label>
             <label class="opt"><input type="radio" name="timing" value="researching">Just researching for now</label>
           </div>
-          <p class="ferr" id="err-5">Please choose one.</p>
-        </div>
-
-        <!-- STEP 6: Funding reality check -->
-        <div class="fstep" data-step="6">
-          <label>Private home care in Winnipeg typically runs $30–45/hr. How would your family fund care?</label>
-          <p class="hint">Several programs can offset part or all of the cost — we'll help you with the paperwork.</p>
-          <div class="opt-grid" data-name="funding">
-            <label class="opt"><input type="radio" name="funding" value="private">Private pay — family funds<small>Comfortable in the range above</small></label>
-            <label class="opt"><input type="radio" name="funding" value="sfmc">WRHA Self &amp; Family Managed Care<small>Approved or applying</small></label>
-            <label class="opt"><input type="radio" name="funding" value="vac">Veterans Affairs Canada</label>
-            <label class="opt"><input type="radio" name="funding" value="insurance">Long-term care insurance</label>
-            <label class="opt"><input type="radio" name="funding" value="help">Not sure — help me find funding</label>
-            <label class="opt"><input type="radio" name="funding" value="outside-budget">That range is outside our budget</label>
-          </div>
           <p class="ferr" id="err-6">Please choose one.</p>
         </div>
 
-        <!-- STEP 7: Situation + contact -->
-        <div class="fstep" data-step="7">
-          <label for="f-situation">Briefly, what's going on?</label>
-          <p class="hint">Two or three sentences is perfect — it helps us prepare for your call so you don't repeat yourself.</p>
-          <textarea id="f-situation" name="situation" placeholder="e.g., Mom is 82, still at home in St. Vital, but she's had two falls this winter and Dad is exhausted…"></textarea>
-          <div style="margin-top:16px">
-            <label for="f-name" style="margin-bottom:6px">Your name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g., Sarah">
-          </div>
-          <div style="margin-top:16px">
-            <label for="f-phone" style="margin-bottom:6px">Best number to reach you</label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="(204) 555-0000">
-          </div>
-          <div style="margin-top:16px">
-            <label for="f-email" style="margin-bottom:6px">Your email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
-          </div>
-          <p class="ferr" id="err-7">Please tell us a little about the situation and how to reach you.</p>
-        </div>
-
         <div class="wizard-nav">
-          <button type="button" class="btn big" id="btn-next">Continue →</button>
+          <button type="button" class="btn-back" id="btn-back">&larr; Back</button>
+          <button type="button" class="btn big" id="btn-next">Continue</button>
         </div>
-        <p class="form-promise">No spam, no pressure. We'll text and email you a link to book a free 15-minute discovery call — that's it.<br><strong style="color:var(--heart)">Founder-led = limited spots.</strong> If our roster is full, we'll tell you honestly and offer the waitlist.</p>
         <p class="ferr" id="err-submit">Something went wrong sending your info. Please try again, or call us directly at <strong><a href="tel:+14312771311" style="color:inherit">(431) 277-1311</a></strong>.</p>
       </form>
 
       <!-- Qualified -->
       <div class="form-success" id="success-qualified">
-        <h3>Thank you — check your phone and inbox. 📱✉️</h3>
-        <p>We're sending a text and email with a link to book your free 15-minute discovery call. From there: your care package, a free in-home assessment with a case coordinator, and the right caregiver matched to your family.</p>
+        <div id="qualified-booking">
+          <h3>One last step — pick a time for your call.</h3>
+          <p>Your case coordinator will call you at the time you choose.</p>
+          <div id="cal-embed-wrap">
+            <div id="my-cal-inline-30min"></div>
+          </div>
+        </div>
+        <div id="qualified-confirmed" hidden>
+          <h3>Thank you — you're booked!</h3>
+          <p>We'll call you at the time you picked. A confirmation is on its way to your inbox.</p>
+        </div>
       </div>
 
       <!-- Nurture (researching) -->
@@ -291,12 +282,6 @@
         <h3>We're not in your area yet. 🗺️</h3>
         <p>BonHeart currently serves Winnipeg and immediate surrounding communities. We've saved your details and will reach out the moment we expand to your area. In the meantime, your regional health authority's home care office is the best starting point.</p>
       </div>
-
-      <!-- Budget mismatch -->
-      <div class="form-success" id="success-budget">
-        <h3>Let's point you somewhere genuinely useful. 💛</h3>
-        <p>If private rates are out of reach right now, you may still qualify for publicly funded home care through the WRHA — call their intake line at <strong>204-788-8330</strong>. And read our <a href="home-care-funding-manitoba.html">Manitoba funding guide</a>: programs like Self &amp; Family Managed Care surprise many families. We'll email it to you now.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -307,12 +292,17 @@
   const FORM_ENDPOINT = "https://hook.us2.make.com/9c9o12ehfi4o7vvdtzjywuthaje3b81p";  // Make.com webhook
   const IN_AREA_FSA_PREFIXES = ["R2", "R3"];          // Winnipeg proper
   const IN_AREA_FSA_EXACT = ["R1A", "R1B", "R4A"];    // surrounding: Selkirk, Lockport, Stonewall — edit to taste
+  const CAL_NAMESPACE = "30min";
+  const CAL_LINK = "david-bolarinwa-zgwdul/30min";
+  const CAL_ORIGIN = "https://app.cal.com";
+  const CONFETTI_SRC = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js";
 
   const form = document.getElementById('lead-form');
   const steps = [...form.querySelectorAll('.fstep')];
   const fill = document.getElementById('progress-fill');
   const stepCount = document.getElementById('step-count');
   const btnNext = document.getElementById('btn-next');
+  const btnBack = document.getElementById('btn-back');
   let cur = 0;
 
   // Step zero: "How it works" gives way to the form, no navigation
@@ -321,21 +311,26 @@
     document.getElementById('get-started').style.display = 'block';
   });
 
-  // option-card selection styling
+  // option-card selection styling — checkboxes toggle independently,
+  // radios keep the original single-select (clear siblings) behavior
   form.querySelectorAll('.opt input').forEach(inp => {
     inp.addEventListener('change', () => {
-      inp.closest('.opt-grid').querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
-      inp.closest('.opt').classList.add('selected');
+      if (inp.type === 'checkbox') {
+        inp.closest('.opt').classList.toggle('selected', inp.checked);
+      } else {
+        inp.closest('.opt-grid').querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+        inp.closest('.opt').classList.add('selected');
+      }
     });
   });
 
   // Pre-fill the care package from a ?care= query param (set by pricing card links)
   const careParam = new URLSearchParams(location.search).get('care');
   if (careParam) {
-    const radio = form.querySelector('input[name="care"][value="' + careParam + '"]');
-    if (radio) {
-      radio.checked = true;
-      radio.dispatchEvent(new Event('change', {bubbles: true}));
+    const box = form.querySelector('input[name="care"][value="' + careParam + '"]');
+    if (box) {
+      box.checked = true;
+      box.dispatchEvent(new Event('change', {bubbles: true}));
     }
   }
 
@@ -343,7 +338,8 @@
     steps.forEach((s,idx) => s.classList.toggle('active', idx === i));
     fill.style.width = ((i+1)/steps.length*100) + '%';
     stepCount.textContent = 'Step ' + (i+1) + ' of ' + steps.length;
-    btnNext.textContent = i === steps.length-1 ? 'Request my rate →' : 'Continue →';
+    btnNext.textContent = i === steps.length-1 ? 'Book my free consultation' : 'Continue';
+    btnBack.hidden = i === 0;
     form.querySelectorAll('.ferr').forEach(e => e.style.display='none');
   }
 
@@ -352,33 +348,27 @@
     return el ? el.value : (form.querySelector('[name="'+name+'"]') ? form.querySelector('[name="'+name+'"]').value.trim() : '');
   }
 
+  function valAll(name){
+    return [...form.querySelectorAll('[name="'+name+'"]:checked')].map(el => el.value);
+  }
+
   function validate(i){
     const err = document.getElementById('err-'+(i+1));
     let ok = true;
     if (i === 0) ok = /^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$/.test(val('postal'));
-    if (i === 1) ok = !!val('relationship');
-    if (i === 2) ok = !!val('decision');
-    if (i === 3) ok = !!val('care') && !!val('hours');
-    if (i === 4) ok = !!val('timing');
-    if (i === 5) ok = !!val('funding');
-    if (i === 6){
+    if (i === 1){
       const reasons = [];
-      if (val('situation').length < 15) reasons.push('a few words about the situation (at least 15 characters)');
       if (!val('name')) reasons.push('your name');
-      if (val('phone').replace(/\D/g,'').length < 10) reasons.push('a valid 10-digit phone number');
       if (!/.+@.+\..+/.test(val('email'))) reasons.push('a valid email address');
+      const phoneDigits = val('phone').replace(/\D/g,'');
+      if (phoneDigits.length > 0 && phoneDigits.length < 10) reasons.push('a valid 10-digit phone number, or leave it blank');
       ok = reasons.length === 0;
       if (err) err.textContent = ok ? '' : 'Please add: ' + reasons.join(', ') + '.';
-      if (!ok){
-        console.log('Step 7 field check:', {
-          situation: val('situation') + ' (length ' + val('situation').length + ', needs 15+)',
-          name: val('name') || '(empty)',
-          phone: val('phone') + ' (' + val('phone').replace(/\D/g,'').length + ' digits, needs 10)',
-          email: val('email') || '(empty)'
-        });
-        console.log('Missing/invalid:', reasons);
-      }
     }
+    if (i === 2) ok = valAll('relationship').length > 0;
+    if (i === 3) ok = !!val('decision');
+    if (i === 4) ok = valAll('care').length > 0;
+    if (i === 5) ok = !!val('timing');
     if (err) err.style.display = ok ? 'none' : 'block';
     if (!ok) console.log('Step ' + (i+1) + ' blocked — not all fields valid yet.');
     return ok;
@@ -391,10 +381,98 @@
 
   function scoreLead(d){
     if (!d.in_area) return 'out-of-area';
-    if (d.funding === 'outside-budget') return 'budget-mismatch';
     if (d.timing === 'researching') return 'nurture';
     if (d.timing === 'this-week' || d.timing === 'this-month') return 'hot';
     return 'warm';
+  }
+
+  // ══════════ Cal.com booking embed (loaded only once a lead qualifies) ══════════
+  function loadScript(src){
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.async = true;
+      s.onload = resolve;
+      s.onerror = () => reject(new Error('Failed to load ' + src));
+      document.head.appendChild(s);
+    });
+  }
+
+  function initCalLoader(){
+    // Standard Cal.com embed loader — queues Cal(...) calls until embed.js finishes loading.
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement('script')).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === 'string') {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ['initNamespace', namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, CAL_ORIGIN + '/embed/embed.js', 'init');
+  }
+
+  function fireConfetti(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (typeof window.confetti !== 'function') return;
+    const brand = getComputedStyle(document.documentElement).getPropertyValue('--heart').trim() || '#B23A48';
+    const brandDeep = getComputedStyle(document.documentElement).getPropertyValue('--heart-deep').trim() || '#8E2C38';
+    const sage = getComputedStyle(document.documentElement).getPropertyValue('--sage').trim() || '#5E7268';
+    window.confetti({
+      particleCount: 130,
+      spread: 90,
+      startVelocity: 35,
+      origin: { y: 0.6 },
+      colors: [brand, brandDeep, sage]
+    });
+  }
+
+  function showQualifiedBooking(data){
+    // Load Cal's loader + canvas-confetti now — not on page load, only once a lead qualifies.
+    initCalLoader();
+    loadScript(CONFETTI_SRC).catch(e => console.warn('canvas-confetti failed to load:', e));
+
+    window.Cal('init', CAL_NAMESPACE, { origin: CAL_ORIGIN });
+    window.Cal.ns[CAL_NAMESPACE]('inline', {
+      elementOrSelector: '#my-cal-inline-30min',
+      calLink: CAL_LINK,
+      config: {
+        layout: 'month_view',
+        theme: 'light',
+        useSlotsViewOnSmallScreen: 'true',
+        cssVarsPerTheme: {
+          light: { 'cal-brand': getComputedStyle(document.documentElement).getPropertyValue('--heart').trim() || '#B23A48' }
+        },
+        name: data.name,
+        email: data.email,
+        notes: 'Care needed: ' + (data.care_text || 'not specified') + ' | Postal code: ' + data.postal
+      }
+    });
+
+    window.Cal.ns[CAL_NAMESPACE]('on', {
+      action: 'bookingSuccessfulV2',
+      callback: function(){
+        document.getElementById('qualified-booking').hidden = true;
+        document.getElementById('qualified-confirmed').hidden = false;
+        fireConfetti();
+      }
+    });
   }
 
   const errSubmit = document.getElementById('err-submit');
@@ -402,9 +480,12 @@
     hot: 'success-qualified',
     warm: 'success-qualified',
     nurture: 'success-nurture',
-    'out-of-area': 'success-out-of-area',
-    'budget-mismatch': 'success-budget'
+    'out-of-area': 'success-out-of-area'
   };
+
+  btnBack.addEventListener('click', () => {
+    if (cur > 0){ cur--; show(cur); }
+  });
 
   btnNext.addEventListener('click', async () => {
     if (!validate(cur)) return;
@@ -412,18 +493,19 @@
     errSubmit.style.display = 'none';
 
     // Final submit: assemble payload
+    const relationship = valAll('relationship');
+    const care = valAll('care');
     const data = {
       postal: val('postal').toUpperCase(),
-      relationship: val('relationship'),
-      decision: val('decision'),
-      care: val('care'),
-      hours: val('hours'),
-      timing: val('timing'),
-      funding: val('funding'),
-      situation: val('situation'),
       name: val('name'),
-      phone: val('phone'),
       email: val('email'),
+      phone: val('phone'),
+      relationship: relationship,
+      relationship_text: relationship.join(', '),
+      decision: val('decision'),
+      care: care,
+      care_text: care.join(', '),
+      timing: val('timing'),
       submitted_at: new Date().toISOString(),
       source: 'trueheart-website'
     };
@@ -450,7 +532,9 @@
 
     // Submission complete — swap the wizard for the matching outcome screen
     form.style.display = 'none';
-    document.getElementById(SUCCESS_ID_BY_SCORE[data.lead_score] || 'success-qualified').style.display = 'block';
+    const successId = SUCCESS_ID_BY_SCORE[data.lead_score] || 'success-qualified';
+    document.getElementById(successId).style.display = 'block';
+    if (successId === 'success-qualified') showQualifiedBooking(data);
   });
 
   show(0);
