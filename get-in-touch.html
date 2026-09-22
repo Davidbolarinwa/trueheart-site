@@ -581,6 +581,26 @@
     }).join('');
   }
 
+  // Maps the raw "timing" value (the radio's value attribute, e.g.
+  // "this-week") to the readable label the visitor actually saw on step 6,
+  // so the case coordinator reads plain English in the Cal.com booking notes
+  // instead of a code.
+  const TIMING_LABELS = {
+    'this-week': 'Right away — this week',
+    'this-month': 'Within the next month',
+    '1-3-months': '1–3 months from now',
+    'researching': 'Just researching for now'
+  };
+
+  function buildBookingNotes(d){
+    return [
+      'Who needs care: ' + (d.relationship_text || 'not specified'),
+      'Type of care: ' + (d.care_text || 'not specified'),
+      'Timing: ' + (TIMING_LABELS[d.timing] || d.timing || 'not specified'),
+      'Postal code: ' + d.postal
+    ].join('\n');
+  }
+
   function showQualifiedBooking(data){
     renderSuggestedPosts(data.care);
     // Load Cal's loader + canvas-confetti now — not on page load, only once a lead qualifies.
@@ -600,7 +620,7 @@
         },
         name: data.name,
         email: data.email,
-        notes: 'Care needed: ' + (data.care_text || 'not specified') + ' | Postal code: ' + data.postal
+        notes: buildBookingNotes(data)
       }
     });
 
