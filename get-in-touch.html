@@ -443,6 +443,41 @@
     });
   }
 
+  // Cal's own SDK — running in our page with full privileges, since we're the
+  // ones who loaded it — can schedule its own "redirect back after booking"
+  // once a booking completes, independent of our bookingSuccessfulV2 callback.
+  // We can't stop it from being *scheduled* (that happens inside Cal's own
+  // message handler, before it notifies us), but we don't need to: the
+  // redirect only *fires* several seconds later, and clearTimeout/clearInterval
+  // can cancel any pending timer at any point before it fires, regardless of
+  // who created it or what its ID is. Timer IDs are small sequential integers
+  // in every browser, so sweeping every ID up to the current highest one
+  // cancels it even without knowing which ID it is. We repeat this on every
+  // animation frame for a few seconds after booking succeeds — long enough to
+  // catch a timer scheduled slightly after our first sweep — and also watch
+  // for (and remove) a <meta http-equiv="refresh"> tag, the other common way
+  // a page redirects itself.
+  function guardAgainstPostBookingRedirect(){
+    function killPendingTimers(){
+      const topId = window.setTimeout(function(){}, 0);
+      for (let i = 1; i <= topId; i++) window.clearTimeout(i);
+    }
+    const metaObserver = new MutationObserver(function(){
+      document.querySelectorAll('meta[http-equiv="refresh" i]').forEach(function(m){ m.remove(); });
+    });
+    metaObserver.observe(document.head, {childList: true});
+
+    const stopAt = Date.now() + 8000;
+    (function sweep(){
+      killPendingTimers();
+      if (Date.now() < stopAt) {
+        requestAnimationFrame(sweep);
+      } else {
+        metaObserver.disconnect();
+      }
+    })();
+  }
+
   function showQualifiedBooking(data){
     // Load Cal's loader + canvas-confetti now — not on page load, only once a lead qualifies.
     initCalLoader();
@@ -478,7 +513,18 @@
         if (embedEl) embedEl.innerHTML = '';
         document.getElementById('qualified-booking').hidden = true;
         document.getElementById('qualified-confirmed').hidden = false;
+
+        // Fire confetti before starting the aggressive timer sweep below —
+        // canvas-confetti's own animation loop runs on requestAnimationFrame
+        // (untouched by clearTimeout), but let it kick off its startup call
+        // first regardless, just in case. The cost of this ordering is a
+        // handful of microseconds — irrelevant against the multi-second
+        // window we're guarding against below.
         fireConfetti();
+
+        // Start the redirect guard — every remaining millisecond matters
+        // here, since Cal's own redirect timer may already be ticking down.
+        guardAgainstPostBookingRedirect();
       }
     });
   }
