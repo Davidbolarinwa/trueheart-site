@@ -115,6 +115,24 @@
   .form-success h3{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:10px}
   #cal-embed-wrap{width:100%;min-height:500px;margin-top:20px}
   #qualified-booking[hidden],#qualified-confirmed[hidden]{display:none}
+  .booking-time-line{font-size:1rem;margin-top:6px}
+  .booking-time-line[hidden]{display:none}
+  .booking-time-line strong{color:var(--ink)}
+
+  /* ---------- "while you wait" suggested reading (same card style as the blog) ---------- */
+  .cat{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--heart);background:rgba(178,58,72,.09);border:1px solid rgba(178,58,72,.25);border-radius:999px;padding:4px 12px;margin-bottom:16px}
+  .suggest{margin:40px 0 0;padding-top:32px;border-top:1px solid var(--line);text-align:left}
+  .suggest h2{font-size:1.2rem;font-weight:900;margin-bottom:18px;text-align:center}
+  .suggest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+  .spost{background:var(--paper-dim);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+  .spost:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
+  .spost .cat{margin-bottom:10px}
+  .spost h3{font-size:1rem;font-weight:700;line-height:1.35;margin:0 0 8px;font-family:'Fraunces',serif}
+  .spost h3 a{text-decoration:none;color:var(--ink)}
+  .spost h3 a:hover{color:var(--heart)}
+  .spost p{font-size:.85rem;color:#3C5166;margin-bottom:14px}
+  .spost .read{margin-top:auto;font-weight:800;font-size:.85rem;color:var(--heart);text-decoration:none}
+  .spost .read:hover{text-decoration:underline}
 
   @media (max-width:640px){
     .form-card{padding:32px 22px}
@@ -268,6 +286,31 @@
         <div id="qualified-confirmed" hidden>
           <h3>Thank you — you're booked!</h3>
           <p>We'll call you at the time you picked. A confirmation is on its way to your inbox.</p>
+          <p class="booking-time-line" id="booking-time-line" hidden>Your call: <strong id="booking-time"></strong></p>
+
+          <div class="suggest">
+            <h2>While you wait</h2>
+            <div class="suggest-grid">
+              <div class="spost">
+                <span class="cat">Getting started</span>
+                <h3><a href="home-care-assessment-what-to-expect.html">What to Expect During a Home Care Assessment: A Step-by-Step Guide</a></h3>
+                <p>Wondering what happens when a case coordinator visits your parent's home? Here's exactly how a BonHeart in-home assessment works, what we look for, and how to prepare.</p>
+                <a class="read" href="home-care-assessment-what-to-expect.html">Read the guide →</a>
+              </div>
+              <div class="spost">
+                <span class="cat">Preparing</span>
+                <h3><a href="prepare-home-for-personal-care-services.html">How to Prepare Your Home for Personal Care Services: A Practical Checklist</a></h3>
+                <p>Small changes make the first visit smoother — for your loved one and their caregiver. A room-by-room checklist covering safety, supplies, and the conversations to have beforehand.</p>
+                <a class="read" href="prepare-home-for-personal-care-services.html">Read the guide →</a>
+              </div>
+              <div class="spost">
+                <span class="cat">Funding</span>
+                <h3><a href="home-care-funding-manitoba.html">How to Access Home Care Funding in Manitoba: Self &amp; Family Managed Care, VAC &amp; Insurance</a></h3>
+                <p>Many Winnipeg families pay less than they expect — or nothing at all. A plain-language walkthrough of WRHA Self &amp; Family Managed Care, Veterans Affairs benefits, and LTC insurance.</p>
+                <a class="read" href="home-care-funding-manitoba.html">Read the guide →</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -443,6 +486,20 @@
     });
   }
 
+  // bookingSuccessfulV2's payload includes startTime (ISO 8601, UTC) — show it
+  // back to the visitor in their own local time via the browser's own
+  // Intl/Date formatting, no library needed.
+  function showBookingTime(bookingData){
+    const iso = bookingData && bookingData.startTime;
+    if (!iso) return;
+    const start = new Date(iso);
+    if (isNaN(start.getTime())) return;
+    const dateStr = start.toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' });
+    const timeStr = start.toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit' });
+    document.getElementById('booking-time').textContent = dateStr + ' at ' + timeStr;
+    document.getElementById('booking-time-line').hidden = false;
+  }
+
   // Cal's own SDK — running in our page with full privileges, since we're the
   // ones who loaded it — can schedule its own "redirect back after booking"
   // once a booking completes, independent of our bookingSuccessfulV2 callback.
@@ -502,7 +559,7 @@
 
     window.Cal.ns[CAL_NAMESPACE]('on', {
       action: 'bookingSuccessfulV2',
-      callback: function(){
+      callback: function(e){
         // Tear down the iframe immediately — Cal's own booking-confirmation
         // page keeps running inside it even after we hide its container, and
         // its own "redirecting you in N seconds" behavior will otherwise
@@ -513,6 +570,7 @@
         if (embedEl) embedEl.innerHTML = '';
         document.getElementById('qualified-booking').hidden = true;
         document.getElementById('qualified-confirmed').hidden = false;
+        showBookingTime(e && e.detail && e.detail.data);
 
         // Fire confetti before starting the aggressive timer sweep below —
         // canvas-confetti's own animation loop runs on requestAnimationFrame
