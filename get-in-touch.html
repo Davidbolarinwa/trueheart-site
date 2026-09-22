@@ -67,8 +67,9 @@
   .step p{font-size:.9rem;color:#3C5166}
   .step .time{display:inline-block;margin-top:12px;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--heart)}
 
-  .minimal-brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:32px 22px 0;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;color:var(--ink)}
-  .minimal-brand img{width:28px;height:28px;object-fit:contain}
+  .minimal-brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:32px 22px 0;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;color:var(--ink);text-decoration:none}
+  .minimal-brand img{width:28px;height:28px;object-fit:contain;transition:transform var(--dur) var(--ease)}
+  .minimal-brand:hover img{transform:scale(1.1) rotate(-4deg)}
   .minimal-brand em{font-style:normal;color:var(--heart)}
 
   /* ---------- form (moved verbatim from the homepage) ---------- */
@@ -145,10 +146,10 @@
 </head>
 <body>
 
-<div class="minimal-brand" aria-hidden="false">
-  <img src="bonhearts-logo.gif" alt="BonHeart Home Care" width="28" height="28">
+<a class="minimal-brand" href="index.html#top">
+  <img src="bonhearts-logo.gif" alt="" aria-hidden="true" width="28" height="28">
   <span>Bon<em>Heart</em></span>
-</div>
+</a>
 
 <section id="how-it-works" class="center">
   <div class="wrap">
@@ -289,27 +290,8 @@
           <p class="booking-time-line" id="booking-time-line" hidden>Your call: <strong id="booking-time"></strong></p>
 
           <div class="suggest">
-            <h2>While you wait</h2>
-            <div class="suggest-grid">
-              <div class="spost">
-                <span class="cat">Getting started</span>
-                <h3><a href="home-care-assessment-what-to-expect.html">What to Expect During a Home Care Assessment: A Step-by-Step Guide</a></h3>
-                <p>Wondering what happens when a case coordinator visits your parent's home? Here's exactly how a BonHeart in-home assessment works, what we look for, and how to prepare.</p>
-                <a class="read" href="home-care-assessment-what-to-expect.html">Read the guide →</a>
-              </div>
-              <div class="spost">
-                <span class="cat">Preparing</span>
-                <h3><a href="prepare-home-for-personal-care-services.html">How to Prepare Your Home for Personal Care Services: A Practical Checklist</a></h3>
-                <p>Small changes make the first visit smoother — for your loved one and their caregiver. A room-by-room checklist covering safety, supplies, and the conversations to have beforehand.</p>
-                <a class="read" href="prepare-home-for-personal-care-services.html">Read the guide →</a>
-              </div>
-              <div class="spost">
-                <span class="cat">Funding</span>
-                <h3><a href="home-care-funding-manitoba.html">How to Access Home Care Funding in Manitoba: Self &amp; Family Managed Care, VAC &amp; Insurance</a></h3>
-                <p>Many Winnipeg families pay less than they expect — or nothing at all. A plain-language walkthrough of WRHA Self &amp; Family Managed Care, Veterans Affairs benefits, and LTC insurance.</p>
-                <a class="read" href="home-care-funding-manitoba.html">Read the guide →</a>
-              </div>
-            </div>
+            <h2>Explore more</h2>
+            <div class="suggest-grid" id="suggest-grid"></div>
           </div>
         </div>
       </div>
@@ -535,7 +517,70 @@
     })();
   }
 
+  // Blog posts worth suggesting on the confirmation screen, keyed by filename
+  // (minus .html). Copy is verbatim from blogs.html — not reworded here.
+  const POST_LIBRARY = {
+    'home-care-assessment-what-to-expect': { cat: 'Getting started', title: 'What to Expect During a Home Care Assessment: A Step-by-Step Guide', desc: "Wondering what happens when a case coordinator visits your parent's home? Here's exactly how a BonHeart in-home assessment works, what we look for, and how to prepare." },
+    'prepare-home-for-personal-care-services': { cat: 'Preparing', title: 'How to Prepare Your Home for Personal Care Services: A Practical Checklist', desc: 'Small changes make the first visit smoother — for your loved one and their caregiver. A room-by-room checklist covering safety, supplies, and the conversations to have beforehand.' },
+    'recovering-at-home-after-surgery': { cat: 'Recovery', title: 'Recovering at Home After Surgery: What Kind of Support Do You Actually Need?', desc: 'The first 72 hours decide the recovery. What different surgeries require, how much support for how long, and the questions to ask the care team before discharge.' },
+    'aging-in-place-home-safety-seniors': { cat: 'Home safety', title: 'Aging in Place: How to Make Your Home Safer for Seniors', desc: 'Most falls happen inside the home — and most hazards can be fixed in a weekend. A room-by-room guide to bathrooms, stairs, lighting, and the tech that actually helps.' },
+    'signs-it-might-be-time-for-home-care': { cat: 'Recognizing the signs', title: 'Signs It Might Be Time for Home Care: A Checklist for Adult Children', desc: 'The physical, household, and emotional signs adult children notice first — including the one most families miss — and how to start the conversation without a fight.' },
+    'day-in-the-life-home-care-client': { cat: "What it's really like", title: 'A Day in the Life of a Home Care Client: What Support Really Looks Like', desc: "Follow one client's care day hour by hour — the morning routine, the errands, the visit notes her daughter reads from Calgary — and see what home care actually feels like." },
+    'in-home-care-vs-long-term-care-winnipeg': { cat: 'Making the decision', title: 'In-Home Care vs. Long-Term Care Facilities: How Winnipeg Families Can Choose', desc: "There's no one right answer — but there is a right answer for your family. An honest comparison of costs, quality of life, and when a facility truly is the better option." },
+    'home-care-agency-vs-private-caregiver': { cat: 'Making the decision', title: "Home Care vs. Hiring a Private Caregiver: What's the Difference?", desc: "The private route looks cheaper on paper. Here's the full picture: legal obligations, backup coverage, vetting, and when hiring directly genuinely makes sense." },
+    'home-care-funding-manitoba': { cat: 'Funding', title: 'How to Access Home Care Funding in Manitoba: Self &amp; Family Managed Care, VAC &amp; Insurance', desc: 'Many Winnipeg families pay less than they expect — or nothing at all. A plain-language walkthrough of WRHA Self &amp; Family Managed Care, Veterans Affairs benefits, and LTC insurance.' }
+  };
+
+  // Which posts are most relevant to each "type of care" checkbox value —
+  // ordered best-match first. Used to personalize the confirmation screen's
+  // suggested reading to what this specific lead actually asked about,
+  // instead of showing the same 3 posts to everyone.
+  const CARE_TO_POSTS = {
+    'Personal Care Services': ['prepare-home-for-personal-care-services', 'aging-in-place-home-safety-seniors'],
+    'Post-Hospital and Convalescent Care': ['recovering-at-home-after-surgery', 'home-care-assessment-what-to-expect'],
+    'Overnight and Respite Care': ['day-in-the-life-home-care-client', 'in-home-care-vs-long-term-care-winnipeg'],
+    'Senior Care': ['aging-in-place-home-safety-seniors', 'signs-it-might-be-time-for-home-care'],
+    'Companionship and Outings': ['day-in-the-life-home-care-client', 'signs-it-might-be-time-for-home-care'],
+    'Household Support': ['prepare-home-for-personal-care-services', 'day-in-the-life-home-care-client'],
+    'Specialized Care': ['in-home-care-vs-long-term-care-winnipeg', 'signs-it-might-be-time-for-home-care'],
+    'Disability Support Services': ['home-care-agency-vs-private-caregiver', 'day-in-the-life-home-care-client'],
+    'Not sure yet — help me figure it out': ['signs-it-might-be-time-for-home-care', 'home-care-assessment-what-to-expect']
+  };
+
+  // Generic fallback if care selections don't fill 3 slots (or came back empty).
+  const FALLBACK_POST_KEYS = ['home-care-assessment-what-to-expect', 'signs-it-might-be-time-for-home-care', 'prepare-home-for-personal-care-services'];
+
+  function pickRelevantPosts(careSelections){
+    const keys = [];
+    (careSelections || []).forEach(function(care){
+      (CARE_TO_POSTS[care] || []).forEach(function(key){
+        if (keys.indexOf(key) === -1) keys.push(key);
+      });
+    });
+    FALLBACK_POST_KEYS.forEach(function(key){
+      if (keys.indexOf(key) === -1) keys.push(key);
+    });
+    return keys.slice(0, 3);
+  }
+
+  function renderSuggestedPosts(careSelections){
+    const grid = document.getElementById('suggest-grid');
+    if (!grid) return;
+    const keys = pickRelevantPosts(careSelections);
+    grid.innerHTML = keys.map(function(key){
+      const post = POST_LIBRARY[key];
+      const href = key + '.html';
+      return '<div class="spost">' +
+        '<span class="cat">' + post.cat + '</span>' +
+        '<h3><a href="' + href + '">' + post.title + '</a></h3>' +
+        '<p>' + post.desc + '</p>' +
+        '<a class="read" href="' + href + '">Read the guide →</a>' +
+        '</div>';
+    }).join('');
+  }
+
   function showQualifiedBooking(data){
+    renderSuggestedPosts(data.care);
     // Load Cal's loader + canvas-confetti now — not on page load, only once a lead qualifies.
     initCalLoader();
     loadScript(CONFETTI_SRC).catch(e => console.warn('canvas-confetti failed to load:', e));
