@@ -125,6 +125,7 @@
   .suggest{margin:40px 0 0;padding-top:32px;border-top:1px solid var(--line);text-align:left}
   .suggest h2{font-size:1.2rem;font-weight:900;margin-bottom:18px;text-align:center}
   .suggest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+  .suggest-more{text-align:center;margin-top:28px}
   .spost{background:var(--paper-dim);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
   .spost:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
   .spost .cat{margin-bottom:10px}
@@ -292,6 +293,7 @@
           <div class="suggest">
             <h2>Explore more</h2>
             <div class="suggest-grid" id="suggest-grid"></div>
+            <p class="suggest-more"><a class="btn" href="/blogs">Browse all our care guides</a></p>
           </div>
         </div>
       </div>
@@ -547,8 +549,8 @@
     'Not sure yet — help me figure it out': ['signs-it-might-be-time-for-home-care', 'home-care-assessment-what-to-expect']
   };
 
-  // Generic fallback if care selections don't fill 3 slots (or came back empty).
-  const FALLBACK_POST_KEYS = ['home-care-assessment-what-to-expect', 'signs-it-might-be-time-for-home-care', 'prepare-home-for-personal-care-services'];
+  // Generic fallback if care selections don't fill 4 slots (or came back empty).
+  const FALLBACK_POST_KEYS = ['home-care-assessment-what-to-expect', 'signs-it-might-be-time-for-home-care', 'prepare-home-for-personal-care-services', 'day-in-the-life-home-care-client'];
 
   function pickRelevantPosts(careSelections){
     const keys = [];
@@ -560,7 +562,7 @@
     FALLBACK_POST_KEYS.forEach(function(key){
       if (keys.indexOf(key) === -1) keys.push(key);
     });
-    return keys.slice(0, 3);
+    return keys.slice(0, 4);
   }
 
   function renderSuggestedPosts(careSelections){
