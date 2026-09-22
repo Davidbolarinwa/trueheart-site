@@ -585,17 +585,36 @@
   // so buildBookingNotes() below can read as a short story rather than a
   // field-by-field dump — written so the case coordinator can read it once
   // and understand the whole situation before the call.
+  // Two representations of the same raw value, kept separate on purpose:
+  // *_LABELS is the exact option text from the form (for the answers list —
+  // precise, unambiguous, easy to cross-check against what they clicked).
+  // *_SENTENCES is a first-person clause for the narrative summary, written
+  // to read as if the visitor is the one saying it — matching how the
+  // relationship options themselves are already phrased in first person
+  // ("My mom", "Myself"), rather than narrating about them in third person.
+  const TIMING_LABELS = {
+    'this-week': 'Right away — this week',
+    'this-month': 'Within the next month',
+    '1-3-months': '1–3 months from now',
+    'researching': 'Just researching for now'
+  };
   const TIMING_SENTENCES = {
-    'this-week': "They'd like to get started right away, this week.",
-    'this-month': "They'd like to get started within the next month.",
-    '1-3-months': "They're planning to get started in the next 1–3 months.",
-    'researching': "They're still just researching for now — no immediate rush."
+    'this-week': "I'd like to get started right away, this week.",
+    'this-month': "I'd like to get started within the next month.",
+    '1-3-months': "I'm planning to get started in the next 1–3 months.",
+    'researching': "I'm still just researching for now — no immediate rush."
+  };
+  const DECISION_LABELS = {
+    'me': 'Me — I can make this decision',
+    'me-plus-family': 'Me, together with family',
+    'person-receiving': 'The person receiving care decides',
+    'gathering': "I'm gathering information for someone else"
   };
   const DECISION_SENTENCES = {
-    'me': "They'll be making the care decision themselves.",
-    'me-plus-family': "They're deciding together with family — worth including them on the call.",
+    'me': "I'll be making the care decision myself.",
+    'me-plus-family': "I'm deciding together with family — worth including them on the call.",
     'person-receiving': 'The person receiving care will make the final decision.',
-    'gathering': "They're just gathering information on behalf of someone else for now."
+    'gathering': "I'm just gathering information on behalf of someone else for now."
   };
 
   function decapitalize(s){
@@ -605,21 +624,34 @@
   function careClause(d){
     const careArr = d.care || [];
     const onlyUnsure = careArr.length === 1 && careArr[0] === 'Not sure yet — help me figure it out';
-    if (onlyUnsure) return "though they're not sure yet exactly what type of care they need";
+    if (onlyUnsure) return "though I'm not sure yet exactly what type of care I need";
     return 'specifically ' + (d.care_text || 'general home care');
   }
 
+  // Builds a first-person summary (as if the visitor wrote it themselves),
+  // labeled with their name, followed by the exact raw answers below it —
+  // so the case coordinator gets the quick, human version up top and the
+  // precise, unambiguous version underneath.
   function buildBookingNotes(d){
-    const name = d.name || 'This caller';
     const rel = decapitalize(d.relationship_text) || 'a family member';
     const timingSentence = TIMING_SENTENCES[d.timing] || '';
     const decisionSentence = DECISION_SENTENCES[d.decision] || '';
 
-    let notes = name + ' is reaching out about care for ' + rel + ', ' + careClause(d) + '. ';
-    if (timingSentence) notes += timingSentence + ' ';
-    if (decisionSentence) notes += decisionSentence + ' ';
-    notes += "They're located in the " + d.postal + ' area.';
-    return notes;
+    let summary = "I'm reaching out about care for " + rel + ', ' + careClause(d) + '. ';
+    if (timingSentence) summary += timingSentence + ' ';
+    if (decisionSentence) summary += decisionSentence + ' ';
+    summary += "I'm located in the " + d.postal + ' area.';
+
+    const answers = [
+      'Who needs care: ' + (d.relationship_text || 'not specified'),
+      'Type of care: ' + (d.care_text || 'not specified'),
+      'Decision maker: ' + (DECISION_LABELS[d.decision] || d.decision || 'not specified'),
+      'Timing: ' + (TIMING_LABELS[d.timing] || d.timing || 'not specified'),
+      'Postal code: ' + d.postal
+    ];
+
+    return (d.name || 'This caller') + "'s request:\n" + summary +
+      '\n\nForm answers:\n- ' + answers.join('\n- ');
   }
 
   function showQualifiedBooking(data){
