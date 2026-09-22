@@ -468,6 +468,14 @@
     window.Cal.ns[CAL_NAMESPACE]('on', {
       action: 'bookingSuccessfulV2',
       callback: function(){
+        // Tear down the iframe immediately — Cal's own booking-confirmation
+        // page keeps running inside it even after we hide its container, and
+        // its own "redirecting you in N seconds" behavior will otherwise
+        // still fire and navigate the whole parent page. Clearing the
+        // container discards the iframe's browsing context (and any timers
+        // queued inside it) before that can happen.
+        const embedEl = document.getElementById('my-cal-inline-30min');
+        if (embedEl) embedEl.innerHTML = '';
         document.getElementById('qualified-booking').hidden = true;
         document.getElementById('qualified-confirmed').hidden = false;
         fireConfetti();
