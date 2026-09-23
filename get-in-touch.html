@@ -325,14 +325,6 @@
   const CAL_LINK = "david-bolarinwa-zgwdul/30min";
   const CAL_ORIGIN = "https://app.cal.com";
   const CONFETTI_SRC = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js";
-  // Separate Make.com scenario/webhook for the "booking confirmed" SMS --
-  // deliberately NOT the same as FORM_ENDPOINT above. FORM_ENDPOINT fires the
-  // moment the lead submits the form, before they've picked a time, so it
-  // never has a real appointment time to work with. This one fires only once
-  // Cal.com reports a confirmed booking (see bookingSuccessfulV2 below), so
-  // its payload can carry a real start_time for the Twilio message.
-  // REPLACE with the real webhook URL from that Make.com scenario.
-  const BOOKING_CONFIRMED_ENDPOINT = "REPLACE-WITH-BOOKING-CONFIRMED-WEBHOOK-URL";
 
   const form = document.getElementById('lead-form');
   const steps = [...form.querySelectorAll('.fstep')];
@@ -494,6 +486,20 @@
     document.getElementById('booking-time-line').hidden = false;
   }
 
+  // Formats an ISO timestamp fixed to America/Winnipeg regardless of the
+  // visitor's own device timezone -- distinct from showBookingTime() above,
+  // which deliberately shows the visitor their OWN local time. This one is
+  // for the Make.com payload, where "Winnipeg time" is what actually matters
+  // (that's where the case coordinator and the client both are).
+  function formatWinnipegTime(iso){
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return '';
+    const dateStr = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/Winnipeg' });
+    const timeStr = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Winnipeg' });
+    return dateStr + ' at ' + timeStr;
+  }
+
   // Fires once Cal.com actually confirms a time — this is the ONLY point in
   // the flow that has a real start_time, so it's the right (and only
   // correct) place to trigger a "your call is confirmed for <time>" SMS.
@@ -501,35 +507,41 @@
   // the booking regardless of whether this webhook succeeds, so we log
   // failures rather than surfacing them.
   function sendBookingConfirmation(formData, bookingData){
-    if (!BOOKING_CONFIRMED_ENDPOINT || BOOKING_CONFIRMED_ENDPOINT.indexOf('REPLACE-WITH') === 0) {
-      console.warn('BOOKING_CONFIRMED_ENDPOINT is not set yet — skipping the booking-confirmed webhook (no SMS will be sent).');
-      return;
-    }
+    const startIso = bookingData && bookingData.startTime;
     const payload = {
+      event_type: 'booking_confirmed',
       name: formData.name,
       phone: formData.phone,
       email: formData.email,
       relationship_text: formData.relationship_text,
       care_text: formData.care_text,
-      // Sent as the readable label ("Within the next month"), not the raw
-      // form code ("this-month") -- this goes straight into a customer-
-      // facing SMS, so it needs to already read naturally.
+      // Sent as readable labels ("Within the next month" / "Me — I can make
+      // this decision"), not the raw form codes -- these go straight into a
+      // customer-facing SMS, so they need to already read naturally.
       timing: TIMING_LABELS[formData.timing] || formData.timing,
+      decision: DECISION_LABELS[formData.decision] || formData.decision,
       postal: formData.postal,
-      // Raw ISO 8601 UTC, deliberately unformatted -- the Make.com template
-      // applies formatDate(...) with the America/Winnipeg timezone itself.
-      start_time: bookingData && bookingData.startTime,
+      // Raw ISO 8601 UTC, deliberately unformatted -- lets the Make.com
+      // scenario apply its own formatDate(...) + timezone if it wants to.
+      start_time: startIso,
       end_time: bookingData && bookingData.endTime,
+      // Already formatted in America/Winnipeg, ready to drop straight into a
+      // message with no further processing on the Make.com side.
+      start_time_local: formatWinnipegTime(startIso),
       booking_uid: bookingData && bookingData.uid,
       source: 'trueheart-website-booking-confirmed'
     };
-    fetch(BOOKING_CONFIRMED_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(function(e){
-      console.error('Booking-confirmed webhook failed:', e);
-    });
+    if (FORM_ENDPOINT){
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(function(e){
+        console.error('Booking-confirmed webhook failed:', e);
+      });
+    } else {
+      console.log('Booking confirmed (configure FORM_ENDPOINT to send):', payload);
+    }
   }
 
   // Cal's own SDK — running in our page with full privileges, since we're the
@@ -791,7 +803,23 @@
       source: 'trueheart-website'
     };
     data.in_area = inServiceArea(data.postal);
+    // scoreLead() needs the RAW timing code (it checks values like
+    // 'this-week' directly) -- compute it before building the outgoing
+    // payload below, which swaps timing/decision to readable labels. `data`
+    // itself keeps the raw codes throughout, since showQualifiedBooking()
+    // further down (buildBookingNotes(), specifically) also depends on the
+    // raw codes to look up its own first-person sentence versions.
     data.lead_score = scoreLead(data);
+
+    // Same webhook/scenario as the booking-confirmation send below --
+    // event_type tells Make.com's router which branch to use. This send
+    // never has a real appointment time (the visitor hasn't picked one yet),
+    // so there's no start_time/start_time_local here.
+    const leadPayload = Object.assign({}, data, {
+      event_type: 'lead_captured',
+      timing: TIMING_LABELS[data.timing] || data.timing,
+      decision: DECISION_LABELS[data.decision] || data.decision
+    });
 
     // Send to Make.com
     if (FORM_ENDPOINT){
@@ -799,7 +827,7 @@
         const res = await fetch(FORM_ENDPOINT, {
           method:'POST',
           headers:{'Content-Type':'application/json'},
-          body: JSON.stringify(data)
+          body: JSON.stringify(leadPayload)
         });
         if (!res.ok) throw new Error('Make.com webhook returned status ' + res.status);
       } catch(e){
@@ -808,7 +836,7 @@
         return;
       }
     } else {
-      console.log('Lead (configure FORM_ENDPOINT to send):', data);
+      console.log('Lead (configure FORM_ENDPOINT to send):', leadPayload);
     }
 
     // Submission complete — swap the wizard for the matching outcome screen
