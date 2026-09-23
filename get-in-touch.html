@@ -543,7 +543,14 @@
       // Already formatted in America/Winnipeg, ready to drop straight into a
       // message with no further processing on the Make.com side.
       start_time_local: formatWinnipegTime(startIso),
-      booking_uid: bookingData && bookingData.uid
+      booking_uid: bookingData && bookingData.uid,
+      // Cal.com's own confirmation emails link attendees to this same
+      // stable short URL to reschedule -- built from just the booking uid,
+      // no separate Cal.com API call needed. Undefined (and simply omitted
+      // from the JSON) if bookingData has no uid for some reason.
+      reschedule_url: bookingData && bookingData.uid
+        ? 'https://cal.com/reschedule/' + bookingData.uid
+        : undefined
     };
     if (FORM_ENDPOINT){
       fetch(FORM_ENDPOINT, {
