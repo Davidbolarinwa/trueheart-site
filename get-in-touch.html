@@ -275,7 +275,6 @@
           <button type="button" class="btn-back" id="btn-back">&larr; Back</button>
           <button type="button" class="btn big" id="btn-next">Continue</button>
         </div>
-        <p class="ferr" id="err-submit">Something went wrong sending your info. Please try again, or call us directly at <strong><a href="tel:+14312771311" style="color:inherit">(431) 277-1311</a></strong>.</p>
       </form>
 
       <!-- Qualified -->
@@ -506,6 +505,16 @@
   // Fire-and-forget: the visitor's own confirmation screen already reflects
   // the booking regardless of whether this webhook succeeds, so we log
   // failures rather than surfacing them.
+  // This is now the ONLY place a lead ever reaches Make.com -- there is no
+  // separate send at form-submit time. Deliberate trade-off (confirmed
+  // 2026-09-23): a lead who qualifies but closes the tab before booking, or
+  // who scores nurture/out-of-area (and so never even sees the Cal.com
+  // embed), never reaches Make.com at all -- no sheet row, no nurture email.
+  // Chosen over the two-payload version because juggling two different
+  // field shapes for one automation was adding more complexity than the
+  // lost visibility was worth. If that trade-off ever needs revisiting, the
+  // two-send version (one at submit, tagged event_type: "lead_captured";
+  // this one, tagged "booking_confirmed") is preserved in git history.
   function sendBookingConfirmation(formData, bookingData){
     const startIso = bookingData && bookingData.startTime;
     const payload = {
@@ -513,14 +522,20 @@
       name: formData.name,
       phone: formData.phone,
       email: formData.email,
+      postal: formData.postal,
+      relationship: formData.relationship,
       relationship_text: formData.relationship_text,
+      care: formData.care,
       care_text: formData.care_text,
       // Sent as readable labels ("Within the next month" / "Me — I can make
       // this decision"), not the raw form codes -- these go straight into a
-      // customer-facing SMS, so they need to already read naturally.
+      // customer-facing SMS/email, so they need to already read naturally.
       timing: TIMING_LABELS[formData.timing] || formData.timing,
       decision: DECISION_LABELS[formData.decision] || formData.decision,
-      postal: formData.postal,
+      submitted_at: formData.submitted_at,
+      source: formData.source,
+      in_area: formData.in_area,
+      lead_score: formData.lead_score,
       // Raw ISO 8601 UTC, deliberately unformatted -- lets the Make.com
       // scenario apply its own formatDate(...) + timezone if it wants to.
       start_time: startIso,
@@ -528,8 +543,7 @@
       // Already formatted in America/Winnipeg, ready to drop straight into a
       // message with no further processing on the Make.com side.
       start_time_local: formatWinnipegTime(startIso),
-      booking_uid: bookingData && bookingData.uid,
-      source: 'trueheart-website-booking-confirmed'
+      booking_uid: bookingData && bookingData.uid
     };
     if (FORM_ENDPOINT){
       fetch(FORM_ENDPOINT, {
@@ -768,7 +782,6 @@
     });
   }
 
-  const errSubmit = document.getElementById('err-submit');
   const SUCCESS_ID_BY_SCORE = {
     hot: 'success-qualified',
     warm: 'success-qualified',
@@ -780,10 +793,9 @@
     if (cur > 0){ cur--; show(cur); }
   });
 
-  btnNext.addEventListener('click', async () => {
+  btnNext.addEventListener('click', () => {
     if (!validate(cur)) return;
     if (cur < steps.length - 1){ cur++; show(cur); return; }
-    errSubmit.style.display = 'none';
 
     // Final submit: assemble payload
     const relationship = valAll('relationship');
@@ -804,42 +816,16 @@
     };
     data.in_area = inServiceArea(data.postal);
     // scoreLead() needs the RAW timing code (it checks values like
-    // 'this-week' directly) -- compute it before building the outgoing
-    // payload below, which swaps timing/decision to readable labels. `data`
-    // itself keeps the raw codes throughout, since showQualifiedBooking()
-    // further down (buildBookingNotes(), specifically) also depends on the
-    // raw codes to look up its own first-person sentence versions.
+    // 'this-week' directly). `data` keeps the raw timing/decision codes
+    // throughout -- both scoreLead() here and buildBookingNotes() later
+    // (inside showQualifiedBooking) depend on them for their lookups.
     data.lead_score = scoreLead(data);
 
-    // Same webhook/scenario as the booking-confirmation send below --
-    // event_type tells Make.com's router which branch to use. This send
-    // never has a real appointment time (the visitor hasn't picked one yet),
-    // so there's no start_time/start_time_local here.
-    const leadPayload = Object.assign({}, data, {
-      event_type: 'lead_captured',
-      timing: TIMING_LABELS[data.timing] || data.timing,
-      decision: DECISION_LABELS[data.decision] || data.decision
-    });
+    // Nothing is sent to Make.com here. The only webhook call in the whole
+    // flow is sendBookingConfirmation(), fired later from bookingSuccessfulV2
+    // -- see its comment for why (confirmed trade-off, 2026-09-23).
 
-    // Send to Make.com
-    if (FORM_ENDPOINT){
-      try {
-        const res = await fetch(FORM_ENDPOINT, {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify(leadPayload)
-        });
-        if (!res.ok) throw new Error('Make.com webhook returned status ' + res.status);
-      } catch(e){
-        console.error('Make.com webhook submission failed:', e);
-        errSubmit.style.display = 'block';
-        return;
-      }
-    } else {
-      console.log('Lead (configure FORM_ENDPOINT to send):', leadPayload);
-    }
-
-    // Submission complete — swap the wizard for the matching outcome screen
+    // Swap the wizard for the matching outcome screen
     form.style.display = 'none';
     const successId = SUCCESS_ID_BY_SCORE[data.lead_score] || 'success-qualified';
     document.getElementById(successId).style.display = 'block';
