@@ -325,6 +325,14 @@
   const CAL_LINK = "david-bolarinwa-zgwdul/30min";
   const CAL_ORIGIN = "https://app.cal.com";
   const CONFETTI_SRC = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js";
+  // Separate Make.com scenario/webhook for the "booking confirmed" SMS --
+  // deliberately NOT the same as FORM_ENDPOINT above. FORM_ENDPOINT fires the
+  // moment the lead submits the form, before they've picked a time, so it
+  // never has a real appointment time to work with. This one fires only once
+  // Cal.com reports a confirmed booking (see bookingSuccessfulV2 below), so
+  // its payload can carry a real start_time for the Twilio message.
+  // REPLACE with the real webhook URL from that Make.com scenario.
+  const BOOKING_CONFIRMED_ENDPOINT = "REPLACE-WITH-BOOKING-CONFIRMED-WEBHOOK-URL";
 
   const form = document.getElementById('lead-form');
   const steps = [...form.querySelectorAll('.fstep')];
@@ -484,6 +492,44 @@
     const timeStr = start.toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit' });
     document.getElementById('booking-time').textContent = dateStr + ' at ' + timeStr;
     document.getElementById('booking-time-line').hidden = false;
+  }
+
+  // Fires once Cal.com actually confirms a time — this is the ONLY point in
+  // the flow that has a real start_time, so it's the right (and only
+  // correct) place to trigger a "your call is confirmed for <time>" SMS.
+  // Fire-and-forget: the visitor's own confirmation screen already reflects
+  // the booking regardless of whether this webhook succeeds, so we log
+  // failures rather than surfacing them.
+  function sendBookingConfirmation(formData, bookingData){
+    if (!BOOKING_CONFIRMED_ENDPOINT || BOOKING_CONFIRMED_ENDPOINT.indexOf('REPLACE-WITH') === 0) {
+      console.warn('BOOKING_CONFIRMED_ENDPOINT is not set yet — skipping the booking-confirmed webhook (no SMS will be sent).');
+      return;
+    }
+    const payload = {
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      relationship_text: formData.relationship_text,
+      care_text: formData.care_text,
+      // Sent as the readable label ("Within the next month"), not the raw
+      // form code ("this-month") -- this goes straight into a customer-
+      // facing SMS, so it needs to already read naturally.
+      timing: TIMING_LABELS[formData.timing] || formData.timing,
+      postal: formData.postal,
+      // Raw ISO 8601 UTC, deliberately unformatted -- the Make.com template
+      // applies formatDate(...) with the America/Winnipeg timezone itself.
+      start_time: bookingData && bookingData.startTime,
+      end_time: bookingData && bookingData.endTime,
+      booking_uid: bookingData && bookingData.uid,
+      source: 'trueheart-website-booking-confirmed'
+    };
+    fetch(BOOKING_CONFIRMED_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function(e){
+      console.error('Booking-confirmed webhook failed:', e);
+    });
   }
 
   // Cal's own SDK — running in our page with full privileges, since we're the
@@ -693,6 +739,7 @@
         document.getElementById('qualified-booking').hidden = true;
         document.getElementById('qualified-confirmed').hidden = false;
         showBookingTime(e && e.detail && e.detail.data);
+        sendBookingConfirmation(data, e && e.detail && e.detail.data);
 
         // Fire confetti before starting the aggressive timer sweep below —
         // canvas-confetti's own animation loop runs on requestAnimationFrame
