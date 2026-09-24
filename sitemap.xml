@@ -179,10 +179,28 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://bonhearts.ca/careers.html</loc>
-    <lastmod>2026-09-08</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://bonhearts.ca/careers</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/careers/health-care-aide/hca-001</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/careers/support-worker/sw-001</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/careers/case-coordinator/cc-001</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://bonhearts.ca/contact.html</loc>
