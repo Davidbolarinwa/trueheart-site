@@ -4,7 +4,7 @@
  * per-posting edits. See careers-data.js for the postings and copy.
  */
 (function(){
-  var MAKE_WEBHOOK_URL = "https://hook.us2.make.com/REPLACE_WITH_CAREERS_WEBHOOK"; // Make.com webhook — placeholder, swap in the real one
+  var MAKE_WEBHOOK_URL = "https://hook.us2.make.com/2cf78mwx3ffe85h52fspvntoheu7hala"; // Make.com webhook — careers application intake
   var MIN_SUBMIT_MS = 2500; // minimum time on page before a submit is trusted
   var MAX_RESUME_BYTES = 5 * 1024 * 1024; // 5MB
   var formLoadTime = Date.now();
