@@ -87,7 +87,9 @@
 
   /* ---------- how it works ---------- */
   #how-it-works{padding:20px 0 8px;text-align:center}
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:36px;counter-reset:step;text-align:left}
+  .steps{display:grid;grid-template-columns:1fr;gap:18px;margin-top:36px;counter-reset:step;text-align:left}
+  @media (min-width:641px){ .steps{grid-template-columns:repeat(2,1fr)} }
+  @media (min-width:901px){ .steps{grid-template-columns:repeat(4,1fr)} }
   .step{
     background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
     padding:26px 22px;counter-increment:step;box-shadow:var(--shadow);
@@ -339,13 +341,15 @@
 
       var badges = document.createElement('div');
       badges.className = 'job-badges';
-      var pay = document.createElement('span');
-      pay.className = 'badge badge-pay';
-      pay.textContent = job.pay;
+      if (job.pay){
+        var pay = document.createElement('span');
+        pay.className = 'badge badge-pay';
+        pay.textContent = job.pay;
+        badges.appendChild(pay);
+      }
       var type = document.createElement('span');
       type.className = 'badge badge-type';
       type.textContent = job.type;
-      badges.appendChild(pay);
       badges.appendChild(type);
       card.appendChild(badges);
 

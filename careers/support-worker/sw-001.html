@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Support Worker | Careers | BonHeart Home Care</title>
-<meta name="description" content="Companionship, daily living support, and respite in clients’ homes. $19/hr flat, independent contract work in Winnipeg.">
+<meta name="description" content="Companionship, daily living support, and respite in clients’ homes. Contract, casual work in Winnipeg.">
 <link rel="canonical" href="https://bonhearts.ca/careers/support-worker/sw-001">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -21,14 +21,14 @@
 <meta property="og:site_name" content="BonHeart Home Care">
 <meta property="og:locale" content="en_CA">
 <meta property="og:title" content="Support Worker | BonHeart Home Care Careers">
-<meta property="og:description" content="Companionship, daily living support, and respite in clients’ homes. $19/hr flat, independent contract work in Winnipeg.">
+<meta property="og:description" content="Companionship, daily living support, and respite in clients’ homes. Contract, casual work in Winnipeg.">
 <meta property="og:url" content="https://bonhearts.ca/careers/support-worker/sw-001">
 <meta property="og:image" content="https://bonhearts.ca/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Support Worker | BonHeart Home Care Careers">
-<meta name="twitter:description" content="Companionship, daily living support, and respite in clients’ homes. $19/hr flat, independent contract work in Winnipeg.">
+<meta name="twitter:description" content="Companionship, daily living support, and respite in clients’ homes. Contract, casual work in Winnipeg.">
 <meta name="twitter:image" content="https://bonhearts.ca/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,7 +96,9 @@
 
   /* ---------- how it works ---------- */
   #how-it-works .kicker{font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--heart);margin-bottom:12px}
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px;counter-reset:step}
+  .steps{display:grid;grid-template-columns:1fr;gap:18px;margin-top:20px;counter-reset:step}
+  @media (min-width:641px){ .steps{grid-template-columns:repeat(2,1fr)} }
+  @media (min-width:901px){ .steps{grid-template-columns:repeat(4,1fr)} }
   .step{
     background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
     padding:26px 22px;counter-increment:step;box-shadow:var(--shadow);

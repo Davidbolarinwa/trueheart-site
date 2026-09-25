@@ -63,7 +63,9 @@
     var badges = document.getElementById('job-badges');
     if (badges){
       badges.innerHTML = '';
-      badges.appendChild(el('span', {className: 'badge badge-pay', text: job.pay}));
+      if (job.pay){
+        badges.appendChild(el('span', {className: 'badge badge-pay', text: job.pay}));
+      }
       badges.appendChild(el('span', {className: 'badge badge-type', text: job.type}));
     }
     var noteEl = document.getElementById('job-pay-note');
@@ -107,6 +109,9 @@
   }
 
   function showNotFound(){
+    document.title = 'Role no longer available | Careers | BonHeart Home Care';
+    var titleEl = document.getElementById('job-title');
+    if (titleEl) titleEl.textContent = 'This role isn’t available';
     var notFound = document.getElementById('job-not-found');
     if (notFound) notFound.hidden = false;
     var applySection = document.getElementById('apply');
