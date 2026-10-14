@@ -1,5 +1,5 @@
 /*
- * BonHeart careers — single source of truth for job postings.
+ * Bonhearts Home Care careers — single source of truth for job postings.
  *
  * To add a new job (no other code changes needed):
  *   1. Add an entry to CAREERS_JOBS below. Give it a fresh `id` (e.g. "hca-002")
@@ -28,8 +28,8 @@ window.CAREERS_JOBS = [
     type: 'Contract, Casual',
     summary: 'Personal care, companionship, and respite support in clients’ homes. Contract, casual.',
     intro: [
-      'BonHeart Health Care Aides provide hands-on personal care, companionship, and respite support to Winnipeg families in their own homes.',
-      'This is independent contract work, not employment — you’re not a BonHeart employee, and there’s no guaranteed schedule. You set your own availability, and client jobs come to you through the BonHeart platform, which also handles the case management side.',
+      'Bonhearts Health Care Aides provide hands-on personal care, companionship, and respite support to Winnipeg families in their own homes.',
+      'This is independent contract work, not employment — you’re not a Bonhearts employee, and there’s no guaranteed schedule. You set your own availability, and client jobs come to you through the Bonhearts platform, which also handles the case management side.',
       'It’s flexible, meaningful work you can build around the rest of your life — a good way to put real care experience to use on your own terms.'
     ],
     responsibilities: [
@@ -37,7 +37,7 @@ window.CAREERS_JOBS = [
       'Provide companionship and steady emotional support during visits',
       'Cover respite shifts so family caregivers can take a real break',
       'Follow each client’s individual care plan',
-      'Communicate with clients, families, and BonHeart’s case coordinators through the platform'
+      'Communicate with clients, families, and our case coordinators through the platform'
     ],
     roleRequirements: [
       '1–2+ years of experience as a Health Care Aide, or in a comparable personal care role'
@@ -53,8 +53,8 @@ window.CAREERS_JOBS = [
     type: 'Contract, Casual',
     summary: 'Companionship, daily living support, and respite in clients’ homes. Contract, casual.',
     intro: [
-      'BonHeart Support Workers help Winnipeg clients with companionship, daily living support, and respite care in their own homes.',
-      'Like every BonHeart role, this is independent contract work with no guaranteed hours. You set your own availability, and pick up client jobs that fit your schedule through the BonHeart platform, which also handles case management.',
+      'Bonhearts Support Workers help Winnipeg clients with companionship, daily living support, and respite care in their own homes.',
+      'Like every Bonhearts role, this is independent contract work with no guaranteed hours. You set your own availability, and pick up client jobs that fit your schedule through the Bonhearts platform, which also handles case management.',
       'If you’re reliable, genuinely warm with people, and looking for flexible work you can build around the rest of your life, this is a good place to start.'
     ],
     responsibilities: [
@@ -62,7 +62,7 @@ window.CAREERS_JOBS = [
       'Help with daily living tasks such as light housekeeping, meal prep, and errands',
       'Cover respite shifts so family caregivers get a reliable break',
       'Follow each client’s care plan and flag changes or concerns',
-      'Communicate with clients and BonHeart’s case coordinators through the platform'
+      'Communicate with clients and our case coordinators through the platform'
     ],
     roleRequirements: [
       'Experience in a support, caregiving, or client-facing care role is preferred, but not required'
@@ -78,12 +78,12 @@ window.CAREERS_JOBS = [
     type: 'Contract',
     summary: 'Conduct client assessments and coordinate scheduling. Paid per completed assessment, contract.',
     intro: [
-      'BonHeart Case Coordinators are the link between new clients and the caregivers who support them.',
-      'You’ll conduct in-home client assessments and coordinate scheduling through the BonHeart platform. No healthcare background is required — just strong admin and scheduling instincts, and a genuine care for getting the details right.',
+      'Bonhearts Case Coordinators are the link between new clients and the caregivers who support them.',
+      'You’ll conduct in-home client assessments and coordinate scheduling through the Bonhearts platform. No healthcare background is required — just strong admin and scheduling instincts, and a genuine care for getting the details right.',
       'This is independent contract work, paid per completed assessment rather than an hourly rate. You set your own availability and take on assessments as they come up.'
     ],
     responsibilities: [
-      'Conduct in-home assessments with new BonHeart clients and their families',
+      'Conduct in-home assessments with new Bonhearts clients and their families',
       'Translate each assessment into a clear, workable care plan',
       'Coordinate scheduling between clients and available caregivers on the platform',
       'Keep client records and case notes accurate and current',
@@ -114,7 +114,7 @@ window.CAREERS_HOW_IT_WORKS = [
   },
   {
     title: 'Train on our platform',
-    desc: 'If it’s a match, we’ll get you set up and trained on the BonHeart platform, where scheduling and client case handling happen.'
+    desc: 'If it’s a match, we’ll get you set up and trained on the Bonhearts platform, where scheduling and client case handling happen.'
   },
   {
     title: 'Set your availability & get to work',

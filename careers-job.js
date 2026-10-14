@@ -48,11 +48,11 @@
   }
 
   function renderJob(job){
-    document.title = job.title + ' | Careers | BonHeart Home Care';
+    document.title = job.title + ' | Careers | Bonhearts Home Care';
     setMeta('meta[name="description"]', 'content', job.summary);
-    setMeta('meta[property="og:title"]', 'content', job.title + ' | BonHeart Home Care Careers');
+    setMeta('meta[property="og:title"]', 'content', job.title + ' | Bonhearts Home Care Careers');
     setMeta('meta[property="og:description"]', 'content', job.summary);
-    setMeta('meta[name="twitter:title"]', 'content', job.title + ' | BonHeart Home Care Careers');
+    setMeta('meta[name="twitter:title"]', 'content', job.title + ' | Bonhearts Home Care Careers');
     setMeta('meta[name="twitter:description"]', 'content', job.summary);
 
     var titleEl = document.getElementById('job-title');
@@ -109,7 +109,7 @@
   }
 
   function showNotFound(){
-    document.title = 'Role no longer available | Careers | BonHeart Home Care';
+    document.title = 'Role no longer available | Careers | Bonhearts Home Care';
     var titleEl = document.getElementById('job-title');
     if (titleEl) titleEl.textContent = 'This role isn’t available';
     var notFound = document.getElementById('job-not-found');

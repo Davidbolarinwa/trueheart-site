@@ -1,6 +1,6 @@
-# BonHeart Home Care — Website
+# Bonhearts Home Care — Website
 
-Static marketing site and blog for BonHeart Home Care (Winnipeg, MB). No build step, no dependencies — plain HTML/CSS/JS, deployable as-is to any static host (GitHub Pages, Netlify, S3, etc.).
+Static marketing site and blog for Bonhearts Home Care (Winnipeg, MB). No build step, no dependencies — plain HTML/CSS/JS, deployable as-is to any static host (GitHub Pages, Netlify, S3, etc.).
 
 ## Structure
 
