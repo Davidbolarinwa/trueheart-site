@@ -8,6 +8,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-VSHVVJWYRF');
+  gtag('config', 'AW-18456232671');
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -836,6 +837,16 @@
     form.style.display = 'none';
     const successId = SUCCESS_ID_BY_SCORE[data.lead_score] || 'success-qualified';
     document.getElementById(successId).style.display = 'block';
+
+    // Google Ads conversion: Lead form submitted (in-area leads only)
+    if (data.lead_score !== 'out-of-area' && typeof gtag === 'function') {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18456232671/HSX_CMujpfocEN-Fz-BE',
+        'value': 1.0,
+        'currency': 'CAD'
+      });
+    }
+
     if (successId === 'success-qualified') showQualifiedBooking(data);
   });
 
