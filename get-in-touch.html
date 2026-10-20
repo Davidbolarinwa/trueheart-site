@@ -104,7 +104,8 @@
   .opt.selected{border-color:var(--heart);background:rgba(178,58,72,.06);animation:optpop .28s var(--ease)}
   @keyframes optpop{0%{transform:scale(.97)}60%{transform:scale(1.015)}100%{transform:scale(1)}}
   .opt small{display:block;font-weight:400;color:var(--sage);font-size:.82rem;margin-top:2px}
-  .wizard-nav{display:flex;align-items:center;gap:12px;margin-top:24px}
+  .wizard-nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:24px}
+  .wizard-nav #err-send{flex-basis:100%;order:3;margin-top:0}
   .wizard-nav .btn{flex:1;text-align:center}
   .btn-back{background:none;border:none;color:var(--sage);font-weight:600;font-size:.92rem;cursor:pointer;padding:10px 4px;font-family:'Poppins',sans-serif;touch-action:manipulation;flex:none}
   .btn-back:hover{color:var(--heart)}
@@ -120,7 +121,10 @@
   @media (max-width:640px){
     .form-card{padding:32px 22px}
     .hero-cta .btn{width:100%;padding:17px 16px;font-size:1rem}
-    .wizard-nav{flex-direction:column-reverse;align-items:stretch;gap:6px}
+    .wizard-nav{flex-direction:column;align-items:stretch;gap:6px}
+    .wizard-nav #btn-next{order:1}
+    .wizard-nav #err-send{order:2;text-align:center}
+    .wizard-nav #btn-back{order:3}
     .wizard-nav .btn{padding:17px 16px;font-size:1rem}
   }
   @media (prefers-reduced-motion:reduce){
@@ -223,8 +227,8 @@
         <div class="wizard-nav">
           <button type="button" class="btn-back" id="btn-back">&larr; Back</button>
           <button type="button" class="btn big" id="btn-next">Continue</button>
+          <p class="ferr" id="err-send">Something went wrong sending your request. Please try again.</p>
         </div>
-        <p class="ferr" id="err-send">Something went wrong sending your request. Please try again.</p>
       </form>
 
       <!-- In area (any timing) -->
