@@ -55,6 +55,7 @@
   .hero-title{font-size:clamp(1.65rem,4.2vw,2.6rem);font-weight:900;color:var(--ink);order:1}
   .hero-sub{font-size:1.05rem;color:#3C5166;margin-top:16px;order:2}
   .video-slot{order:3;position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:var(--ink);margin-top:24px;box-shadow:var(--shadow)}
+  @media (min-width:641px){ .video-slot{max-width:600px} }
   .video-slot iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;font-weight:700;font-size:.95rem}
   .video-placeholder svg{width:72px;height:72px}
