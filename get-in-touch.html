@@ -42,38 +42,35 @@
   .btn:active{transform:translateY(0) scale(.97);box-shadow:none}
   .btn:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--heart);outline-offset:2px}
   .btn.big{padding:17px 38px;font-size:1.1rem}
-  .kicker{font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--heart);margin-bottom:14px}
-  h1.section-title,h2.section-title{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:900;max-width:700px;margin-bottom:18px;color:var(--ink)}
   .center{text-align:center}
   .center .lede,.center h2{margin-left:auto;margin-right:auto}
-  .mt-40{margin-top:40px}
 
-  /* ---------- how it works (step zero) ---------- */
-  #how-it-works{padding:64px 0 8px}
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:44px;counter-reset:step}
-  .step{
-    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
-    padding:26px 22px;counter-increment:step;box-shadow:var(--shadow);text-align:left;
-    transition:transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-    display:flex;flex-direction:column;
-  }
-  .step:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
-  .step::before{
-    content:counter(step);display:inline-flex;align-items:center;justify-content:center;
-    width:38px;height:38px;border-radius:50%;background:var(--heart);color:#fff;
-    font-family:'Fraunces',serif;font-weight:900;font-size:1.1rem;margin-bottom:14px;
-    transition:transform var(--dur) var(--ease);
-    align-self:flex-start;
-  }
-  .step:hover::before{transform:scale(1.1)}
-  .step h3{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:8px}
-  .step p{font-size:.9rem;color:#3C5166}
-  .step .time{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--heart);margin-top:auto;padding-top:12px;align-self:flex-start;}
-
-  .minimal-brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:32px 22px 0;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;color:var(--ink);text-decoration:none}
-  .minimal-brand img{width:28px;height:28px;object-fit:contain;transition:transform var(--dur) var(--ease)}
-  .minimal-brand:hover img{transform:scale(1.1) rotate(-4deg)}
+  .minimal-brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:32px 22px 0;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;color:var(--ink)}
+  .minimal-brand img{width:28px;height:28px;object-fit:contain}
   .minimal-brand em{font-style:normal;color:var(--heart)}
+
+  /* ---------- landing hero ---------- */
+  .hero{padding:36px 0 48px}
+  .hero-inner{max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .hero-title{font-size:clamp(1.65rem,4.2vw,2.6rem);font-weight:900;color:var(--ink);order:1}
+  .hero-sub{font-size:1.05rem;color:#3C5166;margin-top:16px;order:2}
+  .video-slot{order:3;position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:var(--ink);margin-top:24px;box-shadow:var(--shadow)}
+  .video-slot iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;font-weight:700;font-size:.95rem}
+  .video-placeholder svg{width:72px;height:72px}
+  .hero-cta{order:4;margin-top:24px;width:100%}
+  .cta-note{font-size:.85rem;color:var(--sage);margin-top:10px}
+  .hero-points{order:5;margin-top:22px;display:grid;gap:10px;font-size:.95rem;color:var(--ink)}
+  .hero-points svg{display:inline-block;width:20px;height:20px;vertical-align:-4px;margin-right:6px}
+  .fn-link{color:var(--heart);text-decoration:none;font-weight:700;padding:0 2px}
+  .fn-link:hover{text-decoration:underline}
+  .call-line a{color:var(--heart);font-weight:700}
+
+  /* ---------- minimal page footer ---------- */
+  .lp-footer{padding:28px 0 36px;border-top:1px solid var(--line);color:var(--sage);font-size:.8rem;text-align:center}
+  .lp-footer .wrap{max-width:720px}
+  .lp-footer p+p{margin-top:10px}
+  .lp-footer a{color:var(--sage);font-weight:700}
 
   /* ---------- form (moved verbatim from the homepage) ---------- */
   .form-band{background:var(--paper);color:var(--ink);padding:56px 0 80px}
@@ -141,6 +138,7 @@
 
   @media (max-width:640px){
     .form-card{padding:32px 22px}
+    .hero-cta .btn{width:100%;padding:17px 16px}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.001s!important;transition:none!important}
@@ -150,38 +148,31 @@
 </head>
 <body>
 
-<a class="minimal-brand" href="index.html#top">
+<div class="minimal-brand">
   <img src="bonhearts-logo.gif" alt="" aria-hidden="true" width="28" height="28">
   <span>Bon<em>hearts</em></span>
-</a>
+</div>
 
-<section id="how-it-works" class="center">
+<section class="hero" id="hero">
   <div class="wrap">
-    <p class="kicker">How it works</p>
-    <h2 class="section-title" style="margin-left:auto;margin-right:auto">From "we need help" to care in place — in four steps.</h2>
-    <div class="steps">
-      <div class="step">
-        <h3>Tell us about your family</h3>
-        <p>Sixty seconds. Who needs care, their postal code, and what help looks like. That's it.</p>
-        <span class="time">Takes 1 minute</span>
+    <div class="hero-inner">
+      <h1 class="hero-title">Worried about a loved one at home in Winnipeg? Get them a caregiver you can trust.</h1>
+      <p class="hero-sub">From a little help to specialized care, we match your loved one with a nurse-approved caregiver you can trust. Not the right fit? You don't pay.<a class="fn-link" href="#guarantee-fine-print" aria-label="See guarantee fine print">*</a></p>
+      <div class="video-slot" id="video-slot">
+        <div class="video-placeholder" id="video-placeholder">
+          <svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="36" fill="var(--heart)"/><path d="M29 23 L51 36 L29 49 Z" fill="#fff"/></svg>
+          <span>Video coming soon</span>
+        </div>
       </div>
-      <div class="step">
-        <h3>Our team calls you</h3>
-        <p>Pick a time that works. Your case coordinator talks through what your family needs and books your free in-home assessment.</p>
-        <span class="time">You pick the time</span>
+      <div class="hero-cta">
+        <button type="button" class="btn big" id="btn-get-started">Book My Free Care Consultation</button>
+        <p class="cta-note">No commitment. Takes 2 minutes.</p>
       </div>
-      <div class="step">
-        <h3>Free in-home assessment</h3>
-        <p>We walk the home, run a safety check, and go over the care plan with you in person.</p>
-        <span class="time">Scheduled on the call</span>
-      </div>
-      <div class="step">
-        <h3>Matched &amp; care begins</h3>
-        <p>If the aide isn't the right fit, we replace them and that shift is on us.</p>
-        <span class="time">Backed by our fit guarantee</span>
+      <div class="hero-points" id="hero-points">
+        <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L20 5 V11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 V5 Z" fill="none" stroke="var(--heart)" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12 L11 14.5 L15.5 9.5" fill="none" stroke="var(--heart)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Every caregiver approved by a Registered Nurse and screened with 6 safety checks.</span></p>
+        <p id="guarantee-line"><span>Not the right fit on the first visit? You don't pay for it, and we'll match you with someone new.<a class="fn-link" href="#guarantee-fine-print" aria-label="See guarantee fine print">*</a></span></p>
       </div>
     </div>
-    <p class="mt-40"><button type="button" class="btn big" id="btn-get-started">Get Started</button></p>
   </div>
 </section>
 
@@ -315,10 +306,25 @@
   </div>
 </section>
 
+<footer class="lp-footer">
+  <div class="wrap">
+    <p id="guarantee-fine-print">*Applies to the first visit with a caregiver who isn't the right fit, when you ask us to match you with a new caregiver for ongoing care. <a href="/guarantee-terms">See full guarantee terms</a></p>
+    <p>&copy; 2026 Bonhearts Home Care</p>
+  </div>
+</footer>
+
 <script>
   // ══════════ Multi-step qualification form ══════════
   // CONFIG — edit these:
   const FORM_ENDPOINT = "https://hook.us2.make.com/9c9o12ehfi4o7vvdtzjywuthaje3b81p";  // Make.com webhook
+  // Hero video: a Cloudflare Stream iframe URL, e.g.
+  // "https://customer-<code>.cloudflarestream.com/<video-id>/iframe". Leave
+  // empty to show the "Video coming soon" placeholder instead.
+  const VIDEO_EMBED_URL = '';
+  // "Prefer to talk now?" line under the hero. Both empty = line not rendered.
+  // Display format like (204) 555-0123; tel format like +12045550123.
+  const CALL_NUMBER_DISPLAY = '';
+  const CALL_NUMBER_TEL = '';
   const IN_AREA_FSA_PREFIXES = ["R2", "R3"];          // Winnipeg proper
   const IN_AREA_FSA_EXACT = ["R1A", "R1B", "R4A"];    // surrounding: Selkirk, Lockport, Stonewall — edit to taste
   const CAL_NAMESPACE = "30min";
@@ -334,10 +340,37 @@
   const btnBack = document.getElementById('btn-back');
   let cur = 0;
 
-  // Step zero: "How it works" gives way to the form, no navigation
+  // Hero video: swap the placeholder for the Cloudflare Stream player once a
+  // URL is set. preload=none (unless the URL sets its own) so the video only
+  // loads when the visitor presses play.
+  if (VIDEO_EMBED_URL) {
+    const src = new URL(VIDEO_EMBED_URL);
+    if (!src.searchParams.has('preload')) src.searchParams.set('preload', 'none');
+    const iframe = document.createElement('iframe');
+    iframe.src = src.toString();
+    iframe.title = 'Bonhearts Home Care video';
+    iframe.allow = 'accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;';
+    iframe.allowFullscreen = true;
+    document.getElementById('video-slot').replaceChildren(iframe);
+  }
+
+  // "Prefer to talk now?" line — only rendered once a number is configured
+  if (CALL_NUMBER_DISPLAY && CALL_NUMBER_TEL) {
+    const line = document.createElement('p');
+    line.className = 'call-line';
+    const link = document.createElement('a');
+    link.href = 'tel:' + CALL_NUMBER_TEL;
+    link.textContent = CALL_NUMBER_DISPLAY;
+    line.append('Prefer to talk now? Call ', link, '.');
+    document.getElementById('hero-points').appendChild(line);
+  }
+
+  // Hero button reveals the form and scrolls to it, no navigation
   document.getElementById('btn-get-started').addEventListener('click', () => {
-    document.getElementById('how-it-works').style.display = 'none';
-    document.getElementById('get-started').style.display = 'block';
+    const section = document.getElementById('get-started');
+    section.style.display = 'block';
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    section.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   });
 
   // option-card selection styling — checkboxes toggle independently,
