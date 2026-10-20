@@ -12,8 +12,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get in Touch | Bonhearts Home Care</title>
-<meta name="description" content="Tell us about your family and book a free consultation. A case coordinator calls at a time that works for you, then visits for a free in-home assessment.">
+<title>Home Care in Winnipeg | Bonhearts Home Care</title>
+<meta name="description" content="Nurse-approved caregivers for your loved one at home in Winnipeg. Book a free care consultation and we'll call you shortly.">
 <link rel="canonical" href="https://bonhearts.ca/get-in-touch">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -43,7 +43,6 @@
   .btn:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--heart);outline-offset:2px}
   .btn.big{padding:17px 38px;font-size:1.1rem}
   .center{text-align:center}
-  .center .lede,.center h2{margin-left:auto;margin-right:auto}
 
   .minimal-brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:32px 22px 0;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;color:var(--ink)}
   .minimal-brand img{width:28px;height:28px;object-fit:contain}
@@ -116,27 +115,7 @@
   .form-promise{color:var(--sage);font-size:.85rem;margin-top:18px;text-align:center;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
   .form-success{display:none;text-align:center;padding:30px 0 10px}
   .form-success h3{font-size:1.5rem;margin-bottom:10px}
-  #cal-embed-wrap{width:100%;min-height:500px;margin-top:20px}
-  #qualified-booking[hidden],#qualified-confirmed[hidden]{display:none}
-  .booking-time-line{font-size:1rem;margin-top:6px}
-  .booking-time-line[hidden]{display:none}
-  .booking-time-line strong{color:var(--ink)}
-
-  /* ---------- "while you wait" suggested reading (same card style as the blog) ---------- */
-  .cat{display:inline-block;font-size:.72rem;font-weight:800;color:var(--heart);background:rgba(178,58,72,.09);border:1px solid rgba(178,58,72,.25);border-radius:999px;padding:4px 12px;margin-bottom:16px}
-  .suggest{margin:40px 0 0;padding-top:32px;border-top:1px solid var(--line);text-align:left}
-  .suggest h2{font-size:1.2rem;font-weight:800;margin-bottom:18px;text-align:center}
-  .suggest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
-  .suggest-more{text-align:center;margin-top:28px}
-  .spost{background:var(--paper-dim);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
-  .spost:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
-  .spost .cat{margin-bottom:10px}
-  .spost h3{font-size:1rem;font-weight:600;line-height:1.35;margin:0 0 8px}
-  .spost h3 a{text-decoration:none;color:var(--ink)}
-  .spost h3 a:hover{color:var(--heart)}
-  .spost p{font-size:.85rem;color:#3C5166;margin-bottom:14px}
-  .spost .read{margin-top:auto;font-weight:800;font-size:.85rem;color:var(--heart);text-decoration:none}
-  .spost .read:hover{text-decoration:underline}
+  .hp-field{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 
   @media (max-width:640px){
     .form-card{padding:32px 22px}
@@ -236,38 +215,21 @@
           <p class="consent">By tapping below, you agree we can call or text you about care. No spam, ever.</p>
         </div>
 
+        <div class="hp-field" aria-hidden="true">
+          <label for="f-hp">Leave this field blank</label>
+          <input type="text" id="f-hp" name="bh_hp" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="wizard-nav">
           <button type="button" class="btn-back" id="btn-back">&larr; Back</button>
           <button type="button" class="btn big" id="btn-next">Continue</button>
         </div>
+        <p class="ferr" id="err-send">Something went wrong sending your request. Please try again.</p>
       </form>
 
-      <!-- Qualified -->
-      <div class="form-success" id="success-qualified">
-        <div id="qualified-booking">
-          <h3>One last step — pick a time for your call.</h3>
-          <p>Your case coordinator will call you at the time you choose.</p>
-          <div id="cal-embed-wrap">
-            <div id="my-cal-inline-30min"></div>
-          </div>
-        </div>
-        <div id="qualified-confirmed" hidden>
-          <h3>Thank you — you're booked!</h3>
-          <p>We'll call you at the time you picked. A confirmation is on its way to your inbox.</p>
-          <p class="booking-time-line" id="booking-time-line" hidden>Your call: <strong id="booking-time"></strong></p>
-
-          <div class="suggest">
-            <h2>Explore more</h2>
-            <div class="suggest-grid" id="suggest-grid"></div>
-            <p class="suggest-more"><a class="btn" href="/blogs">Browse all our care guides</a></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Nurture (researching) -->
-      <div class="form-success" id="success-nurture">
-        <h3>Smart to research early. 📚</h3>
-        <p>We'll email you our most useful guides — starting with the signs checklist and the Manitoba funding guide — and check in gently. No pressure, no phone calls you didn't ask for. When the time comes, you'll know exactly what to do.</p>
+      <!-- In area (any timing) -->
+      <div class="form-success" id="success-in-area">
+        <h3 id="success-heading"></h3>
       </div>
 
       <!-- Out of area -->
@@ -300,10 +262,15 @@
   const CALL_NUMBER_TEL = '';
   const IN_AREA_FSA_PREFIXES = ["R2", "R3"];          // Winnipeg proper
   const IN_AREA_FSA_EXACT = ["R1A", "R1B", "R4A"];    // surrounding: Selkirk, Lockport, Stonewall — edit to taste
-  const CAL_NAMESPACE = "30min";
-  const CAL_LINK = "david-bolarinwa-zgwdul/30min";
-  const CAL_ORIGIN = "https://app.cal.com";
-  const CONFETTI_SRC = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js";
+  // After-hours window, 24-hour clock, Winnipeg time: a submission at or after
+  // AFTER_HOURS_START, or before MORNING_START, gets the "first thing in the
+  // morning" success copy and after_hours: true in the payload.
+  const AFTER_HOURS_START = 20;
+  const MORNING_START = 8;
+  // Spam guard (same approach as careers-job.js): a filled honeypot or a
+  // submit sooner than this after page load shows success but sends nothing.
+  const MIN_SUBMIT_MS = 2500;
+  const PAGE_LOADED_AT = Date.now();
 
   const form = document.getElementById('lead-form');
   const steps = [...form.querySelectorAll('.fstep')];
@@ -385,10 +352,11 @@
   }
 
   // 10-digit North American number, or null. Strips spaces, dashes,
-  // brackets, dots and a leading +1 / 1 country code.
+  // brackets, dots and a leading +1 / 1 country code. Area codes never
+  // start with 0 or 1, so those are rejected.
   function phoneDigits(raw){
     const s = raw.replace(/[\s\-().]/g, '').replace(/^\+?1(?=\d{10}$)/, '');
-    return /^\d{10}$/.test(s) ? s : null;
+    return /^[2-9]\d{9}$/.test(s) ? s : null;
   }
 
   function validate(i){
@@ -418,257 +386,9 @@
 
   function scoreLead(d){
     if (!d.in_area) return 'out-of-area';
-    if (d.timing === 'researching') return 'nurture';
-    if (d.timing === 'this-week' || d.timing === 'this-month') return 'hot';
-    return 'warm';
-  }
-
-  // ══════════ Cal.com booking embed (loaded only once a lead qualifies) ══════════
-  function loadScript(src){
-    return new Promise((resolve, reject) => {
-      const s = document.createElement('script');
-      s.src = src;
-      s.async = true;
-      s.onload = resolve;
-      s.onerror = () => reject(new Error('Failed to load ' + src));
-      document.head.appendChild(s);
-    });
-  }
-
-  function initCalLoader(){
-    // Standard Cal.com embed loader — queues Cal(...) calls until embed.js finishes loading.
-    (function (C, A, L) {
-      let p = function (a, ar) { a.q.push(ar); };
-      let d = C.document;
-      C.Cal = C.Cal || function () {
-        let cal = C.Cal;
-        let ar = arguments;
-        if (!cal.loaded) {
-          cal.ns = {};
-          cal.q = cal.q || [];
-          d.head.appendChild(d.createElement('script')).src = A;
-          cal.loaded = true;
-        }
-        if (ar[0] === L) {
-          const api = function () { p(api, arguments); };
-          const namespace = ar[1];
-          api.q = api.q || [];
-          if (typeof namespace === 'string') {
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ['initNamespace', namespace]);
-          } else p(cal, ar);
-          return;
-        }
-        p(cal, ar);
-      };
-    })(window, CAL_ORIGIN + '/embed/embed.js', 'init');
-  }
-
-  function fireConfetti(){
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (typeof window.confetti !== 'function') return;
-    const brand = getComputedStyle(document.documentElement).getPropertyValue('--heart').trim() || '#B23A48';
-    const brandDeep = getComputedStyle(document.documentElement).getPropertyValue('--heart-deep').trim() || '#8E2C38';
-    const sage = getComputedStyle(document.documentElement).getPropertyValue('--sage').trim() || '#5E7268';
-    window.confetti({
-      particleCount: 130,
-      spread: 90,
-      startVelocity: 35,
-      origin: { y: 0.6 },
-      colors: [brand, brandDeep, sage]
-    });
-  }
-
-  // bookingSuccessfulV2's payload includes startTime (ISO 8601, UTC) — show it
-  // back to the visitor in their own local time via the browser's own
-  // Intl/Date formatting, no library needed.
-  function showBookingTime(bookingData){
-    const iso = bookingData && bookingData.startTime;
-    if (!iso) return;
-    const start = new Date(iso);
-    if (isNaN(start.getTime())) return;
-    const dateStr = start.toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' });
-    const timeStr = start.toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit' });
-    document.getElementById('booking-time').textContent = dateStr + ' at ' + timeStr;
-    document.getElementById('booking-time-line').hidden = false;
-  }
-
-  // Formats an ISO timestamp fixed to America/Winnipeg regardless of the
-  // visitor's own device timezone -- distinct from showBookingTime() above,
-  // which deliberately shows the visitor their OWN local time. This one is
-  // for the Make.com payload, where "Winnipeg time" is what actually matters
-  // (that's where the case coordinator and the client both are).
-  function formatWinnipegTime(iso){
-    if (!iso) return '';
-    const d = new Date(iso);
-    if (isNaN(d.getTime())) return '';
-    const dateStr = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/Winnipeg' });
-    const timeStr = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Winnipeg' });
-    return dateStr + ' at ' + timeStr;
-  }
-
-  // Fires once Cal.com actually confirms a time — this is the ONLY point in
-  // the flow that has a real start_time, so it's the right (and only
-  // correct) place to trigger a "your call is confirmed for <time>" SMS.
-  // Fire-and-forget: the visitor's own confirmation screen already reflects
-  // the booking regardless of whether this webhook succeeds, so we log
-  // failures rather than surfacing them.
-  // This is now the ONLY place a lead ever reaches Make.com -- there is no
-  // separate send at form-submit time. Deliberate trade-off (confirmed
-  // 2026-09-23): a lead who qualifies but closes the tab before booking, or
-  // who scores nurture/out-of-area (and so never even sees the Cal.com
-  // embed), never reaches Make.com at all -- no sheet row, no nurture email.
-  // Chosen over the two-payload version because juggling two different
-  // field shapes for one automation was adding more complexity than the
-  // lost visibility was worth. If that trade-off ever needs revisiting, the
-  // two-send version (one at submit, tagged event_type: "lead_captured";
-  // this one, tagged "booking_confirmed") is preserved in git history.
-  function sendBookingConfirmation(formData, bookingData){
-    const startIso = bookingData && bookingData.startTime;
-    const payload = {
-      event_type: 'booking_confirmed',
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
-      postal: formData.postal,
-      relationship: formData.relationship,
-      relationship_text: formData.relationship_text,
-      care: formData.care,
-      care_text: formData.care_text,
-      // Sent as readable labels ("Within the next month" / "Me — I can make
-      // this decision"), not the raw form codes -- these go straight into a
-      // customer-facing SMS/email, so they need to already read naturally.
-      timing: TIMING_LABELS[formData.timing] || formData.timing,
-      decision: formData.decision,
-      submitted_at: formData.submitted_at,
-      source: formData.source,
-      in_area: formData.in_area,
-      lead_score: formData.lead_score,
-      // Raw ISO 8601 UTC, deliberately unformatted -- lets the Make.com
-      // scenario apply its own formatDate(...) + timezone if it wants to.
-      start_time: startIso,
-      end_time: bookingData && bookingData.endTime,
-      // Already formatted in America/Winnipeg, ready to drop straight into a
-      // message with no further processing on the Make.com side.
-      start_time_local: formatWinnipegTime(startIso),
-      booking_uid: bookingData && bookingData.uid,
-      // Cal.com's own confirmation emails link attendees to this same
-      // stable short URL to reschedule -- built from just the booking uid,
-      // no separate Cal.com API call needed. Undefined (and simply omitted
-      // from the JSON) if bookingData has no uid for some reason.
-      reschedule_url: bookingData && bookingData.uid
-        ? 'https://cal.com/reschedule/' + bookingData.uid
-        : undefined
-    };
-    if (FORM_ENDPOINT){
-      fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(function(e){
-        console.error('Booking-confirmed webhook failed:', e);
-      });
-    } else {
-      console.log('Booking confirmed (configure FORM_ENDPOINT to send):', payload);
-    }
-  }
-
-  // Cal's own SDK — running in our page with full privileges, since we're the
-  // ones who loaded it — can schedule its own "redirect back after booking"
-  // once a booking completes, independent of our bookingSuccessfulV2 callback.
-  // We can't stop it from being *scheduled* (that happens inside Cal's own
-  // message handler, before it notifies us), but we don't need to: the
-  // redirect only *fires* several seconds later, and clearTimeout/clearInterval
-  // can cancel any pending timer at any point before it fires, regardless of
-  // who created it or what its ID is. Timer IDs are small sequential integers
-  // in every browser, so sweeping every ID up to the current highest one
-  // cancels it even without knowing which ID it is. We repeat this on every
-  // animation frame for a few seconds after booking succeeds — long enough to
-  // catch a timer scheduled slightly after our first sweep — and also watch
-  // for (and remove) a <meta http-equiv="refresh"> tag, the other common way
-  // a page redirects itself.
-  function guardAgainstPostBookingRedirect(){
-    function killPendingTimers(){
-      const topId = window.setTimeout(function(){}, 0);
-      for (let i = 1; i <= topId; i++) window.clearTimeout(i);
-    }
-    const metaObserver = new MutationObserver(function(){
-      document.querySelectorAll('meta[http-equiv="refresh" i]').forEach(function(m){ m.remove(); });
-    });
-    metaObserver.observe(document.head, {childList: true});
-
-    const stopAt = Date.now() + 8000;
-    (function sweep(){
-      killPendingTimers();
-      if (Date.now() < stopAt) {
-        requestAnimationFrame(sweep);
-      } else {
-        metaObserver.disconnect();
-      }
-    })();
-  }
-
-  // Blog posts worth suggesting on the confirmation screen, keyed by filename
-  // (minus .html). Copy is verbatim from blogs.html — not reworded here.
-  const POST_LIBRARY = {
-    'home-care-assessment-what-to-expect': { cat: 'Getting started', title: 'What to Expect During a Home Care Assessment: A Step-by-Step Guide', desc: "Wondering what happens when a case coordinator visits your parent's home? Here's exactly how a Bonhearts in-home assessment works, what we look for, and how to prepare." },
-    'prepare-home-for-personal-care-services': { cat: 'Preparing', title: 'How to Prepare Your Home for Personal Care Services: A Practical Checklist', desc: 'Small changes make the first visit smoother — for your loved one and their caregiver. A room-by-room checklist covering safety, supplies, and the conversations to have beforehand.' },
-    'recovering-at-home-after-surgery': { cat: 'Recovery', title: 'Recovering at Home After Surgery: What Kind of Support Do You Actually Need?', desc: 'The first 72 hours decide the recovery. What different surgeries require, how much support for how long, and the questions to ask the care team before discharge.' },
-    'aging-in-place-home-safety-seniors': { cat: 'Home safety', title: 'Aging in Place: How to Make Your Home Safer for Seniors', desc: 'Most falls happen inside the home — and most hazards can be fixed in a weekend. A room-by-room guide to bathrooms, stairs, lighting, and the tech that actually helps.' },
-    'signs-it-might-be-time-for-home-care': { cat: 'Recognizing the signs', title: 'Signs It Might Be Time for Home Care: A Checklist for Adult Children', desc: 'The physical, household, and emotional signs adult children notice first — including the one most families miss — and how to start the conversation without a fight.' },
-    'day-in-the-life-home-care-client': { cat: "What it's really like", title: 'A Day in the Life of a Home Care Client: What Support Really Looks Like', desc: "Follow one client's care day hour by hour — the morning routine, the errands, the visit notes her daughter reads from Calgary — and see what home care actually feels like." },
-    'in-home-care-vs-long-term-care-winnipeg': { cat: 'Making the decision', title: 'In-Home Care vs. Long-Term Care Facilities: How Winnipeg Families Can Choose', desc: "There's no one right answer — but there is a right answer for your family. An honest comparison of costs, quality of life, and when a facility truly is the better option." },
-    'home-care-agency-vs-private-caregiver': { cat: 'Making the decision', title: "Home Care vs. Hiring a Private Caregiver: What's the Difference?", desc: "The private route looks cheaper on paper. Here's the full picture: legal obligations, backup coverage, vetting, and when hiring directly genuinely makes sense." },
-    'home-care-funding-manitoba': { cat: 'Funding', title: 'How to Access Home Care Funding in Manitoba: Self &amp; Family Managed Care, VAC &amp; Insurance', desc: 'Many Winnipeg families pay less than they expect — or nothing at all. A plain-language walkthrough of WRHA Self &amp; Family Managed Care, Veterans Affairs benefits, and LTC insurance.' }
-  };
-
-  // Which posts are most relevant to each "type of care" checkbox value —
-  // ordered best-match first. Used to personalize the confirmation screen's
-  // suggested reading to what this specific lead actually asked about,
-  // instead of showing the same 3 posts to everyone.
-  const CARE_TO_POSTS = {
-    'Personal Care Services': ['prepare-home-for-personal-care-services', 'aging-in-place-home-safety-seniors'],
-    'Post-Hospital and Convalescent Care': ['recovering-at-home-after-surgery', 'home-care-assessment-what-to-expect'],
-    'Overnight and Respite Care': ['day-in-the-life-home-care-client', 'in-home-care-vs-long-term-care-winnipeg'],
-    'Senior Care': ['aging-in-place-home-safety-seniors', 'signs-it-might-be-time-for-home-care'],
-    'Companionship and Outings': ['day-in-the-life-home-care-client', 'signs-it-might-be-time-for-home-care'],
-    'Household Support': ['prepare-home-for-personal-care-services', 'day-in-the-life-home-care-client'],
-    'Specialized Care': ['in-home-care-vs-long-term-care-winnipeg', 'signs-it-might-be-time-for-home-care'],
-    'Disability Support Services': ['home-care-agency-vs-private-caregiver', 'day-in-the-life-home-care-client'],
-    'Not sure yet — help me figure it out': ['signs-it-might-be-time-for-home-care', 'home-care-assessment-what-to-expect']
-  };
-
-  // Generic fallback if care selections don't fill 4 slots (or came back empty).
-  const FALLBACK_POST_KEYS = ['home-care-assessment-what-to-expect', 'signs-it-might-be-time-for-home-care', 'prepare-home-for-personal-care-services', 'day-in-the-life-home-care-client'];
-
-  function pickRelevantPosts(careSelections){
-    const keys = [];
-    (careSelections || []).forEach(function(care){
-      (CARE_TO_POSTS[care] || []).forEach(function(key){
-        if (keys.indexOf(key) === -1) keys.push(key);
-      });
-    });
-    FALLBACK_POST_KEYS.forEach(function(key){
-      if (keys.indexOf(key) === -1) keys.push(key);
-    });
-    return keys.slice(0, 4);
-  }
-
-  function renderSuggestedPosts(careSelections){
-    const grid = document.getElementById('suggest-grid');
-    if (!grid) return;
-    const keys = pickRelevantPosts(careSelections);
-    grid.innerHTML = keys.map(function(key){
-      const post = POST_LIBRARY[key];
-      const href = key + '.html';
-      return '<div class="spost">' +
-        '<span class="cat">' + post.cat + '</span>' +
-        '<h3><a href="' + href + '">' + post.title + '</a></h3>' +
-        '<p>' + post.desc + '</p>' +
-        '<a class="read" href="' + href + '">Read the guide →</a>' +
-        '</div>';
-    }).join('');
+    if (d.timing === 'asap') return 'hot';
+    if (d.timing === 'few-weeks') return 'warm';
+    return 'nurture';
   }
 
   // Readable label for each raw "timing" value (the exact option text).
@@ -678,133 +398,137 @@
     'exploring': "I'm not sure yet / just exploring"
   };
 
-  // Booking notes for the Cal.com embed (removed in the next change, along
-  // with the rest of the Cal.com flow).
-  function buildBookingNotes(d){
-    const answers = [
-      'Type of care: ' + (d.care_text || 'not specified'),
-      'Timing: ' + (TIMING_LABELS[d.timing] || d.timing || 'not specified'),
-      'Postal code: ' + d.postal
-    ];
-    return (d.name || 'This caller') + "'s request:\n- " + answers.join('\n- ');
+  // Current hour in Winnipeg (0-23), regardless of the visitor's own timezone.
+  function winnipegHour(date){
+    return Number(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Winnipeg', hour: 'numeric', hourCycle: 'h23' }).format(date));
   }
 
-  function showQualifiedBooking(data){
-    renderSuggestedPosts(data.care);
-    // Load Cal's loader + canvas-confetti now — not on page load, only once a lead qualifies.
-    initCalLoader();
-    loadScript(CONFETTI_SRC).catch(e => console.warn('canvas-confetti failed to load:', e));
-
-    window.Cal('init', CAL_NAMESPACE, { origin: CAL_ORIGIN });
-    window.Cal.ns[CAL_NAMESPACE]('inline', {
-      elementOrSelector: '#my-cal-inline-30min',
-      calLink: CAL_LINK,
-      config: {
-        layout: 'month_view',
-        theme: 'light',
-        useSlotsViewOnSmallScreen: 'true',
-        cssVarsPerTheme: {
-          light: { 'cal-brand': getComputedStyle(document.documentElement).getPropertyValue('--heart').trim() || '#B23A48' }
-        },
-        name: data.name,
-        email: data.email,
-        notes: buildBookingNotes(data)
-      }
-    });
-
-    window.Cal.ns[CAL_NAMESPACE]('on', {
-      action: 'bookingSuccessfulV2',
-      callback: function(e){
-        // Tear down the iframe immediately — Cal's own booking-confirmation
-        // page keeps running inside it even after we hide its container, and
-        // its own "redirecting you in N seconds" behavior will otherwise
-        // still fire and navigate the whole parent page. Clearing the
-        // container discards the iframe's browsing context (and any timers
-        // queued inside it) before that can happen.
-        const embedEl = document.getElementById('my-cal-inline-30min');
-        if (embedEl) embedEl.innerHTML = '';
-        document.getElementById('qualified-booking').hidden = true;
-        document.getElementById('qualified-confirmed').hidden = false;
-        showBookingTime(e && e.detail && e.detail.data);
-        sendBookingConfirmation(data, e && e.detail && e.detail.data);
-
-        // Fire confetti before starting the aggressive timer sweep below —
-        // canvas-confetti's own animation loop runs on requestAnimationFrame
-        // (untouched by clearTimeout), but let it kick off its startup call
-        // first regardless, just in case. The cost of this ordering is a
-        // handful of microseconds — irrelevant against the multi-second
-        // window we're guarding against below.
-        fireConfetti();
-
-        // Start the redirect guard — every remaining millisecond matters
-        // here, since Cal's own redirect timer may already be ticking down.
-        guardAgainstPostBookingRedirect();
-      }
-    });
+  function isAfterHours(date){
+    const h = winnipegHour(date);
+    return h >= AFTER_HOURS_START || h < MORNING_START;
   }
 
-  const SUCCESS_ID_BY_SCORE = {
-    hot: 'success-qualified',
-    warm: 'success-qualified',
-    nurture: 'success-nurture',
-    'out-of-area': 'success-out-of-area'
-  };
+  // e.g. "Tuesday, October 20 at 8:15 PM", fixed to America/Winnipeg.
+  // Newer browsers put a narrow no-break space before AM/PM; normalize it to
+  // a plain space so it reads cleanly in an SMS/email.
+  function formatWinnipegTime(date){
+    const dateStr = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/Winnipeg' });
+    const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Winnipeg' });
+    return (dateStr + ' at ' + timeStr).replace(/[\u202F\u00A0]/g, ' ');
+  }
+
+  function showSuccess(id){
+    form.style.display = 'none';
+    document.getElementById(id).style.display = 'block';
+  }
 
   btnBack.addEventListener('click', () => {
     if (cur > 0){ cur--; show(cur); }
   });
 
-  btnNext.addEventListener('click', () => {
+  const errSend = document.getElementById('err-send');
+  const SUBMIT_LABEL = 'Book My Free Care Consultation';
+
+  btnNext.addEventListener('click', async () => {
     if (!validate(cur)) return;
     if (cur < steps.length - 1){ cur++; show(cur); return; }
+    if (btnNext.disabled) return;
 
-    // Final submit: assemble payload
-    const relationship = valAll('relationship');
+    // Final submit: one payload per lead (every lead, including out-of-area)
+    const now = new Date();
+    const name = val('name');
+    const phone = val('phone');
+    const digits = phoneDigits(phone);
     const care = valAll('care');
-    const data = {
-      postal: val('postal').toUpperCase(),
-      name: val('name'),
+    const timing = val('timing');
+    const postal = val('postal').toUpperCase();
+    const inArea = inServiceArea(postal);
+    const afterHours = isAfterHours(now);
+
+    // Keeps every key (same names, same order) of the old booking-time
+    // payload so the existing Make.com scenario keeps receiving it; keys the
+    // new form no longer collects are sent empty. New keys follow after.
+    const payload = {
+      // Kept only for compatibility with the existing Make.com scenario
+      // (its filters may key off it) -- there's no booking step anymore.
+      event_type: 'booking_confirmed',
+      name: name,
+      phone: phone,
       email: val('email'),
-      phone: val('phone'),
-      relationship: relationship,
-      relationship_text: relationship.join(', '),
-      decision: val('decision'),
+      postal: postal,
+      relationship: [],
+      relationship_text: '',
       care: care,
       care_text: care.join(', '),
-      timing: val('timing'),
-      submitted_at: new Date().toISOString(),
-      source: 'trueheart-website'
+      timing: TIMING_LABELS[timing] || timing,
+      decision: '',
+      submitted_at: now.toISOString(),
+      source: 'trueheart-website',
+      in_area: inArea,
+      lead_score: scoreLead({ in_area: inArea, timing: timing }),
+      start_time: '',
+      end_time: '',
+      start_time_local: '',
+      booking_uid: '',
+      reschedule_url: '',
+      timing_code: timing,
+      phone_e164: '+1' + digits,
+      after_hours: afterHours,
+      submitted_at_local: formatWinnipegTime(now)
     };
-    data.in_area = inServiceArea(data.postal);
-    // scoreLead() needs the RAW timing code (it checks values like
-    // 'this-week' directly). `data` keeps the raw timing/decision codes
-    // throughout -- both scoreLead() here and buildBookingNotes() later
-    // (inside showQualifiedBooking) depend on them for their lookups.
-    data.lead_score = scoreLead(data);
 
-    // Nothing is sent to Make.com here. The only webhook call in the whole
-    // flow is sendBookingConfirmation(), fired later from bookingSuccessfulV2
-    // -- see its comment for why (confirmed trade-off, 2026-09-23).
+    // Spam guard: validation above always runs first; a bot then gets the
+    // normal success screen, but nothing is sent (each real submission
+    // triggers an automatic text message).
+    const isSpam = !!form.elements.bh_hp.value || (Date.now() - PAGE_LOADED_AT) < MIN_SUBMIT_MS;
 
-    // Swap the wizard for the matching outcome screen
-    form.style.display = 'none';
-    const successId = SUCCESS_ID_BY_SCORE[data.lead_score] || 'success-qualified';
-    document.getElementById(successId).style.display = 'block';
+    if (!isSpam){
+      // This is the only record of the lead, so it's awaited, not
+      // fire-and-forget: success is only shown once the webhook accepts it.
+      errSend.style.display = 'none';
+      btnNext.disabled = true;
+      btnNext.setAttribute('aria-busy', 'true');
+      btnNext.textContent = 'Sending…';
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+      } catch (e) {
+        console.error('Lead webhook failed:', e);
+        btnNext.disabled = false;
+        btnNext.removeAttribute('aria-busy');
+        btnNext.textContent = SUBMIT_LABEL;
+        errSend.style.display = 'block';
+        return;
+      }
 
-    // Google Ads conversion: Lead form submitted (in-area leads only)
-    if (data.lead_score !== 'out-of-area' && typeof gtag === 'function') {
-      gtag('event', 'conversion', {
-        'send_to': 'AW-18456232671/HSX_CMujpfocEN-Fz-BE',
-        'value': 1.0,
-        'currency': 'CAD'
-      });
+      // Google Ads conversion: in-area leads only, and only after a real,
+      // successful send (never for spam-guarded or failed submissions)
+      if (inArea && typeof gtag === 'function') {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18456232671/HSX_CMujpfocEN-Fz-BE',
+          'value': 1.0,
+          'currency': 'CAD'
+        });
+      }
     }
 
-    if (successId === 'success-qualified') showQualifiedBooking(data);
+    if (!inArea){ showSuccess('success-out-of-area'); return; }
+
+    const firstName = name.split(/\s+/)[0];
+    const heading = afterHours
+      ? "Thanks, {name}. We've got your request. We'll call you first thing in the morning."
+      : "Thanks, {name}. We'll call you shortly.";
+    const [before, after] = heading.split('{name}');
+    document.getElementById('success-heading').textContent = before + firstName + after;
+    showSuccess('success-in-area');
   });
 
   show(0);
-  console.log('Bonhearts form loaded and ready. Fill it out to see the lead payload logged here.');
 </script>
 
 </body>
