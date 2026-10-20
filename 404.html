@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#16324F; --ink-deep:#0E2338; --paper:#FBF9F5; --paper-dim:#F2EEE6;
@@ -32,8 +32,9 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:'Public Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;font-size:17px}
-  h1,h2,h3{font-family:'Fraunces',serif;line-height:1.15;letter-spacing:-.01em}
+  body{font-family:'Poppins',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;font-size:18px}
+  h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:800;line-height:1.15;letter-spacing:-.01em}
+  strong,th{font-weight:600}
   a{color:var(--heart)}
   .wrap{max-width:720px;margin:0 auto;padding:0 22px}
   nav{position:relative;z-index:50;background:rgba(251,249,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:0 0 0 rgba(22,50,79,0);transition:box-shadow var(--dur) var(--ease)}
@@ -43,7 +44,7 @@
   .logo img{width:26px;height:26px;transition:transform var(--dur) var(--ease);object-fit:contain}
   .logo:hover img{transform:scale(1.1) rotate(-4deg)}
   .logo em{font-style:normal;color:var(--heart)}
-  .btn{display:inline-block;background:var(--heart);color:#fff;text-decoration:none;font-weight:800;padding:12px 24px;border-radius:999px;font-size:.95rem;touch-action:manipulation;border:none;cursor:pointer;font-family:'Public Sans',sans-serif;transition:transform var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease)}
+  .btn{display:inline-block;background:var(--heart);color:#fff;text-decoration:none;font-weight:800;padding:12px 24px;border-radius:999px;font-size:.95rem;touch-action:manipulation;border:none;cursor:pointer;font-family:'Poppins',sans-serif;transition:transform var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease)}
   .btn:hover{background:var(--heart-deep);transform:translateY(-2px);box-shadow:0 10px 22px rgba(178,58,72,.28)}
   .btn:active{transform:translateY(0) scale(.97);box-shadow:none}
   .btn.small{padding:10px 20px;font-size:.9rem}
@@ -55,12 +56,12 @@
 
   /* ---------- error page ---------- */
   .error-page{text-align:center;padding:100px 22px}
-  .error-page .code{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(4rem,14vw,7rem);color:var(--heart);line-height:1}
-  .error-page h1{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:900;margin:10px 0 14px}
+  .error-page .code{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(4rem,14vw,7rem);color:var(--heart);line-height:1}
+  .error-page h1{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:800;margin:10px 0 14px}
   .error-page p{color:#3C5166;max-width:480px;margin:0 auto 30px}
   .error-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
   .error-links{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;font-size:.92rem}
-  .error-links a{font-weight:700;text-decoration:none}
+  .error-links a{font-weight:600;text-decoration:none}
   .error-links a:hover{text-decoration:underline}
 
   /* ---------- primary nav (mega menu) — added by nav build script ---------- */
@@ -76,7 +77,7 @@
   .nav-list{list-style:none;padding:10px 18px;display:flex;flex-direction:column;margin:0}
   .nav-item{border-bottom:1px solid var(--line);position:relative}
   .nav-item:last-child{border-bottom:none}
-  .nav-link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 4px;text-decoration:none;color:var(--ink);font-weight:700;font-size:.98rem;background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:'Public Sans',system-ui,sans-serif}
+  .nav-link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 4px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.98rem;background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:'Poppins',system-ui,sans-serif}
   .nav-link:hover{color:var(--heart)}
   a.nav-link[aria-current="page"]{color:var(--heart)}
   .caret{width:10px;height:8px;flex:none;transition:transform var(--dur-fast) var(--ease)}
@@ -87,7 +88,7 @@
   .nav-dropdown li a:hover,.nav-dropdown li .nested-btn:hover{color:var(--heart)}
   .nav-dropdown-nested{padding-left:16px}
   .nav-cta-wrap{display:flex;flex-direction:column;gap:12px;padding:16px 18px 22px;border-top:1px solid var(--line)}
-  .nav-cta-wrap .nav-phone{font-weight:700;font-size:.92rem;text-decoration:none;color:var(--ink)}
+  .nav-cta-wrap .nav-phone{font-weight:600;font-size:.92rem;text-decoration:none;color:var(--ink)}
   .nav-cta-wrap .nav-phone:hover{color:var(--heart)}
   .nav-cta{text-align:center;white-space:nowrap;flex-shrink:0}
   @media (min-width:901px){
@@ -126,7 +127,7 @@
   .announcement-banner:hover,.announcement-banner:focus-visible{background:#94420F}
   .ann-badge{
     flex:none;background:#fff;color:#B5541A;
-    font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.02em;
+    font-weight:800;font-size:.72rem;letter-spacing:.02em;
     padding:4px 10px;border-radius:999px;
   }
   .ann-text{font-size:.92rem;color:#fff;line-height:1.3}
