@@ -15,6 +15,62 @@
 <title>Home Care in Winnipeg | Bonhearts Home Care</title>
 <meta name="description" content="Nurse-approved caregivers for your loved one at home in Winnipeg. Book a free care consultation and we'll call you shortly.">
 <link rel="canonical" href="https://bonhearts.ca/get-in-touch">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Who is this for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Families in Winnipeg with a loved one who needs help at home, from a few hours a week of everyday help to specialized care for memory, mobility, or recovery after a hospital stay."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens after I book?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We'll call you shortly. You're not committing to anything. We'll learn what your loved one needs and what matters to you, and build a care plan around them. If it's a fit, someone from our team comes to the home for a free assessment. Then we match the right caregiver and find a schedule that works for your family."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you check your caregivers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every caregiver is approved by a Registered Nurse and passes six checks: their caregiver certification, a criminal record and vulnerable sector check, abuse registry checks, CPR and first aid, immunizations, and references."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the caregiver isn't the right fit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tell us within 48 hours. You don't pay for that first visit, and we'll match you with someone new."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can we get help paying for care?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Many families don't realize their insurance, Veterans Affairs, or Manitoba's Self and Family Managed Care program may help cover the cost. Ask us on your call, and we'll point you in the right direction."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will my loved one have the same caregiver?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We keep the same familiar caregiver with your loved one, so they build real trust."
+      }
+    }
+  ]
+}
+</script>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -65,6 +121,22 @@
   .fn-link{color:var(--heart);text-decoration:none;font-weight:600;padding:0 2px}
   .fn-link:hover{text-decoration:underline}
   .call-line a{color:var(--heart);font-weight:600}
+
+  /* ---------- landing FAQ (accordion) ---------- */
+  .faq-lp{padding:16px 0 56px}
+  .faq-lp .wrap{max-width:720px}
+  .faq-lp h2{font-size:clamp(1.5rem,3.4vw,2rem);text-align:center;margin-bottom:24px}
+  .faq-list{border-top:1px solid var(--line)}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-item h3{font-size:1rem;line-height:1.4;letter-spacing:0}
+  .faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:56px;padding:16px 4px;background:none;border:none;cursor:pointer;text-align:left;font:inherit;font-size:1rem;font-weight:600;color:var(--ink);touch-action:manipulation}
+  .faq-q:hover{color:var(--heart)}
+  .faq-icon{position:relative;flex:none;width:16px;height:16px;color:var(--heart)}
+  .faq-icon::before,.faq-icon::after{content:"";position:absolute;left:0;top:7px;width:16px;height:2px;border-radius:2px;background:currentColor;transition:transform var(--dur) var(--ease)}
+  .faq-icon::after{transform:rotate(90deg)}
+  .faq-q[aria-expanded="true"] .faq-icon::after{transform:rotate(0deg)}
+  .faq-a{padding:0 4px 20px;color:#3C5166;font-size:.95rem}
+  .faq-a:not([hidden]){animation:fadein .25s ease}
 
   /* ---------- minimal page footer ---------- */
   .lp-footer{padding:28px 0 36px;border-top:1px solid var(--line);color:var(--sage);font-size:.8rem;text-align:center}
@@ -245,6 +317,38 @@
   </div>
 </section>
 
+<section class="faq-lp" aria-labelledby="faq-heading">
+  <div class="wrap">
+    <h2 id="faq-heading">Questions families ask</h2>
+    <div class="faq-list" id="faq-list">
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="faq-q1" aria-expanded="false" aria-controls="faq-a1"><span>Who is this for?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden><p>Families in Winnipeg with a loved one who needs help at home, from a few hours a week of everyday help to specialized care for memory, mobility, or recovery after a hospital stay.</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="faq-q2" aria-expanded="false" aria-controls="faq-a2"><span>What happens after I book?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden><p>We'll call you shortly. You're not committing to anything. We'll learn what your loved one needs and what matters to you, and build a care plan around them. If it's a fit, someone from our team comes to the home for a free assessment. Then we match the right caregiver and find a schedule that works for your family.</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="faq-q3" aria-expanded="false" aria-controls="faq-a3"><span>How do you check your caregivers?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden><p>Every caregiver is approved by a Registered Nurse and passes six checks: their caregiver certification, a criminal record and vulnerable sector check, abuse registry checks, CPR and first aid, immunizations, and references.</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="faq-q4" aria-expanded="false" aria-controls="faq-a4"><span>What if the caregiver isn't the right fit?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden><p>Tell us within 48 hours. You don't pay for that first visit, and we'll match you with someone new.<a class="fn-link" href="#guarantee-fine-print" aria-label="See guarantee fine print">*</a></p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="faq-q5" aria-expanded="false" aria-controls="faq-a5"><span>Can we get help paying for care?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden><p>Many families don't realize their insurance, Veterans Affairs, or Manitoba's Self and Family Managed Care program may help cover the cost. Ask us on your call, and we'll point you in the right direction.</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="faq-q6" aria-expanded="false" aria-controls="faq-a6"><span>Will my loved one have the same caregiver?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden><p>Yes. We keep the same familiar caregiver with your loved one, so they build real trust.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer class="lp-footer">
   <div class="wrap">
     <p id="guarantee-fine-print">*Applies to the first visit with a caregiver who isn't the right fit, when you ask us to match you with a new caregiver for ongoing care. <a href="/guarantee-terms">See full guarantee terms</a></p>
@@ -308,6 +412,19 @@
     line.append('Prefer to talk now? Call ', link, '.');
     document.getElementById('hero-points').appendChild(line);
   }
+
+  // Landing FAQ: accordion, one answer open at a time
+  const faqButtons = [...document.querySelectorAll('.faq-q')];
+  faqButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const opening = btn.getAttribute('aria-expanded') !== 'true';
+      faqButtons.forEach(b => {
+        const open = opening && b === btn;
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.getElementById(b.getAttribute('aria-controls')).hidden = !open;
+      });
+    });
+  });
 
   // Hero button reveals the form and scrolls to it, no navigation
   document.getElementById('btn-get-started').addEventListener('click', () => {
