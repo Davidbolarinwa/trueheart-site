@@ -197,6 +197,12 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://bonhearts.ca/guarantee-terms</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://bonhearts.ca/contact.html</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
