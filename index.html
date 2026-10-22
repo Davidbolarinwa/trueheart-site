@@ -227,7 +227,7 @@
   .hero .sub strong{color:#fff;font-weight:800}
   .hero .hero-kw{font-size:clamp(1.05rem,2vw,1.3rem);font-weight:600;max-width:640px;margin:14px auto 0;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.85),0 2px 8px rgba(0,0,0,.7)}
   .hero .sub{margin-top:14px}
-  .hero-offer{display:inline-block;margin:22px auto 0;padding:10px 18px;border-radius:14px;background:rgba(22,50,79,.82);color:#fff;font-size:1rem;font-weight:600;max-width:640px}
+  .hero-offer{display:block;width:fit-content;margin:22px auto 0;padding:10px 18px;border-radius:14px;background:rgba(22,50,79,.82);color:#fff;font-size:1rem;font-weight:600;max-width:640px}
   .hero-offer a{color:#fff;white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
 
   /* ---------- services ---------- */
@@ -311,7 +311,7 @@
   .band.dim{background:var(--paper-dim)}
   /* separates two adjacent cream bands that would otherwise blur together */
   .band.divider-top{border-top:1px solid var(--line)}
-  .kicker{font-size:.8rem;font-weight:800;letter-spacing:.02em;color:var(--heart);margin-bottom:14px}
+  .kicker{font-size:.875rem;font-weight:800;letter-spacing:.02em;color:var(--heart);margin-bottom:14px}
   h2.section-title{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:800;max-width:700px;margin-bottom:18px}
   .lede{font-size:1.1rem;max-width:640px;color:#3C5166}
   /* ---------- blog ---------- */
@@ -323,7 +323,7 @@
   }
   .post:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
   .post .cat{
-    align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.02em;
+    align-self:flex-start;font-size:.875rem;font-weight:800;letter-spacing:.02em;
     color:var(--heart);background:rgba(178,58,72,.09);border:1px solid rgba(178,58,72,.25);
     border-radius:999px;padding:4px 12px;margin-bottom:14px;
   }
@@ -371,7 +371,7 @@
   .guarantee h2{font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:800;margin-bottom:14px}
   .guarantee p{max-width:560px;margin:0 auto 26px;color:#3C5166;font-size:1.05rem}
   .guarantee p strong{color:var(--ink)}
-  .guarantee p.guarantee-terms-link{font-size:.85rem;color:var(--sage);margin-top:-14px}
+  .guarantee p.guarantee-terms-link{font-size:.875rem;color:var(--sage);margin-top:-14px}
   .guarantee-terms-link a{color:inherit}
 
   /* ---------- FAQ ---------- */
@@ -407,11 +407,11 @@
   /* wizard */
   .progress{height:6px;background:var(--paper-dim);border-radius:999px;overflow:hidden;margin-bottom:8px}
   .progress-fill{height:100%;width:0%;background:var(--heart);border-radius:999px;transition:width var(--dur-slow) var(--ease)}
-  .step-count{font-size:.78rem;font-weight:600;color:var(--sage);margin-bottom:22px}
+  .step-count{font-size:.875rem;font-weight:600;color:var(--sage);margin-bottom:22px}
   .fstep{display:none}
   .fstep.active{display:block;animation:fadein .25s ease}
   @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .fstep .hint{font-size:.85rem;color:var(--sage);margin:-6px 0 14px}
+  .fstep .hint{font-size:.875rem;color:var(--sage);margin:-6px 0 14px}
   .opt-grid{display:grid;gap:10px}
   .opt{
     display:block;border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;
@@ -423,7 +423,7 @@
   .opt input{position:absolute;opacity:0;pointer-events:none}
   .opt.selected{border-color:var(--heart);background:rgba(178,58,72,.06);animation:optpop .28s var(--ease)}
   @keyframes optpop{0%{transform:scale(.97)}60%{transform:scale(1.015)}100%{transform:scale(1)}}
-  .opt small{display:block;font-weight:400;color:var(--sage);font-size:.82rem;margin-top:2px}
+  .opt small{display:block;font-weight:400;color:var(--sage);font-size:.875rem;margin-top:2px}
   .wizard-nav{display:flex;gap:12px;margin-top:24px}
   .wizard-nav .btn{flex:1;text-align:center}
   .btn-back{
@@ -434,7 +434,7 @@
   }
   .btn-back:hover{border-color:var(--ink)}
   .btn-back:active{transform:scale(.97)}
-  .ferr{display:none;color:var(--heart);font-size:.85rem;font-weight:600;margin-top:10px}
+  .ferr{display:none;color:var(--heart);font-size:.875rem;font-weight:600;margin-top:10px}
   .form-success{display:none;text-align:center;padding:30px 0 10px}
   .form-success h3{font-family:'Poppins',sans-serif;font-size:1.5rem;margin-bottom:10px}
 
@@ -554,7 +554,7 @@
   .announcement-banner:hover,.announcement-banner:focus-visible{background:#94420F}
   .ann-badge{
     flex:none;background:#fff;color:#B5541A;
-    font-weight:800;font-size:.72rem;letter-spacing:.02em;
+    font-weight:800;font-size:.875rem;letter-spacing:.02em;
     padding:4px 10px;border-radius:999px;
   }
   .ann-text{font-size:.92rem;color:#fff;line-height:1.3}
@@ -567,7 +567,7 @@
   @media(max-width:767px){
     .ann-text-full{display:none}
     .ann-text-short{display:inline}
-    .ann-text{font-size:.83rem}
+    .ann-text{font-size:.875rem}
     .announcement-banner{gap:8px;padding:0 16px}
   }
 
@@ -604,7 +604,7 @@
 <nav aria-label="Primary">
   <div class="nav-inner">
     <a class="logo" href="/#top">
-      <img src="bonhearts-logo.gif" alt="" aria-hidden="true">
+      <img src="bonhearts-logo.svg" alt="" aria-hidden="true">
       <span>Bon<em>hearts</em></span>
     </a>
     <div class="nav-quick">
@@ -693,7 +693,7 @@
       <article class="service-card">
         <div class="service-photo-frame">
           <!-- Crop position setting for this card's photo: adjust the X% (left/right) and Y% (up/down) below to recentre the subject within the circular frame. -->
-          <img class="service-photo" src="service_img10.webp" alt="A caregiver helping a senior client with daily personal care at home" width="400" height="300" loading="lazy" style="object-position:62% 50%">
+          <img class="service-photo" src="service_img10-800.webp" alt="A caregiver helping a senior client with daily personal care at home" width="400" height="300" loading="lazy" style="object-position:62% 50%">
         </div>
         <div class="service-body">
           <h3>Personal Care Services</h3>
@@ -704,7 +704,7 @@
       <article class="service-card">
         <div class="service-photo-frame">
           <!-- Crop position setting for this card's photo: adjust the X% (left/right) and Y% (up/down) below to recentre the subject within the circular frame. -->
-          <img class="service-photo" src="service_img9.webp" alt="A caregiver supporting a client recovering at home after a hospital stay" width="400" height="300" loading="lazy" style="object-position:30% 50%">
+          <img class="service-photo" src="service_img9-800.webp" alt="A caregiver supporting a client recovering at home after a hospital stay" width="400" height="300" loading="lazy" style="object-position:30% 50%">
         </div>
         <div class="service-body">
           <h3>Post-Hospital and Convalescent Care</h3>
@@ -715,7 +715,7 @@
       <article class="service-card">
         <div class="service-photo-frame">
           <!-- Crop position setting for this card's photo: adjust the X% (left/right) and Y% (up/down) below to recentre the subject within the circular frame. -->
-          <img class="service-photo" src="service_img8.webp" alt="A caregiver providing overnight care so a family caregiver can rest" width="400" height="300" loading="lazy" style="object-position:77% 50%">
+          <img class="service-photo" src="service_img8-800.webp" alt="A caregiver providing overnight care so a family caregiver can rest" width="400" height="300" loading="lazy" style="object-position:77% 50%">
         </div>
         <div class="service-body">
           <h3>Overnight and Respite Care</h3>
@@ -726,7 +726,7 @@
       <article class="service-card">
         <div class="service-photo-frame">
           <!-- Crop position setting for this card's photo: adjust the X% (left/right) and Y% (up/down) below to recentre the subject within the circular frame. -->
-          <img class="service-photo" src="service_img7.webp" alt="A caregiver assisting a senior with everyday tasks at home" width="400" height="300" loading="lazy" style="object-position:45% 50%">
+          <img class="service-photo" src="service_img7-800.webp" alt="A caregiver assisting a senior with everyday tasks at home" width="400" height="300" loading="lazy" style="object-position:45% 50%">
         </div>
         <div class="service-body">
           <h3>Senior Care</h3>
@@ -737,7 +737,7 @@
       <article class="service-card">
         <div class="service-photo-frame">
           <!-- Crop position setting for this card's photo: adjust the X% (left/right) and Y% (up/down) below to recentre the subject within the circular frame. -->
-          <img class="service-photo" src="service_img6.webp" alt="A caregiver and client enjoying a walk together outdoors" width="400" height="300" loading="lazy" style="object-position:66% 50%">
+          <img class="service-photo" src="service_img6-800.webp" alt="A caregiver and client enjoying a walk together outdoors" width="400" height="300" loading="lazy" style="object-position:66% 50%">
         </div>
         <div class="service-body">
           <h3>Companionship and Outings</h3>
@@ -748,7 +748,7 @@
       <article class="service-card">
         <div class="service-photo-frame">
           <!-- Crop position setting for this card's photo: adjust the X% (left/right) and Y% (up/down) below to recentre the subject within the circular frame. -->
-          <img class="service-photo" src="service_img5.webp" alt="A caregiver helping with light housekeeping in a client's home" width="400" height="300" loading="lazy" style="object-position:48% 50%">
+          <img class="service-photo" src="service_img5-800.webp" alt="A caregiver helping with light housekeeping in a client's home" width="400" height="300" loading="lazy" style="object-position:48% 50%">
         </div>
         <div class="service-body">
           <h3>Household Support</h3>
@@ -759,7 +759,7 @@
       <article class="service-card">
         <div class="service-photo-frame">
           <!-- Crop position setting for this card's photo: adjust the X% (left/right) and Y% (up/down) below to recentre the subject within the circular frame. -->
-          <img class="service-photo" src="service_img4.webp" alt="A caregiver providing specialized support for a client with a complex medical condition" width="400" height="300" loading="lazy" style="object-position:50% 50%">
+          <img class="service-photo" src="service_img4-800.webp" alt="A caregiver providing specialized support for a client with a complex medical condition" width="400" height="300" loading="lazy" style="object-position:50% 50%">
         </div>
         <div class="service-body">
           <h3>Specialized Care</h3>
@@ -770,7 +770,7 @@
       <article class="service-card">
         <div class="service-photo-frame">
           <!-- Crop position setting for this card's photo: adjust the X% (left/right) and Y% (up/down) below to recentre the subject within the circular frame. -->
-          <img class="service-photo" src="service_img3.webp" alt="A caregiver assisting an adult with a disability with daily activities" width="400" height="300" loading="lazy" style="object-position:55% 50%">
+          <img class="service-photo" src="service_img3-800.webp" alt="A caregiver assisting an adult with a disability with daily activities" width="400" height="300" loading="lazy" style="object-position:55% 50%">
         </div>
         <div class="service-body">
           <h3>Disability Support Services</h3>
@@ -841,7 +841,7 @@
 <footer>
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Bonhearts Home Care">
-      <img src="bonhearts-logo.gif" alt="" aria-hidden="true">
+      <img src="bonhearts-logo.svg" alt="" aria-hidden="true">
       <span>Bon<em style="font-style:normal;color:var(--heart)">hearts</em></span>
     </a>
     <p class="foot-contact"><strong>Bonhearts Home Care</strong> &middot; Available 24/7 &middot; <a href="tel:+14312774531">(431) 277-4531</a> &middot; <!--email_off--><a href="mailto:info@bonhearts.ca">info@bonhearts.ca</a><!--/email_off--></p>
