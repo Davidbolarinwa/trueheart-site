@@ -110,8 +110,9 @@
   .hero-title{font-size:clamp(1.65rem,4.2vw,2.6rem);font-weight:800;color:var(--ink);order:1}
   .hero-sub{font-size:1.05rem;color:#3C5166;margin-top:16px;order:2}
   .video-slot{order:3;position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:var(--ink);margin-top:24px;box-shadow:var(--shadow)}
-  @media (min-width:641px){ .video-slot{max-width:600px} }
-  .video-slot iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-slot mux-player{position:absolute;inset:0;width:100%;height:100%;display:block;font-family:'Poppins',sans-serif;
+    /* No seeking: hide the scrub bar, skip buttons and speed control */
+    --time-range:none;--seek-backward-button:none;--seek-forward-button:none;--playback-rate-button:none}
   .video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;font-weight:600;font-size:.95rem}
   .video-placeholder svg{width:72px;height:72px}
   .hero-cta{order:4;margin-top:24px;width:100%}
@@ -360,10 +361,9 @@
   // ══════════ Multi-step qualification form ══════════
   // CONFIG — edit these:
   const FORM_ENDPOINT = "https://hook.us2.make.com/9c9o12ehfi4o7vvdtzjywuthaje3b81p";  // Make.com webhook
-  // Hero video: a Cloudflare Stream iframe URL, e.g.
-  // "https://customer-<code>.cloudflarestream.com/<video-id>/iframe". Leave
-  // empty to show the "Video coming soon" placeholder instead.
-  const VIDEO_EMBED_URL = '';
+  // Hero video: the Mux playback ID of the VSL (Mux dashboard → asset →
+  // Playback IDs). Leave empty to show the "Video coming soon" placeholder.
+  const MUX_PLAYBACK_ID = 'OXTvpqqoDJ7Zw7XNfBurQ6gA4LuVB01JX0101zBjvFrsyk';
   // "Prefer to talk now?" line under the hero. Both empty = line not rendered.
   // Display format like (204) 555-0123; tel format like +12045550123.
   const CALL_NUMBER_DISPLAY = '(431) 277-4531';
@@ -388,18 +388,41 @@
   const btnBack = document.getElementById('btn-back');
   let cur = 0;
 
-  // Hero video: swap the placeholder for the Cloudflare Stream player once a
-  // URL is set. preload=none (unless the URL sets its own) so the video only
-  // loads when the visitor presses play.
-  if (VIDEO_EMBED_URL) {
-    const src = new URL(VIDEO_EMBED_URL);
-    if (!src.searchParams.has('preload')) src.searchParams.set('preload', 'none');
-    const iframe = document.createElement('iframe');
-    iframe.src = src.toString();
-    iframe.title = 'Bonhearts Home Care video';
-    iframe.allow = 'accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;';
-    iframe.allowFullscreen = true;
-    document.getElementById('video-slot').replaceChildren(iframe);
+  // Hero video: swap the placeholder for Mux Player once a playback ID is set.
+  // Viewers can play, pause, change volume and go fullscreen, but not seek:
+  // the CSS hides the scrub bar, skip buttons and speed control; this snaps
+  // the video back if it jumps any other way (keyboard, lock-screen controls).
+  if (MUX_PLAYBACK_ID) {
+    const lib = document.createElement('script');
+    lib.src = 'https://cdn.jsdelivr.net/npm/@mux/mux-player';
+    document.head.appendChild(lib);
+
+    const player = document.createElement('mux-player');
+    player.setAttribute('playback-id', MUX_PLAYBACK_ID);
+    player.setAttribute('stream-type', 'on-demand');
+    player.setAttribute('metadata-video-title', 'Bonhearts VSL');
+    player.setAttribute('preload', 'none');
+    player.setAttribute('hotkeys', 'noarrowleft noarrowright');
+    player.setAttribute('accent-color', '#B23A48');
+    player.setAttribute('primary-color', '#FBF9F5');
+    player.setAttribute('secondary-color', '#16324F');
+    document.getElementById('video-slot').replaceChildren(player);
+
+    let allowedTime = 0;
+    let seeking = false;
+    player.addEventListener('timeupdate', () => {
+      if (!seeking) allowedTime = player.currentTime;
+    });
+    player.addEventListener('seeking', () => {
+      seeking = true;
+      if (Math.abs(player.currentTime - allowedTime) > 0.5) player.currentTime = allowedTime;
+    });
+    player.addEventListener('seeked', () => { seeking = false; });
+    // Replaying after the end restarts from 0, so allow that one jump
+    player.addEventListener('ended', () => { allowedTime = 0; });
+    player.addEventListener('ratechange', () => {
+      if (player.playbackRate !== 1) player.playbackRate = 1;
+    });
   }
 
   // "Prefer to talk now?" line — only rendered once a number is configured
