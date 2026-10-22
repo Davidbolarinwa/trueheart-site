@@ -196,6 +196,24 @@
   .form-promise{color:var(--sage);font-size:.85rem;margin-top:18px;text-align:center;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
   .form-success{display:none;text-align:center;padding:30px 0 10px}
   .form-success h3{font-size:1.5rem;margin-bottom:10px}
+  .form-success h3 a{color:var(--heart);white-space:nowrap}
+  .btn-secondary{background:transparent;color:var(--heart);box-shadow:inset 0 0 0 2px var(--heart)}
+  .btn-secondary:hover{background:var(--heart);color:#fff}
+  .oa-action{margin-top:22px}
+  /* Free guide offer (out-of-area screen, ?test=1 only for now) */
+  .guide-offer{margin-top:30px;padding:22px;border:1.5px solid var(--line);border-radius:14px;background:var(--paper);text-align:left}
+  .guide-offer[hidden],.guide-offer [hidden]{display:none}
+  .guide-text{font-weight:600}
+  .guide-change{background:none;border:none;padding:6px 0;margin-top:4px;color:var(--sage);font-family:'Poppins',sans-serif;font-size:.85rem;text-decoration:underline;cursor:pointer;min-height:44px}
+  .guide-change:hover{color:var(--heart)}
+  .guide-email{margin-top:14px}
+  .guide-email label{margin-bottom:6px}
+  .form-card label.guide-check{display:flex;align-items:flex-start;gap:10px;margin:16px 0 0;font-weight:400;font-size:.9rem;cursor:pointer}
+  .guide-check input{width:18px;height:18px;margin-top:3px;accent-color:var(--heart);flex:none}
+  .guide-offer .btn{margin-top:16px}
+  .guide-done{margin-top:30px;font-weight:600;font-size:1.05rem;color:var(--ink)}
+  .careers-line{font-size:.8rem;color:var(--sage);margin-top:18px;text-align:center}
+  .careers-line a{color:var(--sage);font-weight:600}
   .hp-field{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 
   @media (max-width:640px){
@@ -318,10 +336,26 @@
 
       <!-- Out of area -->
       <div class="form-success" id="success-out-of-area">
-        <h3>We're not in your area yet. 🗺️</h3>
-        <p>Bonhearts Home Care currently serves Winnipeg and immediate surrounding communities. We've saved your details and will reach out the moment we expand to your area. In the meantime, your regional health authority's home care office is the best starting point.</p>
+        <h3>We're not in your area yet.</h3>
+        <p>Bonhearts Home Care currently serves Winnipeg, Selkirk, Lockport and West St. Paul. For care where your loved one lives, your regional health authority's home care program is the best place to start.</p>
+        <p class="oa-action"><a class="btn btn-secondary" href="https://www.gov.mb.ca/health/homecare/" target="_blank" rel="noopener">Find your local home care office</a></p>
+
+        <!-- Free guide offer: shown only with ?test=1 (see GUIDE_SEND) -->
+        <div class="guide-offer" id="guide-offer" hidden>
+          <p class="guide-text" id="guide-text"></p>
+          <button type="button" class="guide-change" id="guide-change" hidden>Use a different email</button>
+          <div class="guide-email" id="guide-email-wrap" hidden>
+            <label for="g-email">Your email</label>
+            <input id="g-email" type="email" autocomplete="email" placeholder="you@example.com">
+          </div>
+          <label class="guide-check"><input type="checkbox" id="g-tips"> Also send me occasional care tips.</label>
+          <p class="ferr" id="err-guide"></p>
+          <button type="button" class="btn" id="btn-guide">Yes, send it to me</button>
+        </div>
+        <p class="guide-done" id="guide-done" hidden>Done! Check your inbox.</p>
       </div>
     </div>
+    <p class="careers-line">Looking for work as a caregiver? <a href="/careers">Apply here</a></p>
   </div>
 </section>
 
@@ -376,12 +410,17 @@
   const CALL_NUMBER_DISPLAY = '(431) 277-4531';
   const CALL_NUMBER_TEL = '+14312774531';
   const IN_AREA_FSA_PREFIXES = ["R2", "R3"];          // Winnipeg proper
-  const IN_AREA_FSA_EXACT = ["R1A", "R1B", "R4A"];    // surrounding: Selkirk, Lockport, Stonewall — edit to taste
+  const IN_AREA_FSA_EXACT = ["R1A", "R1B", "R4A"];    // surrounding: R1A Selkirk (also some Lockport/St. Andrews), R1B Lockport, R4A West St. Paul — edit to taste
   // After-hours window, 24-hour clock, Winnipeg time: a submission at or after
   // AFTER_HOURS_START, or before MORNING_START, gets the "first thing in the
   // morning" success copy and after_hours: true in the payload.
   const AFTER_HOURS_START = 20;
   const MORNING_START = 8;
+  // Free guide offer on the out-of-area screen. Only shown when the page URL
+  // has ?test=1. GUIDE_SEND = false: the guide_request payload is only
+  // console.logged; true: it's POSTed to FORM_ENDPOINT.
+  const GUIDE_SEND = false;
+  const GUIDE_TITLE = "How to Choose a Caregiver You Can Trust";
   // Spam guard (same approach as careers-job.js): a filled honeypot or a
   // submit sooner than this after page load shows success but sends nothing.
   const MIN_SUBMIT_MS = 2500;
@@ -706,15 +745,107 @@
       }
     }
 
-    if (!inArea){ showSuccess('success-out-of-area'); return; }
+    if (!inArea){ setupGuideOffer(); showSuccess('success-out-of-area'); return; }
 
     const firstName = name.split(/\s+/)[0];
     const heading = afterHours
-      ? "Thanks, {name}. We've got your request. We'll call you first thing in the morning."
+      ? "Thanks, {name}. We're here 24/7. If it's urgent, call us now at {phone}. Otherwise, we'll call you first thing in the morning."
       : "Thanks, {name}. We'll call you shortly.";
-    const [before, after] = heading.split('{name}');
-    document.getElementById('success-heading').textContent = before + firstName + after;
+    // {name} as text; {phone} as a tap-to-call link
+    const headingEl = document.getElementById('success-heading');
+    headingEl.replaceChildren(...heading.split(/(\{name\}|\{phone\})/).map(part => {
+      if (part === '{name}') return firstName;
+      if (part !== '{phone}') return part;
+      const link = document.createElement('a');
+      link.href = 'tel:' + CALL_NUMBER_TEL;
+      link.textContent = CALL_NUMBER_DISPLAY;
+      return link;
+    }));
     showSuccess('success-in-area');
+  });
+
+  // Free guide offer (out-of-area screen). Test mode only for now: shown
+  // only with ?test=1. Sends its own guide_request payload, separate from the
+  // lead; the button covers the guide only, the tips checkbox is the separate
+  // (CASL) permission for anything else.
+  const guideOffer = document.getElementById('guide-offer');
+  const guideText = document.getElementById('guide-text');
+  const guideChange = document.getElementById('guide-change');
+  const guideEmailWrap = document.getElementById('guide-email-wrap');
+  const guideEmail = document.getElementById('g-email');
+  const guideTips = document.getElementById('g-tips');
+  const guideErr = document.getElementById('err-guide');
+  const btnGuide = document.getElementById('btn-guide');
+  const GUIDE_BTN_LABEL = 'Yes, send it to me';
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let guideKnownEmail = '';
+
+  function askForGuideEmail(){
+    guideText.textContent = 'Want our free guide, ' + GUIDE_TITLE + "? We'll send it to your email.";
+    guideChange.hidden = true;
+    guideEmailWrap.hidden = false;
+    guideKnownEmail = '';
+  }
+
+  function setupGuideOffer(){
+    if (new URLSearchParams(location.search).get('test') !== '1') return;
+    const email = val('email');
+    if (email){
+      guideKnownEmail = email;
+      guideText.textContent = 'Want our free guide, ' + GUIDE_TITLE + "? We'll send it to " + email + '.';
+      guideChange.hidden = false;
+    } else {
+      askForGuideEmail();
+    }
+    guideOffer.hidden = false;
+  }
+
+  guideChange.addEventListener('click', () => { askForGuideEmail(); guideEmail.focus(); });
+
+  btnGuide.addEventListener('click', async () => {
+    if (btnGuide.disabled) return;
+    const email = guideKnownEmail || guideEmail.value.trim();
+    if (!EMAIL_RE.test(email)){
+      guideErr.textContent = 'Please enter a valid email address.';
+      guideErr.style.display = 'block';
+      guideEmail.focus();
+      return;
+    }
+    guideErr.style.display = 'none';
+    const digits = phoneDigits(val('phone'));
+    const guidePayload = {
+      event: 'guide_request',
+      email: email,
+      newsletter_consent: guideTips.checked,
+      guide_title: GUIDE_TITLE,
+      postal: val('postal').toUpperCase(),
+      phone_e164: digits ? '+1' + digits : '',
+      submitted_at_local: formatWinnipegTime(new Date())
+    };
+    if (GUIDE_SEND){
+      btnGuide.disabled = true;
+      btnGuide.textContent = 'Sending…';
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(guidePayload),
+          keepalive: true
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+      } catch (e) {
+        console.error('Guide request failed:', e);
+        btnGuide.disabled = false;
+        btnGuide.textContent = GUIDE_BTN_LABEL;
+        guideErr.textContent = "Something went wrong sending your guide. Please try again.";
+        guideErr.style.display = 'block';
+        return;
+      }
+    } else {
+      console.log('Guide request (GUIDE_SEND is off, nothing sent):', guidePayload);
+    }
+    guideOffer.hidden = true;
+    document.getElementById('guide-done').hidden = false;
   });
 
   show(0);
