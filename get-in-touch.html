@@ -115,6 +115,11 @@
     --time-range:none;--seek-backward-button:none;--seek-forward-button:none;--playback-rate-button:none}
   .video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;font-weight:600;font-size:.95rem}
   .video-placeholder svg{width:72px;height:72px}
+  .sound-on{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:flex;align-items:center;gap:10px;background:var(--heart);color:#fff;border:none;border-radius:999px;padding:16px 28px;min-height:56px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;white-space:nowrap;cursor:pointer;touch-action:manipulation;box-shadow:0 10px 26px rgba(22,50,79,.35);animation:sound-pulse 1.8s ease-in-out infinite}
+  .sound-on:hover{background:var(--heart-deep)}
+  .sound-on:focus-visible{outline:3px solid #fff;outline-offset:3px}
+  @keyframes sound-pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.06)}}
+  @media (max-width:640px){ .sound-on{padding:14px 22px;font-size:1rem} }
   .hero-cta{order:4;margin-top:24px;width:100%}
   .cta-note{font-size:.85rem;color:var(--sage);margin-top:10px}
   .hero-points{order:5;margin-top:22px;display:grid;gap:10px;font-size:.95rem;color:var(--ink)}
@@ -401,7 +406,8 @@
     player.setAttribute('playback-id', MUX_PLAYBACK_ID);
     player.setAttribute('stream-type', 'on-demand');
     player.setAttribute('metadata-video-title', 'Bonhearts VSL');
-    player.setAttribute('preload', 'none');
+    player.setAttribute('preload', 'auto');
+    player.setAttribute('playsinline', '');
     player.setAttribute('hotkeys', 'noarrowleft noarrowright');
     player.setAttribute('accent-color', '#B23A48');
     player.setAttribute('primary-color', '#FBF9F5');
@@ -423,6 +429,41 @@
     player.addEventListener('ratechange', () => {
       if (player.playbackRate !== 1) player.playbackRate = 1;
     });
+
+    // Autoplay on load: try with sound first; if the browser blocks that,
+    // play muted and offer a "turn on sound" button that restarts from 0:00.
+    const soundBtn = document.createElement('button');
+    soundBtn.type = 'button';
+    soundBtn.className = 'sound-on';
+    soundBtn.textContent = '\u{1F50A} Click to turn on sound';
+    soundBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      allowedTime = 0;  // first, so the no-seek guard allows the restart
+      player.currentTime = 0;
+      player.muted = false;
+      player.volume = 1;
+      player.play();
+      soundBtn.remove();
+    });
+    // Unmuted with the player's own volume control instead: just drop the button
+    player.addEventListener('volumechange', () => {
+      if (!player.muted) soundBtn.remove();
+    });
+    // Only NotAllowedError means "blocked"; anything else (the player's own
+    // source load interrupting play()) gets one retry once it can play.
+    let retried = false;
+    const tryPlay = () => player.play().catch(err => {
+      if (err.name === 'NotAllowedError') {
+        player.muted = true;
+        player.play().catch(() => {});
+        document.getElementById('video-slot').appendChild(soundBtn);
+      } else if (!retried) {
+        retried = true;
+        if (player.readyState >= 3) tryPlay();
+        else player.addEventListener('canplay', tryPlay, { once: true });
+      }
+    });
+    customElements.whenDefined('mux-player').then(tryPlay);
   }
 
   // "Prefer to talk now?" line — only rendered once a number is configured
