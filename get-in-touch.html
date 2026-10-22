@@ -126,6 +126,10 @@
   .cta-note{font-size:.85rem;color:var(--sage);margin-top:10px}
   .hero-points{order:5;margin-top:22px;display:grid;gap:10px;font-size:.95rem;color:var(--ink)}
   .hero-points svg{display:inline-block;width:20px;height:20px;vertical-align:-4px;margin-right:6px}
+  .care-plan-title{font-weight:600;color:var(--ink)}
+  .care-plan ul{display:inline-block;list-style:none;margin:6px 0 0;padding:0;text-align:left}
+  .care-plan li{display:flex;align-items:flex-start;gap:8px;margin-top:4px}
+  .hero-points .care-plan svg{flex:none;width:18px;height:18px;margin:4px 0 0}
   .fn-link{color:var(--heart);text-decoration:none;font-weight:600;padding:0 2px}
   .fn-link:hover{text-decoration:underline}
   .call-line a{color:var(--heart);font-weight:600}
@@ -219,6 +223,7 @@
   @media (max-width:640px){
     .form-card{padding:32px 22px}
     .hero-cta .btn{width:100%;padding:17px 16px;font-size:1rem}
+    .cta-note-more{display:block}
     .wizard-nav{flex-direction:column;align-items:stretch;gap:6px}
     .wizard-nav #btn-next{order:1}
     .wizard-nav #err-send{order:2;text-align:center}
@@ -251,11 +256,19 @@
       </div>
       <div class="hero-cta">
         <button type="button" class="btn big" id="btn-get-started">Book My Free Care Consultation</button>
-        <p class="cta-note">No commitment. Takes 2 minutes.</p>
+        <p class="cta-note">No commitment. Takes 2 minutes. <span class="cta-note-more">Care can start within days.</span></p>
       </div>
       <div class="hero-points" id="hero-points">
         <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L20 5 V11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 V5 Z" fill="none" stroke="var(--heart)" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12 L11 14.5 L15.5 9.5" fill="none" stroke="var(--heart)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Every caregiver approved by a Registered Nurse and screened with 6 safety checks.</span></p>
-        <p id="guarantee-line"><span>Not the right fit on the first visit? You don't pay for it, and we'll match you with someone new.<a class="fn-link" href="#guarantee-fine-print" aria-label="See guarantee fine print">*</a></span></p>
+        <div class="care-plan" id="guarantee-line">
+          <p class="care-plan-title">Your Free Peace-of-Mind Care Plan</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7" fill="none" stroke="var(--heart)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Free care consultation call</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7" fill="none" stroke="var(--heart)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Free in-home safety assessment</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7" fill="none" stroke="var(--heart)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A caregiver matched to your loved one</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7" fill="none" stroke="var(--heart)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>First-visit fit guarantee<a class="fn-link" href="#guarantee-fine-print" aria-label="See guarantee fine print">*</a></span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
