@@ -112,7 +112,9 @@
   .video-slot{order:3;position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:var(--ink);margin-top:24px;box-shadow:var(--shadow)}
   .video-slot mux-player{position:absolute;inset:0;width:100%;height:100%;display:block;font-family:'Poppins',sans-serif;
     /* No seeking: hide the scrub bar, skip buttons and speed control */
-    --time-range:none;--seek-backward-button:none;--seek-forward-button:none;--playback-rate-button:none}
+    --time-range:none;--seek-backward-button:none;--seek-forward-button:none;--playback-rate-button:none;
+    /* ...but show the time as "1:24 / 3:58", at every player size */
+    --time-display:inline-flex;--duration-display:inline-flex}
   .video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;font-weight:600;font-size:.95rem}
   .video-placeholder svg{width:72px;height:72px}
   .sound-on{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:flex;align-items:center;gap:10px;background:var(--heart);color:#fff;border:none;border-radius:999px;padding:16px 28px;min-height:56px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;white-space:nowrap;cursor:pointer;touch-action:manipulation;box-shadow:0 10px 26px rgba(22,50,79,.35);animation:sound-pulse 1.8s ease-in-out infinite}
@@ -395,7 +397,8 @@
 
   // Hero video: swap the placeholder for Mux Player once a playback ID is set.
   // Viewers can play, pause, change volume and go fullscreen, but not seek:
-  // the CSS hides the scrub bar, skip buttons and speed control; this snaps
+  // the CSS hides the scrub bar, skip buttons and speed control (the time
+  // display stays visible, read-only); this snaps
   // the video back if it jumps any other way (keyboard, lock-screen controls).
   if (MUX_PLAYBACK_ID) {
     const lib = document.createElement('script');
@@ -407,6 +410,7 @@
     player.setAttribute('stream-type', 'on-demand');
     player.setAttribute('metadata-video-title', 'Bonhearts VSL');
     player.setAttribute('preload', 'auto');
+    player.setAttribute('thumbnail-time', '2');  // poster: the smiling, waving frame
     player.setAttribute('playsinline', '');
     player.setAttribute('hotkeys', 'noarrowleft noarrowright');
     player.setAttribute('accent-color', '#B23A48');
