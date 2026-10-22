@@ -220,13 +220,33 @@
     .ann-text{font-size:.83rem}
     .announcement-banner{gap:8px;padding:0 16px}
   }
+
+  /* ---------- always-visible phone + CTA (below the full-nav breakpoint) and shared footer ---------- */
+  .nav-quick{display:flex;align-items:center;gap:14px;margin-left:auto;margin-right:12px}
+  .nav-quick-phone{font-weight:600;font-size:1rem;text-decoration:none;color:var(--ink);white-space:nowrap}
+  .nav-quick-phone:hover{color:var(--heart)}
+  .nq-247{display:inline-block;font-size:.875rem;font-weight:800;color:var(--heart);margin-right:2px}
+  .nav-quick-cta{white-space:nowrap}
+  @media (min-width:1301px){.nav-quick{display:none}}
+  @media (max-width:640px){
+    .nav-inner{flex-wrap:wrap;row-gap:10px}
+    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:8px}
+    .nav-inner{padding-left:16px;padding-right:16px}
+    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:6px}
+    .nav-quick-phone{font-size:.9375rem}
+    .nav-quick-cta{padding:9px 14px;font-size:.875rem}
+  }
+  @media (max-width:400px){.nq-247{display:none}}
+  @media (min-width:1301px){.nav-inner{max-width:1240px}}
+  footer .foot-links a,footer .foot-contact a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  footer .foot-links a:hover,footer .foot-contact a:hover{color:var(--heart)}
 </style>
 </head>
 <body>
-<a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg families for Fall 2026 — see if your loved one qualifies">
+<a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg-area families. Get your free Peace-of-Mind Care Plan">
   <span class="ann-badge">New</span>
-  <span class="ann-text ann-text-full"><strong>Now Accepting New Winnipeg Families for Fall 2026 🍁</strong> — See If Your Loved One Qualifies</span>
-  <span class="ann-text ann-text-short"><strong>Now Accepting Fall 2026 Families 🍁</strong></span>
+  <span class="ann-text ann-text-full"><strong>Now accepting new Winnipeg-area families</strong> — Get Your Free Peace-of-Mind Care Plan</span>
+  <span class="ann-text ann-text-short"><strong>Now accepting new Winnipeg-area families</strong></span>
   <svg class="ann-arrow" width="28" height="14" viewBox="0 0 28 14" fill="none" aria-hidden="true"><path d="M0 7h24M17 1l7 6-7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
 
@@ -234,17 +254,21 @@
 <div class="progress-bar" id="progress-bar"></div>
 <nav aria-label="Primary">
   <div class="nav-inner">
-    <a class="logo" href="index.html#top">
+    <a class="logo" href="/#top">
       <img src="bonhearts-logo.gif" alt="" aria-hidden="true">
       <span>Bon<em>hearts</em></span>
     </a>
+    <div class="nav-quick">
+      <a class="nav-quick-phone" href="tel:+14312774531"><span class="nq-247">24/7</span> (431) 277-4531</a>
+      <a class="btn small nav-quick-cta" href="/get-in-touch">Get Your Free Care Plan</a>
+    </div>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
       <svg class="icon-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <div class="nav-menu" id="nav-menu">
       <ul class="nav-list">
-        <li class="nav-item"><a class="nav-link" href="index.html#top">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#top">Home</a></li>
         <li class="nav-item">
           <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-services">Services<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="nav-dropdown" id="menu-services">
@@ -264,7 +288,7 @@
             <li><a href="our-story.html">Our Story</a></li>
             <li><a href="our-story.html#founders">Meet the Founders</a></li>
             <li><a href="our-approach-values.html">Our Approach &amp; Values</a></li>
-            <li><a href="careers.html">Careers</a></li>
+            <li><a href="/careers">Careers</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -273,29 +297,27 @@
             <li>
               <button type="button" class="nested-btn nav-drop-btn" aria-expanded="false" aria-controls="menu-manitoba">Manitoba<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <ul class="nav-dropdown nav-dropdown-nested" id="menu-manitoba">
-                <li><a href="manitoba.html">All Manitoba Locations</a></li>
+                <li><a href="manitoba.html">All Service Areas</a></li>
                 <li><a href="manitoba-winnipeg.html">Winnipeg</a></li>
-                <li><a href="manitoba-headingley.html">Headingley</a></li>
-                <li><a href="manitoba-interlake-eastern-region.html">Interlake Eastern Region</a></li>
-                <li><a href="manitoba-northern-health-region.html">Northern Health Region</a></li>
-                <li><a href="manitoba-southern-health-region.html">Southern Health Region</a></li>
+                <li><a href="manitoba-selkirk.html">Selkirk</a></li>
+                <li><a href="manitoba-lockport.html">Lockport</a></li>
+                <li><a href="manitoba-west-st-paul.html">West St. Paul</a></li>
               </ul>
             </li>
-            <li><a href="british-columbia.html">British Columbia</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-resources">Resources<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="nav-dropdown" id="menu-resources">
             <li><a href="/blogs">Our Blog</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="/#faq">FAQ</a></li>
           </ul>
         </li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
       </ul>
       <div class="nav-cta-wrap">
         <a class="nav-phone" href="tel:+14312774531">(431) 277-4531</a>
-        <a class="btn small nav-cta" href="/get-in-touch">Free Consultation</a>
+        <a class="btn small nav-cta" href="/get-in-touch">Get Your Free Care Plan</a>
       </div>
     </div>
   </div>
@@ -348,13 +370,13 @@
   <ol>
     <li>Share your observations with siblings — compare notes; you've each seen different pieces.</li>
     <li>Book a check-up with their family doctor and share your concerns beforehand.</li>
-    <li>Get a professional read on the home situation. Our <a href="home-care-assessment-what-to-expect.html">free in-home assessment</a> is exactly this: an unhurried, no-obligation look at what support would actually help.</li>
+    <li>Get a professional read on the home situation. Our <a href="home-care-assessment-what-to-expect.html">free in-home safety assessment</a> is exactly this: an unhurried, no-obligation look at what support would actually help.</li>
   </ol>
 
   <div class="cta-box">
     <h2>Recognized a few of these signs?</h2>
-    <p>A free 15-minute discovery call is the lowest-pressure next step there is.</p>
-    <a class="btn" href="/get-in-touch">Request my rate</a>
+    <p>A free care consultation call, the first step of your free Peace-of-Mind Care Plan, is the lowest-pressure next step there is.</p>
+    <a class="btn" href="/get-in-touch">Get Your Free Care Plan</a>
   </div>
 
 
@@ -370,7 +392,7 @@
       <div class="spost">
         <span class="cat">Getting started</span>
         <h3><a href="home-care-assessment-what-to-expect.html">What to Expect During a Home Care Assessment: A Step-by-Step Guide</a></h3>
-        <p>What happens when a case coordinator visits, what we look for, and how to prepare.</p>
+        <p>What happens when a care coordinator visits, what we look for, and how to prepare.</p>
         <a class="read" href="home-care-assessment-what-to-expect.html">Read the guide →</a>
       </div>
       <div class="spost">
@@ -387,8 +409,11 @@
 
 <footer>
   <div class="wrap">
-    <p>Bonhearts Home Care · Winnipeg, Manitoba · <a href="tel:+14312774531">(431) 277-4531</a></p>
-    <p>© 2026 Bonhearts Home Care. All rights reserved.</p>
+    <p class="foot-contact"><strong>Bonhearts Home Care</strong> &middot; Available 24/7 &middot; <a href="tel:+14312774531">(431) 277-4531</a> &middot; <!--email_off--><a href="mailto:info@bonhearts.ca">info@bonhearts.ca</a><!--/email_off--></p>
+    <p>Serving Winnipeg, Selkirk, Lockport and West St. Paul, Manitoba.</p>
+    <p class="foot-links"><a href="/privacy-policy">Privacy Policy</a> &middot; <a href="/guarantee-terms">Guarantee Terms</a> &middot; <a href="/contact.html">Contact</a></p>
+    <p>Bonhearts is a private agency, not part of WRHA or Shared Health. Personal health information is handled in accordance with Manitoba's Personal Health Information Act (PHIA).</p>
+    <p>&copy; 2026 Bonhearts Home Care. All rights reserved.</p>
   </div>
 </footer>
 

@@ -12,8 +12,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Care in Manitoba | Bonhearts Home Care</title>
-<meta name="description" content="Bonhearts Home Care serves families across Manitoba, including Winnipeg, Headingley, and the Interlake-Eastern, Northern, and Southern Health Regions.">
+<title>Home Care Service Areas Near Winnipeg | Bonhearts Home Care</title>
+<meta name="description" content="Bonhearts Home Care provides private home care in Winnipeg, Selkirk, Lockport and West St. Paul, Manitoba. Care can start within days. Call 24/7: (431) 277-4531.">
 <link rel="canonical" href="https://bonhearts.ca/manitoba.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -21,15 +21,15 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bonhearts Home Care">
 <meta property="og:locale" content="en_CA">
-<meta property="og:title" content="Home Care in Manitoba | Bonhearts Home Care">
-<meta property="og:description" content="Bonhearts Home Care serves families across Manitoba, including Winnipeg, Headingley, and the Interlake-Eastern, Northern, and Southern Health Regions.">
+<meta property="og:title" content="Home Care Service Areas Near Winnipeg | Bonhearts Home Care">
+<meta property="og:description" content="Bonhearts Home Care provides private home care in Winnipeg, Selkirk, Lockport and West St. Paul, Manitoba. Care can start within days. Call 24/7: (431) 277-4531.">
 <meta property="og:url" content="https://bonhearts.ca/manitoba.html">
 <meta property="og:image" content="https://bonhearts.ca/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Home Care in Manitoba | Bonhearts Home Care">
-<meta name="twitter:description" content="Bonhearts Home Care serves families across Manitoba, including Winnipeg, Headingley, and the Interlake-Eastern, Northern, and Southern Health Regions.">
+<meta name="twitter:title" content="Home Care Service Areas Near Winnipeg | Bonhearts Home Care">
+<meta name="twitter:description" content="Bonhearts Home Care provides private home care in Winnipeg, Selkirk, Lockport and West St. Paul, Manitoba. Care can start within days. Call 24/7: (431) 277-4531.">
 <meta name="twitter:image" content="https://bonhearts.ca/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,6 +76,7 @@
   .cta-box{background:var(--ink);color:var(--paper);border-radius:16px;padding:32px 30px;margin:40px 0 8px;text-align:center}
   .cta-box h2{color:#fff;margin:0 0 8px;font-size:1.3rem}
   .cta-box p{color:#C4D2DE;margin-bottom:20px}
+  main a:not(.btn):not(.place-card){color:var(--heart);font-weight:600}
   .place-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:28px 0}
   .place-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);font-weight:600;display:block;transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
   .place-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);color:var(--heart)}
@@ -163,30 +164,54 @@
     .ann-text{font-size:.83rem}
     .announcement-banner{gap:8px;padding:0 16px}
   }
+
+  /* ---------- always-visible phone + CTA (below the full-nav breakpoint) and shared footer ---------- */
+  .nav-quick{display:flex;align-items:center;gap:14px;margin-left:auto;margin-right:12px}
+  .nav-quick-phone{font-weight:600;font-size:1rem;text-decoration:none;color:var(--ink);white-space:nowrap}
+  .nav-quick-phone:hover{color:var(--heart)}
+  .nq-247{display:inline-block;font-size:.875rem;font-weight:800;color:var(--heart);margin-right:2px}
+  .nav-quick-cta{white-space:nowrap}
+  @media (min-width:1301px){.nav-quick{display:none}}
+  @media (max-width:640px){
+    .nav-inner{flex-wrap:wrap;row-gap:10px}
+    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:8px}
+    .nav-inner{padding-left:16px;padding-right:16px}
+    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:6px}
+    .nav-quick-phone{font-size:.9375rem}
+    .nav-quick-cta{padding:9px 14px;font-size:.875rem}
+  }
+  @media (max-width:400px){.nq-247{display:none}}
+  @media (min-width:1301px){.nav-inner{max-width:1240px}}
+  footer .foot-links a,footer .foot-contact a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  footer .foot-links a:hover,footer .foot-contact a:hover{color:var(--heart)}
 </style>
 </head>
 <body>
-<a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg families for Fall 2026 — see if your loved one qualifies">
+<a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg-area families. Get your free Peace-of-Mind Care Plan">
   <span class="ann-badge">New</span>
-  <span class="ann-text ann-text-full"><strong>Now Accepting New Winnipeg Families for Fall 2026 🍁</strong> — See If Your Loved One Qualifies</span>
-  <span class="ann-text ann-text-short"><strong>Now Accepting Fall 2026 Families 🍁</strong></span>
+  <span class="ann-text ann-text-full"><strong>Now accepting new Winnipeg-area families</strong> — Get Your Free Peace-of-Mind Care Plan</span>
+  <span class="ann-text ann-text-short"><strong>Now accepting new Winnipeg-area families</strong></span>
   <svg class="ann-arrow" width="28" height="14" viewBox="0 0 28 14" fill="none" aria-hidden="true"><path d="M0 7h24M17 1l7 6-7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
 
 
 <nav aria-label="Primary">
   <div class="nav-inner">
-    <a class="logo" href="index.html#top">
+    <a class="logo" href="/#top">
       <img src="bonhearts-logo.gif" alt="" aria-hidden="true">
       <span>Bon<em>hearts</em></span>
     </a>
+    <div class="nav-quick">
+      <a class="nav-quick-phone" href="tel:+14312774531"><span class="nq-247">24/7</span> (431) 277-4531</a>
+      <a class="btn small nav-quick-cta" href="/get-in-touch">Get Your Free Care Plan</a>
+    </div>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
       <svg class="icon-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <div class="nav-menu" id="nav-menu">
       <ul class="nav-list">
-        <li class="nav-item"><a class="nav-link" href="index.html#top">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#top">Home</a></li>
         <li class="nav-item">
           <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-services">Services<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="nav-dropdown" id="menu-services">
@@ -206,7 +231,7 @@
             <li><a href="our-story.html">Our Story</a></li>
             <li><a href="our-story.html#founders">Meet the Founders</a></li>
             <li><a href="our-approach-values.html">Our Approach &amp; Values</a></li>
-            <li><a href="careers.html">Careers</a></li>
+            <li><a href="/careers">Careers</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -215,60 +240,62 @@
             <li>
               <button type="button" class="nested-btn nav-drop-btn" aria-expanded="false" aria-controls="menu-manitoba">Manitoba<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <ul class="nav-dropdown nav-dropdown-nested" id="menu-manitoba">
-                <li><a href="manitoba.html">All Manitoba Locations</a></li>
+                <li><a href="manitoba.html">All Service Areas</a></li>
                 <li><a href="manitoba-winnipeg.html">Winnipeg</a></li>
-                <li><a href="manitoba-headingley.html">Headingley</a></li>
-                <li><a href="manitoba-interlake-eastern-region.html">Interlake Eastern Region</a></li>
-                <li><a href="manitoba-northern-health-region.html">Northern Health Region</a></li>
-                <li><a href="manitoba-southern-health-region.html">Southern Health Region</a></li>
+                <li><a href="manitoba-selkirk.html">Selkirk</a></li>
+                <li><a href="manitoba-lockport.html">Lockport</a></li>
+                <li><a href="manitoba-west-st-paul.html">West St. Paul</a></li>
               </ul>
             </li>
-            <li><a href="british-columbia.html">British Columbia</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-resources">Resources<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="nav-dropdown" id="menu-resources">
             <li><a href="/blogs">Our Blog</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="/#faq">FAQ</a></li>
           </ul>
         </li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
       </ul>
       <div class="nav-cta-wrap">
         <a class="nav-phone" href="tel:+14312774531">(431) 277-4531</a>
-        <a class="btn small nav-cta" href="/get-in-touch">Free Consultation</a>
+        <a class="btn small nav-cta" href="/get-in-touch">Get Your Free Care Plan</a>
       </div>
     </div>
   </div>
 </nav>
 
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html#top">Home</a> / Locations / <span aria-current="page">Manitoba</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/#top">Home</a> / <span aria-current="page">Service Areas</span></nav>
 <div class="page-head reveal">
-  <p class="kicker">Service Area</p>
-  <h1>Home Care in Manitoba</h1>
-  <p>Private, one-on-one home care for families across Manitoba — matched to a vetted Health Care Aide near you.</p>
+  <p class="kicker">Service Areas</p>
+  <h1>Where We Provide Home Care</h1>
+  <p>Bonhearts Home Care serves four communities in Manitoba: Winnipeg, Selkirk, Lockport and West St. Paul.</p>
 </div>
 
 <main class="wrap reveal">
+  <p>We keep our service area small on purpose. Staying close to home means caregivers aren't spending their day on the highway, backup is nearby when someone is sick, and care can start within days. Choose your community to see what we offer there.</p>
   <div class="place-grid">
     <a class="place-card" href="manitoba-winnipeg.html">Winnipeg</a>
-    <a class="place-card" href="manitoba-headingley.html">Headingley</a>
-    <a class="place-card" href="manitoba-interlake-eastern-region.html">Interlake Eastern Region</a>
-    <a class="place-card" href="manitoba-northern-health-region.html">Northern Health Region</a>
-    <a class="place-card" href="manitoba-southern-health-region.html">Southern Health Region</a>
+    <a class="place-card" href="manitoba-selkirk.html">Selkirk</a>
+    <a class="place-card" href="manitoba-lockport.html">Lockport</a>
+    <a class="place-card" href="manitoba-west-st-paul.html">West St. Paul</a>
   </div>
+  <p>Not sure if an address is in our area? Enter the postal code in our short form and we'll confirm right away. If you're outside these four communities, your regional health authority's home care program is the best place to start: <a href="https://www.gov.mb.ca/health/homecare/" rel="noopener">Manitoba home care offices</a>.</p>
   <div class="cta-box">
-    <h2>Not sure if we serve your area?</h2>
-    <p>Enter your postal code in our quick form and we'll confirm right away.</p>
-    <a class="btn" href="/get-in-touch">Request my rate</a>
+    <h2>Your Free Peace-of-Mind Care Plan</h2>
+    <p>We'll reach out very soon. If it's urgent, call us 24/7 at <a href="tel:+14312774531" style="color:#fff">(431) 277-4531</a>. Care can start within days.</p>
+    <a class="btn" href="/get-in-touch">Get Your Free Care Plan</a>
   </div>
 
 </main>
 
 <footer>
   <div class="wrap">
-    <p>Bonhearts Home Care &middot; Winnipeg, Manitoba &middot; <a href="tel:+14312774531">(431) 277-4531</a></p>
+    <p class="foot-contact"><strong>Bonhearts Home Care</strong> &middot; Available 24/7 &middot; <a href="tel:+14312774531">(431) 277-4531</a> &middot; <!--email_off--><a href="mailto:info@bonhearts.ca">info@bonhearts.ca</a><!--/email_off--></p>
+    <p>Serving Winnipeg, Selkirk, Lockport and West St. Paul, Manitoba.</p>
+    <p class="foot-links"><a href="/privacy-policy">Privacy Policy</a> &middot; <a href="/guarantee-terms">Guarantee Terms</a> &middot; <a href="/contact.html">Contact</a></p>
+    <p>Bonhearts is a private agency, not part of WRHA or Shared Health. Personal health information is handled in accordance with Manitoba's Personal Health Information Act (PHIA).</p>
     <p>&copy; 2026 Bonhearts Home Care. All rights reserved.</p>
   </div>
 </footer>

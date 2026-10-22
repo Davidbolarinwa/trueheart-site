@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Approach &amp; Values | Bonhearts Home Care</title>
-<meta name="description" content="Founded and led by a Registered Nurse, every Bonhearts caregiver is criminal-record and abuse-registry checked, WCB-covered, and PHIA compliant — no contracts.">
+<meta name="description" content="Founded and led by a Registered Nurse. Every Bonhearts caregiver passes 6 safety checks. PHIA-compliant care, no long-term contract, and care that can start within days.">
 <link rel="canonical" href="https://bonhearts.ca/our-approach-values.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -22,14 +22,14 @@
 <meta property="og:site_name" content="Bonhearts Home Care">
 <meta property="og:locale" content="en_CA">
 <meta property="og:title" content="Our Approach &amp; Values | Bonhearts Home Care">
-<meta property="og:description" content="Founded and led by a Registered Nurse, every Bonhearts caregiver is criminal-record and abuse-registry checked, WCB-covered, and PHIA compliant — no contracts.">
+<meta property="og:description" content="Founded and led by a Registered Nurse. Every Bonhearts caregiver passes 6 safety checks. PHIA-compliant care, no long-term contract, and care that can start within days.">
 <meta property="og:url" content="https://bonhearts.ca/our-approach-values.html">
 <meta property="og:image" content="https://bonhearts.ca/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Our Approach &amp; Values | Bonhearts Home Care">
-<meta name="twitter:description" content="Founded and led by a Registered Nurse, every Bonhearts caregiver is criminal-record and abuse-registry checked, WCB-covered, and PHIA compliant — no contracts.">
+<meta name="twitter:description" content="Founded and led by a Registered Nurse. Every Bonhearts caregiver passes 6 safety checks. PHIA-compliant care, no long-term contract, and care that can start within days.">
 <meta name="twitter:image" content="https://bonhearts.ca/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,30 +160,54 @@
     .ann-text{font-size:.83rem}
     .announcement-banner{gap:8px;padding:0 16px}
   }
+
+  /* ---------- always-visible phone + CTA (below the full-nav breakpoint) and shared footer ---------- */
+  .nav-quick{display:flex;align-items:center;gap:14px;margin-left:auto;margin-right:12px}
+  .nav-quick-phone{font-weight:600;font-size:1rem;text-decoration:none;color:var(--ink);white-space:nowrap}
+  .nav-quick-phone:hover{color:var(--heart)}
+  .nq-247{display:inline-block;font-size:.875rem;font-weight:800;color:var(--heart);margin-right:2px}
+  .nav-quick-cta{white-space:nowrap}
+  @media (min-width:1301px){.nav-quick{display:none}}
+  @media (max-width:640px){
+    .nav-inner{flex-wrap:wrap;row-gap:10px}
+    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:8px}
+    .nav-inner{padding-left:16px;padding-right:16px}
+    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:6px}
+    .nav-quick-phone{font-size:.9375rem}
+    .nav-quick-cta{padding:9px 14px;font-size:.875rem}
+  }
+  @media (max-width:400px){.nq-247{display:none}}
+  @media (min-width:1301px){.nav-inner{max-width:1240px}}
+  footer .foot-links a,footer .foot-contact a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  footer .foot-links a:hover,footer .foot-contact a:hover{color:var(--heart)}
 </style>
 </head>
 <body>
-<a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg families for Fall 2026 — see if your loved one qualifies">
+<a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg-area families. Get your free Peace-of-Mind Care Plan">
   <span class="ann-badge">New</span>
-  <span class="ann-text ann-text-full"><strong>Now Accepting New Winnipeg Families for Fall 2026 🍁</strong> — See If Your Loved One Qualifies</span>
-  <span class="ann-text ann-text-short"><strong>Now Accepting Fall 2026 Families 🍁</strong></span>
+  <span class="ann-text ann-text-full"><strong>Now accepting new Winnipeg-area families</strong> — Get Your Free Peace-of-Mind Care Plan</span>
+  <span class="ann-text ann-text-short"><strong>Now accepting new Winnipeg-area families</strong></span>
   <svg class="ann-arrow" width="28" height="14" viewBox="0 0 28 14" fill="none" aria-hidden="true"><path d="M0 7h24M17 1l7 6-7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
 
 
 <nav aria-label="Primary">
   <div class="nav-inner">
-    <a class="logo" href="index.html#top">
+    <a class="logo" href="/#top">
       <img src="bonhearts-logo.gif" alt="" aria-hidden="true">
       <span>Bon<em>hearts</em></span>
     </a>
+    <div class="nav-quick">
+      <a class="nav-quick-phone" href="tel:+14312774531"><span class="nq-247">24/7</span> (431) 277-4531</a>
+      <a class="btn small nav-quick-cta" href="/get-in-touch">Get Your Free Care Plan</a>
+    </div>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
       <svg class="icon-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <div class="nav-menu" id="nav-menu">
       <ul class="nav-list">
-        <li class="nav-item"><a class="nav-link" href="index.html#top">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#top">Home</a></li>
         <li class="nav-item">
           <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-services">Services<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="nav-dropdown" id="menu-services">
@@ -203,7 +227,7 @@
             <li><a href="our-story.html">Our Story</a></li>
             <li><a href="our-story.html#founders">Meet the Founders</a></li>
             <li><a href="our-approach-values.html">Our Approach &amp; Values</a></li>
-            <li><a href="careers.html">Careers</a></li>
+            <li><a href="/careers">Careers</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -212,29 +236,27 @@
             <li>
               <button type="button" class="nested-btn nav-drop-btn" aria-expanded="false" aria-controls="menu-manitoba">Manitoba<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <ul class="nav-dropdown nav-dropdown-nested" id="menu-manitoba">
-                <li><a href="manitoba.html">All Manitoba Locations</a></li>
+                <li><a href="manitoba.html">All Service Areas</a></li>
                 <li><a href="manitoba-winnipeg.html">Winnipeg</a></li>
-                <li><a href="manitoba-headingley.html">Headingley</a></li>
-                <li><a href="manitoba-interlake-eastern-region.html">Interlake Eastern Region</a></li>
-                <li><a href="manitoba-northern-health-region.html">Northern Health Region</a></li>
-                <li><a href="manitoba-southern-health-region.html">Southern Health Region</a></li>
+                <li><a href="manitoba-selkirk.html">Selkirk</a></li>
+                <li><a href="manitoba-lockport.html">Lockport</a></li>
+                <li><a href="manitoba-west-st-paul.html">West St. Paul</a></li>
               </ul>
             </li>
-            <li><a href="british-columbia.html">British Columbia</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-resources">Resources<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="nav-dropdown" id="menu-resources">
             <li><a href="/blogs">Our Blog</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="/#faq">FAQ</a></li>
           </ul>
         </li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
       </ul>
       <div class="nav-cta-wrap">
         <a class="nav-phone" href="tel:+14312774531">(431) 277-4531</a>
-        <a class="btn small nav-cta" href="/get-in-touch">Free Consultation</a>
+        <a class="btn small nav-cta" href="/get-in-touch">Get Your Free Care Plan</a>
       </div>
     </div>
   </div>
@@ -249,23 +271,26 @@
 <main class="wrap reveal">
   <ul class="list">
     <li>Founded &amp; led by a Registered Nurse</li>
-    <li>Every caregiver criminal record &amp; abuse registry checked</li>
+    <li>Every caregiver approved by a Registered Nurse and screened with 6 safety checks: caregiver certification, a criminal record and vulnerable sector check, abuse registry checks, CPR and first aid, immunizations, and references</li>
     <li>WCB coverage in place for every caregiver</li>
     <li>Manitoba PHIA compliant handling of personal health information</li>
-    <li>No contracts — cancel anytime with 24 hours' notice</li>
+    <li>No long-term contract. Pause or cancel with 24 hours' notice.</li>
     <li>First visit backed by our guarantee</li>
   </ul>
   <div class="cta-box">
-    <h2>See it for yourself</h2>
-    <p>Book a free 15-minute discovery call and get a personalized rate.</p>
-    <a class="btn" href="/get-in-touch">Request my rate</a>
+    <h2>Your Free Peace-of-Mind Care Plan</h2>
+    <p>A free care consultation call, a free in-home safety assessment, and a caregiver matched to your loved one. We'll reach out very soon. If it's urgent, call us 24/7 at <a href="tel:+14312774531" style="color:#fff">(431) 277-4531</a>. Care can start within days.</p>
+    <a class="btn" href="/get-in-touch">Get Your Free Care Plan</a>
   </div>
 
 </main>
 
 <footer>
   <div class="wrap">
-    <p>Bonhearts Home Care &middot; Winnipeg, Manitoba &middot; <a href="tel:+14312774531">(431) 277-4531</a></p>
+    <p class="foot-contact"><strong>Bonhearts Home Care</strong> &middot; Available 24/7 &middot; <a href="tel:+14312774531">(431) 277-4531</a> &middot; <!--email_off--><a href="mailto:info@bonhearts.ca">info@bonhearts.ca</a><!--/email_off--></p>
+    <p>Serving Winnipeg, Selkirk, Lockport and West St. Paul, Manitoba.</p>
+    <p class="foot-links"><a href="/privacy-policy">Privacy Policy</a> &middot; <a href="/guarantee-terms">Guarantee Terms</a> &middot; <a href="/contact.html">Contact</a></p>
+    <p>Bonhearts is a private agency, not part of WRHA or Shared Health. Personal health information is handled in accordance with Manitoba's Personal Health Information Act (PHIA).</p>
     <p>&copy; 2026 Bonhearts Home Care. All rights reserved.</p>
   </div>
 </footer>

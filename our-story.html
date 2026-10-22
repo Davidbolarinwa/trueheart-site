@@ -98,12 +98,6 @@
     font-size:.76rem;font-weight:600;background:var(--paper-dim);border:1px solid var(--line);
     border-radius:999px;padding:5px 12px;color:var(--ink);
   }
-  .capacity-note{
-    max-width:640px;margin:38px auto 0;text-align:center;
-    background:rgba(178,58,72,.07);border:1.5px dashed rgba(178,58,72,.4);border-radius:12px;
-    padding:18px 24px;font-size:.95rem;color:var(--ink);
-  }
-  .capacity-note strong{color:var(--heart)}
   .list{margin:28px 0;display:grid;gap:12px}
   .list li{list-style:none;padding:16px 20px;background:var(--white);border:1px solid var(--line);border-left:3px solid var(--heart);border-radius:0 10px 10px 0;font-weight:600;box-shadow:var(--shadow)}
   .cta-box{background:var(--ink);color:var(--paper);border-radius:16px;padding:32px 30px;margin:40px 0 8px;text-align:center}
@@ -196,30 +190,54 @@
     .ann-text{font-size:.83rem}
     .announcement-banner{gap:8px;padding:0 16px}
   }
+
+  /* ---------- always-visible phone + CTA (below the full-nav breakpoint) and shared footer ---------- */
+  .nav-quick{display:flex;align-items:center;gap:14px;margin-left:auto;margin-right:12px}
+  .nav-quick-phone{font-weight:600;font-size:1rem;text-decoration:none;color:var(--ink);white-space:nowrap}
+  .nav-quick-phone:hover{color:var(--heart)}
+  .nq-247{display:inline-block;font-size:.875rem;font-weight:800;color:var(--heart);margin-right:2px}
+  .nav-quick-cta{white-space:nowrap}
+  @media (min-width:1301px){.nav-quick{display:none}}
+  @media (max-width:640px){
+    .nav-inner{flex-wrap:wrap;row-gap:10px}
+    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:8px}
+    .nav-inner{padding-left:16px;padding-right:16px}
+    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:6px}
+    .nav-quick-phone{font-size:.9375rem}
+    .nav-quick-cta{padding:9px 14px;font-size:.875rem}
+  }
+  @media (max-width:400px){.nq-247{display:none}}
+  @media (min-width:1301px){.nav-inner{max-width:1240px}}
+  footer .foot-links a,footer .foot-contact a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  footer .foot-links a:hover,footer .foot-contact a:hover{color:var(--heart)}
 </style>
 </head>
 <body>
-<a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg families for Fall 2026 — see if your loved one qualifies">
+<a class="announcement-banner" href="/get-in-touch" aria-label="Now accepting new Winnipeg-area families. Get your free Peace-of-Mind Care Plan">
   <span class="ann-badge">New</span>
-  <span class="ann-text ann-text-full"><strong>Now Accepting New Winnipeg Families for Fall 2026 🍁</strong> — See If Your Loved One Qualifies</span>
-  <span class="ann-text ann-text-short"><strong>Now Accepting Fall 2026 Families 🍁</strong></span>
+  <span class="ann-text ann-text-full"><strong>Now accepting new Winnipeg-area families</strong> — Get Your Free Peace-of-Mind Care Plan</span>
+  <span class="ann-text ann-text-short"><strong>Now accepting new Winnipeg-area families</strong></span>
   <svg class="ann-arrow" width="28" height="14" viewBox="0 0 28 14" fill="none" aria-hidden="true"><path d="M0 7h24M17 1l7 6-7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
 
 
 <nav aria-label="Primary">
   <div class="nav-inner">
-    <a class="logo" href="index.html#top">
+    <a class="logo" href="/#top">
       <img src="bonhearts-logo.gif" alt="" aria-hidden="true">
       <span>Bon<em>hearts</em></span>
     </a>
+    <div class="nav-quick">
+      <a class="nav-quick-phone" href="tel:+14312774531"><span class="nq-247">24/7</span> (431) 277-4531</a>
+      <a class="btn small nav-quick-cta" href="/get-in-touch">Get Your Free Care Plan</a>
+    </div>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
       <svg class="icon-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <div class="nav-menu" id="nav-menu">
       <ul class="nav-list">
-        <li class="nav-item"><a class="nav-link" href="index.html#top">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#top">Home</a></li>
         <li class="nav-item">
           <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-services">Services<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="nav-dropdown" id="menu-services">
@@ -239,7 +257,7 @@
             <li><a href="our-story.html">Our Story</a></li>
             <li><a href="our-story.html#founders">Meet the Founders</a></li>
             <li><a href="our-approach-values.html">Our Approach &amp; Values</a></li>
-            <li><a href="careers.html">Careers</a></li>
+            <li><a href="/careers">Careers</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -248,29 +266,27 @@
             <li>
               <button type="button" class="nested-btn nav-drop-btn" aria-expanded="false" aria-controls="menu-manitoba">Manitoba<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <ul class="nav-dropdown nav-dropdown-nested" id="menu-manitoba">
-                <li><a href="manitoba.html">All Manitoba Locations</a></li>
+                <li><a href="manitoba.html">All Service Areas</a></li>
                 <li><a href="manitoba-winnipeg.html">Winnipeg</a></li>
-                <li><a href="manitoba-headingley.html">Headingley</a></li>
-                <li><a href="manitoba-interlake-eastern-region.html">Interlake Eastern Region</a></li>
-                <li><a href="manitoba-northern-health-region.html">Northern Health Region</a></li>
-                <li><a href="manitoba-southern-health-region.html">Southern Health Region</a></li>
+                <li><a href="manitoba-selkirk.html">Selkirk</a></li>
+                <li><a href="manitoba-lockport.html">Lockport</a></li>
+                <li><a href="manitoba-west-st-paul.html">West St. Paul</a></li>
               </ul>
             </li>
-            <li><a href="british-columbia.html">British Columbia</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <button type="button" class="nav-link nav-drop-btn" aria-expanded="false" aria-controls="menu-resources">Resources<svg class="caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <ul class="nav-dropdown" id="menu-resources">
             <li><a href="/blogs">Our Blog</a></li>
-            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="/#faq">FAQ</a></li>
           </ul>
         </li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
       </ul>
       <div class="nav-cta-wrap">
         <a class="nav-phone" href="tel:+14312774531">(431) 277-4531</a>
-        <a class="btn small nav-cta" href="/get-in-touch">Free Consultation</a>
+        <a class="btn small nav-cta" href="/get-in-touch">Get Your Free Care Plan</a>
       </div>
     </div>
   </div>
@@ -307,29 +323,31 @@
         <div class="avatar">D</div>
         <h3>David</h3>
         <p class="role">Co-founder · Operations &amp; Client Experience</p>
-        <p>David builds the systems behind the care — the reason you hear back within 24 hours to book your discovery call, your care package comes together fast after the assessment, and no visit, note, or follow-up ever slips through the cracks.</p>
+        <p>David builds the systems behind the care — the reason families hear back from us very soon, your care plan comes together fast after the assessment, and no visit, note, or follow-up ever slips through the cracks.</p>
         <p>His background in operations and process automation means Bonhearts runs with the reliability of a large agency and the warmth of a family-run one.</p>
         <div class="cred">
           <span>Operations &amp; scheduling systems</span>
-          <span>24-hour response workflow</span>
+          <span>Fast response workflow</span>
           <span>Visit notes after every shift</span>
         </div>
       </div>
     </div>
-    <p class="capacity-note"><strong>An honest note on capacity:</strong> because we're founder-led, we only welcome a limited number of families at a time — it's how we keep the quality of care personal. When our roster is full, new families join a short waitlist.</p>
   </section>
 
   <div class="cta-box">
-    <h2>Curious if we're a fit?</h2>
-    <p>Tell us a bit about your situation and we'll follow up with a personalized rate.</p>
-    <a class="btn" href="/get-in-touch">Request my rate</a>
+    <h2>Your Free Peace-of-Mind Care Plan</h2>
+    <p>Tell us a bit about your situation. We'll reach out very soon. If it's urgent, call us 24/7 at <a href="tel:+14312774531" style="color:#fff">(431) 277-4531</a>. Care can start within days.</p>
+    <a class="btn" href="/get-in-touch">Get Your Free Care Plan</a>
   </div>
 
 </main>
 
 <footer>
   <div class="wrap">
-    <p>Bonhearts Home Care &middot; Winnipeg, Manitoba &middot; <a href="tel:+14312774531">(431) 277-4531</a></p>
+    <p class="foot-contact"><strong>Bonhearts Home Care</strong> &middot; Available 24/7 &middot; <a href="tel:+14312774531">(431) 277-4531</a> &middot; <!--email_off--><a href="mailto:info@bonhearts.ca">info@bonhearts.ca</a><!--/email_off--></p>
+    <p>Serving Winnipeg, Selkirk, Lockport and West St. Paul, Manitoba.</p>
+    <p class="foot-links"><a href="/privacy-policy">Privacy Policy</a> &middot; <a href="/guarantee-terms">Guarantee Terms</a> &middot; <a href="/contact.html">Contact</a></p>
+    <p>Bonhearts is a private agency, not part of WRHA or Shared Health. Personal health information is handled in accordance with Manitoba's Personal Health Information Act (PHIA).</p>
     <p>&copy; 2026 Bonhearts Home Care. All rights reserved.</p>
   </div>
 </footer>
