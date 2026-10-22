@@ -6,3 +6,10 @@
 !.dev.vars.example
 .env*
 !.env.example
+
+# Internal notes live in the private repo ~/bonhearts-notes (github.com/Davidbolarinwa/bonhearts-notes).
+# CLAUDE.md here is a local symlink to that copy and must never be committed (GitHub Pages publishes every file).
+CLAUDE.md
+README.md
+wrangler.jsonc
+.claude/
