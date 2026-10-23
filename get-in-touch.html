@@ -113,8 +113,6 @@
   .btn.big{padding:17px 38px;font-size:1.1rem}
   .center{text-align:center}
 
-  .top-call{margin:0;padding:10px 16px;background:var(--ink);color:#fff;text-align:center;font-size:1rem;font-weight:600}
-  .top-call a{color:#fff;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
   .minimal-brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:18px 22px 0;font-family:'Fraunces',serif;font-weight:900;font-size:1.35rem;color:var(--ink)}
   .minimal-brand img{width:28px;height:28px;object-fit:contain}
   .minimal-brand em{font-style:normal;color:var(--heart)}
@@ -261,8 +259,6 @@
 </style>
 </head>
 <body>
-
-<p class="top-call">Prefer to talk? Call <a href="tel:+14312774531">(431) 277-4531</a> &mdash; 24/7</p>
 
 <div class="minimal-brand">
   <img src="bonhearts-logo.gif" alt="" aria-hidden="true" width="28" height="28">
@@ -450,8 +446,7 @@
   // Hero video: the Mux playback ID of the VSL (Mux dashboard → asset →
   // Playback IDs). Leave empty to show the "Video coming soon" placeholder.
   const MUX_PLAYBACK_ID = 'OXTvpqqoDJ7Zw7XNfBurQ6gA4LuVB01JX0101zBjvFrsyk';
-  // Phone used in the success heading's tap-to-call link (the "Prefer to talk?"
-  // line at the top of the page is static HTML). Display format like (204) 555-0123; tel format like +12045550123.
+  // Phone used in the success heading's tap-to-call link. Display format like (204) 555-0123; tel format like +12045550123.
   const CALL_NUMBER_DISPLAY = '(431) 277-4531';
   const CALL_NUMBER_TEL = '+14312774531';
   const IN_AREA_FSA_PREFIXES = ["R2", "R3"];          // Winnipeg proper
