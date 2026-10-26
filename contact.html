@@ -137,15 +137,10 @@
   .nav-dropdown li a,.nav-dropdown li .nested-btn{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 4px;text-decoration:none;color:#3C5166;font-weight:600;font-size:.92rem;width:100%;background:none;border:none;text-align:left;cursor:pointer;font-family:inherit}
   .nav-dropdown li a:hover,.nav-dropdown li .nested-btn:hover{color:var(--heart)}
   .nav-dropdown-nested{padding-left:16px}
-  .nav-cta-wrap{display:flex;flex-direction:column;gap:12px;padding:16px 18px 22px;border-top:1px solid var(--line)}
-  .nav-cta-wrap .nav-phone{font-weight:600;font-size:.92rem;text-decoration:none;color:var(--ink)}
-  .nav-cta-wrap .nav-phone:hover{color:var(--heart)}
-  .nav-cta{text-align:center;white-space:nowrap;flex-shrink:0}
   @media (min-width:1301px){
     .nav-toggle{display:none}
     .nav-inner{justify-content:flex-start;column-gap:36px}
     .nav-menu{flex:1 1 auto}
-    .nav-cta-wrap{margin-left:auto}
     .nav-menu{position:static;max-height:none;overflow:visible;background:none;border:none;box-shadow:none;display:flex;align-items:center;gap:10px}
     .nav-list{flex-direction:row;align-items:center;padding:0;gap:2px}
     .nav-item{border-bottom:none}
@@ -159,7 +154,6 @@
     .nav-dropdown-nested.open{opacity:1;visibility:visible;translate:0 0}
     .nested-btn .caret{transform:rotate(-90deg)}
     .nested-btn[aria-expanded="true"] .caret{transform:rotate(-90deg)}
-    .nav-cta-wrap{flex-direction:row;align-items:center;padding:0;border-top:none;gap:14px;flex-shrink:0}
   }
   @media (prefers-reduced-motion:reduce){
     .nav-menu,.nav-dropdown,.nav-dropdown-nested,.caret{transition:none!important}
@@ -193,16 +187,9 @@
     .announcement-banner{gap:8px;padding:0 16px}
   }
 
-  /* ---------- always-visible CTA (below the full-nav breakpoint) and shared footer ---------- */
-  .nav-quick{display:flex;align-items:center;gap:14px;margin-left:auto;margin-right:12px}
-  .nav-quick-cta{white-space:nowrap}
-  @media (min-width:1301px){.nav-quick{display:none}}
+  /* ---------- nav padding on phones and shared footer ---------- */
   @media (max-width:640px){
-    .nav-inner{flex-wrap:wrap;row-gap:10px}
-    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:8px}
     .nav-inner{padding-left:16px;padding-right:16px}
-    .nav-quick{order:3;width:100%;margin:0;justify-content:space-between;gap:6px}
-    .nav-quick-cta{flex:1;text-align:center;padding:9px 14px;font-size:.875rem}
   }
   @media (min-width:1301px){.nav-inner{max-width:1240px}}
   footer .foot-links a,footer .foot-contact a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:2px}
@@ -224,9 +211,6 @@
       <img src="bonhearts-logo.gif" alt="" aria-hidden="true">
       <span>Bon<em>hearts</em></span>
     </a>
-    <div class="nav-quick">
-      <a class="btn small nav-quick-cta" href="/get-in-touch">Get Your Free Care Plan</a>
-    </div>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
       <svg class="icon-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -280,10 +264,6 @@
         </li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
       </ul>
-      <div class="nav-cta-wrap">
-        <a class="nav-phone" href="tel:+14318149914">(431) 814-9914</a>
-        <a class="btn small nav-cta" href="/get-in-touch">Get Your Free Care Plan</a>
-      </div>
     </div>
   </div>
 </nav>
