@@ -1,3 +1,6 @@
+---
+# Blog index: cards are generated from _articles/ (see BLOG-EDITOR.md).
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -273,66 +276,16 @@
     <h1 class="section-title">Answers before you ever have to ask.</h1>
     <p class="lede">Practical guides from our care team on funding, assessments, and making the right decision for your family — no sales pitch, just the information we wish every family had sooner.</p>
     <div class="blog-grid">
+{%- comment %} Newest first; posts with the same date keep listing_order. {% endcomment %}
+{%- assign by_date = site.articles | group_by_exp: "a", "a.date | date: '%Y-%m-%d'" | sort: "name" | reverse %}
+{%- for day in by_date %}{% assign day_posts = day.items | sort: "listing_order", "last" %}{% for post in day_posts %}
       <article class="post">
-        <span class="cat">Getting started</span>
-        <h3><a href="home-care-assessment-what-to-expect.html">What to Expect During a Home Care Assessment: A Step-by-Step Guide</a></h3>
-        <p>Wondering what happens when a care coordinator visits your parent's home? Here's exactly how a Bonhearts in-home safety assessment works, what we look for, and how to prepare.</p>
-        <a class="read" href="home-care-assessment-what-to-expect.html">Read the guide →</a>
+        <span class="cat">{{ post.category | escape }}</span>
+        <h3><a href="{{ post.url | remove_first: "/" }}">{{ post.title | escape }}</a></h3>
+        <p>{{ post.card_text | default: post.description | escape }}</p>
+        <a class="read" href="{{ post.url | remove_first: "/" }}">Read the guide →</a>
       </article>
-      <article class="post">
-        <span class="cat">Funding</span>
-        <h3><a href="home-care-funding-manitoba.html">How to Access Home Care Funding in Manitoba: Self &amp; Family Managed Care, VAC &amp; Insurance</a></h3>
-        <p>Many Winnipeg families pay less than they expect — or nothing at all. A plain-language walkthrough of WRHA Self &amp; Family Managed Care, Veterans Affairs benefits, and LTC insurance.</p>
-        <a class="read" href="home-care-funding-manitoba.html">Read the guide →</a>
-      </article>
-      <article class="post">
-        <span class="cat">Making the decision</span>
-        <h3><a href="in-home-care-vs-long-term-care-winnipeg.html">In-Home Care vs. Long-Term Care Facilities: How Winnipeg Families Can Choose</a></h3>
-        <p>There's no one right answer — but there is a right answer for your family. An honest comparison of costs, quality of life, and when a facility truly is the better option.</p>
-        <a class="read" href="in-home-care-vs-long-term-care-winnipeg.html">Read the guide →</a>
-      </article>
-      <article class="post">
-        <span class="cat">Veterans</span>
-        <h3><a href="veterans-hiring-home-care-mistakes.html">Common Mistakes Veterans Make When Hiring Home Care — And How to Avoid Them</a></h3>
-        <p>From leaving VAC benefits unclaimed to hiring providers who don't understand the paperwork — the pitfalls we see most often, and how Veterans and their families can sidestep them.</p>
-        <a class="read" href="veterans-hiring-home-care-mistakes.html">Read the guide →</a>
-      </article>
-      <article class="post">
-        <span class="cat">Preparing</span>
-        <h3><a href="prepare-home-for-personal-care-services.html">How to Prepare Your Home for Personal Care Services: A Practical Checklist</a></h3>
-        <p>Small changes make the first visit smoother — for your loved one and their caregiver. A room-by-room checklist covering safety, supplies, and the conversations to have beforehand.</p>
-        <a class="read" href="prepare-home-for-personal-care-services.html">Read the guide →</a>
-      </article>
-      <article class="post">
-        <span class="cat">Recognizing the signs</span>
-        <h3><a href="signs-it-might-be-time-for-home-care.html">Signs It Might Be Time for Home Care: A Checklist for Adult Children</a></h3>
-        <p>The physical, household, and emotional signs adult children notice first — including the one most families miss — and how to start the conversation without a fight.</p>
-        <a class="read" href="signs-it-might-be-time-for-home-care.html">Read the guide →</a>
-      </article>
-      <article class="post">
-        <span class="cat">Home safety</span>
-        <h3><a href="aging-in-place-home-safety-seniors.html">Aging in Place: How to Make Your Home Safer for Seniors</a></h3>
-        <p>Most falls happen inside the home — and most hazards can be fixed in a weekend. A room-by-room guide to bathrooms, stairs, lighting, and the tech that actually helps.</p>
-        <a class="read" href="aging-in-place-home-safety-seniors.html">Read the guide →</a>
-      </article>
-      <article class="post">
-        <span class="cat">Making the decision</span>
-        <h3><a href="home-care-agency-vs-private-caregiver.html">Home Care vs. Hiring a Private Caregiver: What's the Difference?</a></h3>
-        <p>The private route looks cheaper on paper. Here's the full picture: legal obligations, backup coverage, vetting, and when hiring directly genuinely makes sense.</p>
-        <a class="read" href="home-care-agency-vs-private-caregiver.html">Read the guide →</a>
-      </article>
-      <article class="post">
-        <span class="cat">Recovery</span>
-        <h3><a href="recovering-at-home-after-surgery.html">Recovering at Home After Surgery: What Kind of Support Do You Actually Need?</a></h3>
-        <p>The first 72 hours decide the recovery. What different surgeries require, how much support for how long, and the questions to ask the care team before discharge.</p>
-        <a class="read" href="recovering-at-home-after-surgery.html">Read the guide →</a>
-      </article>
-      <article class="post">
-        <span class="cat">What it's really like</span>
-        <h3><a href="day-in-the-life-home-care-client.html">A Day in the Life of a Home Care Client: What Support Really Looks Like</a></h3>
-        <p>Follow one client's care day hour by hour — the morning routine, the errands, the visit notes her daughter reads from Calgary — and see what home care actually feels like.</p>
-        <a class="read" href="day-in-the-life-home-care-client.html">Read the guide →</a>
-      </article>
+{%- endfor %}{% endfor %}
     </div>
   </div>
 </section>
@@ -344,7 +297,7 @@
       <span>Bon<em style="font-style:normal;color:var(--heart)">hearts</em></span>
     </a>
     <p class="foot-contact"><strong>Bonhearts Home Care</strong> &middot; Available 24/7 &middot; <a href="tel:+14318149914">(431) 814-9914</a> &middot; <!--email_off--><a href="mailto:info@bonhearts.ca">info@bonhearts.ca</a><!--/email_off--></p>
-    <p>Serving Winnipeg, Selkirk, Lockport and West St. Paul, Manitoba.</p>
+    <p>Serving Winnipeg, Selkirk, Lockport, West St.&nbsp;Paul and East St.&nbsp;Paul, Manitoba.</p>
     <p class="foot-links"><a href="/privacy-policy">Privacy Policy</a> &middot; <a href="/guarantee-terms">Guarantee Terms</a> &middot; <a href="/contact.html">Contact</a></p>
     <p>Bonhearts is a private agency, not part of WRHA or Shared Health. Personal health information is handled in accordance with Manitoba's Personal Health Information Act (PHIA).</p>
     <p>&copy; 2026 Bonhearts Home Care. All rights reserved.</p>

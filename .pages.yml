@@ -1,0 +1,134 @@
+# Pages CMS (https://pagescms.org) configuration for the Bonhearts blog.
+# How to use it: BLOG-EDITOR.md.
+
+media:
+  input: images/blog
+  output: /images/blog
+
+content:
+  - name: articles
+    label: Articles
+    type: collection
+    path: _articles
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      fields: [title, date, published]
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: published
+        label: Published
+        type: boolean
+        default: false
+        description: "Off = draft. Drafts are not built: no page, not on the blog page, not in the sitemap."
+      - name: title
+        label: Title (H1)
+        type: string
+        required: true
+      - name: seo_title
+        label: Browser tab / Google title
+        type: string
+        description: "Optional shorter title. ' | Bonhearts Home Care' is added automatically. Leave empty to use the title."
+      - name: description
+        label: Meta description
+        type: text
+        required: true
+        description: "Aim for 160 characters or fewer. Shown in Google results and link previews."
+      - name: permalink
+        label: Permalink (URL)
+        type: string
+        required: true
+        pattern:
+          regex: "^/[a-z0-9-]+\\.html$"
+          message: "Use /lowercase-words-with-dashes.html. Never change it after the post is published."
+      - name: date
+        label: Date published
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: date_modified
+        label: Date last updated
+        type: date
+        default: ""
+        description: "Optional. Set it when you make a real content change."
+        options:
+          format: yyyy-MM-dd
+      - name: image
+        label: Social share image
+        type: image
+        description: "WebP, under 200 KB, 1200 px wide. Leave empty to use the standard Bonhearts image."
+      - name: image_alt
+        label: Image description (alt text)
+        type: string
+      - name: category
+        label: Category label
+        type: string
+        required: true
+        description: "The small label on the card and post, e.g. Getting started."
+      - name: card_text
+        label: Blog page card text
+        type: text
+        description: "One or two sentences for the card on /blogs. Leave empty to use the meta description."
+      - name: teaser
+        label: Keep reading text
+        type: text
+        description: "Short line shown when another post suggests this one. Leave empty to use the card text."
+      - name: read_time
+        label: Read time
+        type: string
+        description: "e.g. 6 min"
+      - name: related_services
+        label: Related services
+        type: select
+        description: "Pick 1 to 3."
+        options:
+          multiple: true
+          max: 3
+          values:
+            - name: /personal-care-services.html
+              label: Personal Care Services
+            - name: /post-hospital-convalescent-care.html
+              label: Post-Hospital & Convalescent Care
+            - name: /overnight-respite-care.html
+              label: Overnight & Respite Care
+            - name: /senior-care.html
+              label: Senior Home Care
+            - name: /companionship-outings.html
+              label: Companionship & Outings
+            - name: /household-support.html
+              label: Household Support
+            - name: /specialized-care.html
+              label: Specialized Care
+            - name: /disability-support-services.html
+              label: Disability Support Services
+            - name: /dementia-care.html
+              label: Dementia Care (page not live yet, hidden on the site)
+      - name: keep_reading
+        label: Keep reading (other posts)
+        type: string
+        list: true
+        description: "Permalinks of up to 3 other posts, e.g. /home-care-funding-manitoba.html"
+        pattern:
+          regex: "^/[a-z0-9-]+\\.html$"
+          message: "Use the other post's permalink, e.g. /home-care-funding-manitoba.html"
+      - name: cta_title
+        label: End box heading
+        type: string
+        description: "Heading of the navy box at the end. Leave empty for the standard one."
+      - name: cta_text
+        label: End box text
+        type: text
+        description: "Text of the navy box. Links use Markdown, e.g. [(431) 814-9914](tel:+14318149914). Leave empty for the standard text."
+      - name: listing_order
+        label: Order among same-date posts
+        type: number
+        description: "Optional. Lower numbers come first when posts share a date."
+      - name: body
+        label: Article
+        type: rich-text
+        options:
+          format: markdown
+          media: false

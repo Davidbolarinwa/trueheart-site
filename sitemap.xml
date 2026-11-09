@@ -1,3 +1,6 @@
+---
+# Static entries are kept by hand; blog entries come from _articles/.
+---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -62,67 +65,16 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+{%- comment %} Blog posts, generated from _articles/ (drafts are never built, so never listed). {% endcomment %}
+{%- assign posts = site.articles | sort: "date" | reverse %}
+{%- for post in posts %}{% unless post.noindex %}
   <url>
-    <loc>https://bonhearts.ca/home-care-assessment-what-to-expect.html</loc>
-    <lastmod>2026-10-14</lastmod>
+    <loc>{{ site.url }}{{ post.url }}</loc>
+    <lastmod>{{ post.date_modified | default: post.date | date: "%Y-%m-%d" }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://bonhearts.ca/home-care-funding-manitoba.html</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bonhearts.ca/in-home-care-vs-long-term-care-winnipeg.html</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bonhearts.ca/veterans-hiring-home-care-mistakes.html</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bonhearts.ca/prepare-home-for-personal-care-services.html</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bonhearts.ca/signs-it-might-be-time-for-home-care.html</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bonhearts.ca/aging-in-place-home-safety-seniors.html</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bonhearts.ca/home-care-agency-vs-private-caregiver.html</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bonhearts.ca/recovering-at-home-after-surgery.html</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://bonhearts.ca/day-in-the-life-home-care-client.html</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
+{%- endunless %}{% endfor %}
   <url>
     <loc>https://bonhearts.ca/manitoba.html</loc>
     <lastmod>2026-10-22</lastmod>

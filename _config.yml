@@ -1,0 +1,47 @@
+# Jekyll config for GitHub Pages (github-pages gem, Jekyll 3.10).
+# Plain .html pages without front matter are copied as they are; only the blog
+# (_articles/), blogs.html and sitemap.xml are built from templates.
+# How to add a post: BLOG-EDITOR.md.
+
+title: Bonhearts Home Care
+url: https://bonhearts.ca
+baseurl: ""
+timezone: America/Winnipeg
+
+markdown: kramdown
+kramdown:
+  # Keep apostrophes and quotes exactly as typed (no curly-quote conversion).
+  smart_quotes: ["apos", "apos", "quot", "quot"]
+  # No automatic id="" on headings (the old pages had none).
+  auto_ids: false
+
+collections:
+  articles:
+    output: true
+    # Every article sets its own permalink (its URL never changes once published).
+    permalink: /:name.html
+
+defaults:
+  - scope:
+      path: ""
+      type: articles
+    values:
+      layout: post
+      published: false
+      author: Mary, RN
+      author_title: Co-founder, Bonhearts Home Care
+      author_job_title: Registered Nurse, Co-founder
+      reviewed_by: a Registered Nurse
+      image: /og-image.png
+
+# Not part of the site. (Setting exclude replaces Jekyll's own default list, so
+# its entries are repeated here.)
+exclude:
+  - BLOG-EDITOR.md
+  - CLAUDE.md
+  - README.md
+  - wrangler.jsonc
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

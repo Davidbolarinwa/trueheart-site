@@ -1,0 +1,38 @@
+# Service pages offered in an article's "Related services" block (and in Pages CMS).
+# live: false hides a page that doesn't exist yet.
+- url: /personal-care-services.html
+  name: Personal Care Services
+  blurb: Help with bathing, dressing, hygiene, medication reminders, and daily routines, delivered with dignity and patience.
+  live: true
+- url: /post-hospital-convalescent-care.html
+  name: Post-Hospital & Convalescent Care
+  blurb: Steady support through the first weeks home, so recovery goes as smoothly as possible.
+  live: true
+- url: /overnight-respite-care.html
+  name: Overnight & Respite Care
+  blurb: Whether you need a full night's sleep or a week away, we cover the hours when someone needs to be there.
+  live: true
+- url: /senior-care.html
+  name: Senior Home Care
+  blurb: Practical, everyday support that helps your loved one stay independent in their own home for longer.
+  live: true
+- url: /companionship-outings.html
+  name: Companionship & Outings
+  blurb: Conversation, appointments, groceries, a walk in the park. Someone who actually shows up.
+  live: true
+- url: /household-support.html
+  name: Household Support
+  blurb: Laundry, light cleaning, meal prep, and the small tasks that pile up faster than anyone expects.
+  live: true
+- url: /specialized-care.html
+  name: Specialized Care
+  blurb: Experienced support for dementia, Alzheimer's, Parkinson's, ALS, and other complex conditions.
+  live: true
+- url: /disability-support-services.html
+  name: Disability Support Services
+  blurb: In-home care for adults of any age living with a disability, focused on independence and daily wellbeing.
+  live: true
+- url: /dementia-care.html
+  name: Dementia Care
+  blurb: Placeholder for a future dementia care page.
+  live: false
