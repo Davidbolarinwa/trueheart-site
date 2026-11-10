@@ -13,7 +13,7 @@ GitHub account that owns this repo. This file isn't published on the site.
    - **Meta description**: 160 characters or fewer. It's what Google and Facebook show.
    - **Permalink**: the address, e.g. `/caring-for-a-parent-with-dementia.html`. Lowercase
      words and dashes only, starting with `/` and ending in `.html`.
-   - **Date published**, **Category label**, **Read time**, **Related services** (1 to 3).
+   - **Date published**, **Category label**, **Read time**, **Related services** (1 to 5).
    - Optional: browser-tab title, card text, keep-reading text and posts, end box heading
      and text, social share image.
    - **Article**: the post itself. Use headings (H2 for sections, H3 under them), lists,
@@ -26,7 +26,7 @@ GitHub account that owns this repo. This file isn't published on the site.
    Pages rebuilds, and the post is live within a few minutes. It appears on `/blogs` and in
    the sitemap automatically.
 
-The byline, "Reviewed by a Registered Nurse" line, related services, end box and the
+The byline ("By Mary, RN"), related services, end box and the
 analytics tags come from the layout. You don't add them to the article.
 
 ## Drafts

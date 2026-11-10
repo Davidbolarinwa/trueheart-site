@@ -31,7 +31,6 @@ defaults:
       author: Mary, RN
       author_title: Co-founder, Bonhearts Home Care
       author_job_title: Registered Nurse, Co-founder
-      reviewed_by: a Registered Nurse
       image: /og-image.png
 
 # Not part of the site. (Setting exclude replaces Jekyll's own default list, so

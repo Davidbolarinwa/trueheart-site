@@ -53,6 +53,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://bonhearts.ca/dementia-care.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/palliative-care.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://bonhearts.ca/disability-support-services.html</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -102,6 +114,12 @@
   <url>
     <loc>https://bonhearts.ca/manitoba-west-st-paul.html</loc>
     <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bonhearts.ca/manitoba-east-st-paul.html</loc>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

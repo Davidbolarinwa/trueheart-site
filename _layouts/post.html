@@ -116,7 +116,6 @@
   .post-body blockquote{background:var(--white);border-left:4px solid var(--heart);border-radius:0 12px 12px 0;padding:18px 22px;margin:26px 0;box-shadow:var(--shadow)}
   .post-body blockquote p{margin-bottom:0}
   .post-body blockquote p + p{margin-top:12px}
-  .byline .reviewed{display:block;margin-top:4px;color:var(--ink);font-weight:600}
   .related{margin:40px 0 0}
   .related h2{font-size:1.3rem;font-weight:800;margin:0 0 14px}
   .related-list{list-style:none;margin:0;display:grid;gap:12px}
@@ -287,6 +286,8 @@
             <li><a href="companionship-outings.html">Companionship &amp; Outings</a></li>
             <li><a href="household-support.html">Household Support</a></li>
             <li><a href="specialized-care.html">Specialized Care</a></li>
+            <li><a href="dementia-care.html">Dementia Care</a></li>
+            <li><a href="palliative-care.html">Palliative Care</a></li>
             <li><a href="disability-support-services.html">Disability Support Services</a></li>
           </ul>
         </li>
@@ -310,6 +311,7 @@
                 <li><a href="manitoba-selkirk.html">Selkirk</a></li>
                 <li><a href="manitoba-lockport.html">Lockport</a></li>
                 <li><a href="manitoba-west-st-paul.html">West St. Paul</a></li>
+                <li><a href="manitoba-east-st-paul.html">East St. Paul</a></li>
               </ul>
             </li>
           </ul>
@@ -333,7 +335,7 @@
 
   <span class="cat">{{ page.category | escape }}</span>
   <h1>{{ page.title | escape }}</h1>
-  <p class="byline">By <strong>{{ page.author | escape }}</strong> · {{ page.author_title }}{% if page.read_time %} · {{ page.read_time }} read{% endif %}{% if page.reviewed_by %}<span class="reviewed">Reviewed by {{ page.reviewed_by }}</span>{% endif %}</p>
+  <p class="byline">By <strong>{{ page.author | escape }}</strong> · {{ page.author_title }}{% if page.read_time %} · {{ page.read_time }} read{% endif %}</p>
 
   <div class="post-body">
 {{ content }}

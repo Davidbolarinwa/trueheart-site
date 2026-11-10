@@ -14,6 +14,8 @@ related_services:
   - "/senior-care.html"
   - "/disability-support-services.html"
   - "/personal-care-services.html"
+  - "/dementia-care.html"
+  - "/palliative-care.html"
 keep_reading:
   - "/veterans-hiring-home-care-mistakes.html"
   - "/home-care-agency-vs-private-caregiver.html"

@@ -83,10 +83,10 @@ content:
       - name: related_services
         label: Related services
         type: select
-        description: "Pick 1 to 3."
+        description: "Pick 1 to 5."
         options:
           multiple: true
-          max: 3
+          max: 5
           values:
             - name: /personal-care-services.html
               label: Personal Care Services
@@ -102,10 +102,12 @@ content:
               label: Household Support
             - name: /specialized-care.html
               label: Specialized Care
+            - name: /dementia-care.html
+              label: Dementia Care
+            - name: /palliative-care.html
+              label: Palliative Care
             - name: /disability-support-services.html
               label: Disability Support Services
-            - name: /dementia-care.html
-              label: Dementia Care (page not live yet, hidden on the site)
       - name: keep_reading
         label: Keep reading (other posts)
         type: string

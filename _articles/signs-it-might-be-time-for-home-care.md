@@ -14,6 +14,7 @@ related_services:
   - "/senior-care.html"
   - "/overnight-respite-care.html"
   - "/companionship-outings.html"
+  - "/dementia-care.html"
 keep_reading:
   - "/in-home-care-vs-long-term-care-winnipeg.html"
   - "/home-care-assessment-what-to-expect.html"
