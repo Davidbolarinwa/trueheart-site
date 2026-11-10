@@ -19,10 +19,8 @@ keep_reading:
 cta_title: "Want a number for your family?"
 cta_text: "Book a free care consultation. We'll build a plan around your loved one's needs and your budget, starting with what public home care and funding can cover first. If it's urgent, call us 24/7 at [(431) 814-9914](tel:+14318149914)."
 permalink: "/dementia-care-at-home-cost-winnipeg.html"
-published: false
+published: true
 ---
-
-> **DRAFT NOTE (delete this box before publishing):** Voice answers are now in. Mary to read and approve before publishing, since the post carries her byline.
 
 Your mom was just diagnosed. Or your dad has started leaving the stove on. And somewhere between the worry and the late-night searching, one question keeps coming back: *how are we going to pay for this?*
 
