@@ -22,7 +22,7 @@ permalink: "/dementia-care-at-home-cost-winnipeg.html"
 published: false
 ---
 
-> **DRAFT NOTE (delete this box before publishing):** Voice sections marked "VOICE" below still need real answers from Mary or David. Every number comes from the brief's facts table. Open checks: minimum visit length, and whether assessed WRHA home care has any client charge.
+> **DRAFT NOTE (delete this box before publishing):** Voice answers are now in. Mary to read and approve before publishing, since the post carries her byline.
 
 Your mom was just diagnosed. Or your dad has started leaving the stove on. And somewhere between the worry and the late-night searching, one question keeps coming back: *how are we going to pay for this?*
 
@@ -36,7 +36,7 @@ Start with WRHA. Call the Home Care Intake Line at **204-788-8330** to get your 
 
 Home care in Manitoba is arranged through your regional health authority. In Winnipeg, that's the WRHA, and every request goes through the intake line above. It's not an insured service under the Canada Health Act, so families sometimes pay for care while they wait for public services to start.
 
-**VOICE (David, Q5, from your answer):** When a family calls us worried about cost, the first thing we tell them is to call WRHA and get assessed. You need to know what you qualify for before you spend a dollar on private care.
+When a family calls us worried about cost, the first thing we tell them is to call WRHA and get assessed. You need to know what your loved one qualifies for before you spend a dollar on private care.
 
 Public home care is a strong starting point, but families often top it up. The common reasons: the hours approved don't cover evenings or weekends, visits are short, or the family simply needs more help than the assessment allows. That's where private hours come in.
 
@@ -75,14 +75,32 @@ Where you land in that range depends on the care your loved one needs. Your exac
 
 ## An ER nurse's advice: plan before the crisis
 
-**VOICE (Mary, Q1 to Q4, still needed):** What Mary saw in the ER when families hadn't planned; the most expensive mistake families make; the signs that a family needs more hours or overnight care; and one free thing a family can do this week to make home safer. Two or three short paragraphs in her words.
+As an ER nurse, I saw the same pattern again and again. An older parent comes in after a fall. We do the scan, and nothing is broken. They go home. The next time we see them, it's something more serious: a worse fall, or an infection because nobody was there to help them stay clean and dry after the first one. Now they're confused and in worse shape than when they first came in.
+
+That's the most expensive mistake families make. They wait for the crisis. A few hours of help at home costs far less, in money and in health, than a second trip to the ER.
+
+**Signs your family needs more hours, or overnight care:**
+
+- You're using more and more of your work hours to handle emergencies.
+- You can't focus at work, because you're waiting for the next call: "Mom fell again," or "She forgot her diabetes medication."
+- The food you cook ahead of time comes back untouched.
+- Showers and basic hygiene are being skipped.
+- You're exhausted, and the people helping are starting to burn out.
+
+**One free thing you can do this week:** give your loved one a schedule with people in it. Line up family, friends or neighbours to check in at set times that fit *their* day. If Mom wakes up at 10, someone stops by around then: "Good morning, how are you feeling? Want to go for a walk? Read the paper together? What should we make for breakfast?" Add regular outings, like a community centre program. Knowing who is coming and when gives them something to look forward to, and it tells them people care. It isn't only the illness that wears people down. Loneliness does too.
 
 ## Why the same caregiver matters for dementia
 
-**VOICE (David, Q7, still needed):** In your own words, why a consistent caregiver is worth it for someone living with dementia.
+Think about why you've kept the same friends for years. Familiarity builds trust. When it's the same caregiver every time, your loved one knows who is coming and when. A stranger isn't walking into their home. That sense of security matters for anyone, and even more for someone living with dementia.
 
 ## How the free consultation helps you spend less
 
-**VOICE (David, Q6, still needed):** How the consultation keeps families from overspending, with a typical example of how a plan comes together.
+We build the plan around what your loved one actually needs, so you're not paying for hours that don't help. We ask about their routine and set care around it.
+
+Here's a typical example. A family is on top of everything. They buy the groceries and cook a week of meals ahead. Then they notice Mom isn't eating what they made. That's where we come in: "Your daughter made this for you. Want me to warm it up, or do you feel more like a salad or toast today?" The same goes for hygiene: "Today's shower day. We don't need a long soak, just a quick rinse." The family can't always be there. We become their eyes and ears.
+
+Plans change, and that's fine. Give us 24 to 48 hours' notice and we'll adjust. I once cared for a client whose bath day fell the week after a family wedding. She wanted to look her best for it, but her public home care schedule couldn't move for a one-off. With private care, it can. If you need us on a different day, for church or a family event, we'll be there. It might not be your usual caregiver for a one-off change, but we'll find someone, and the more often it happens, the more familiar that person becomes. Older adults value their privacy too, and they don't always want extended family knowing they need help getting ready.
+
+You set the schedule and the rules. If a caregiver isn't the right fit, tell us and we'll find someone else. The consultation is us getting to know you, and it's just as much a chance for you to decide whether we're the right fit for your family.
 
 The bottom line: start with WRHA, use every program you qualify for, and pay privately only for the gaps. If you'd like help putting that plan together, that's exactly what our free consultation is for.
