@@ -1,0 +1,301 @@
+<!-- Home care cost estimator, included as cost-estimator.html (Liquid include).
+     Self-contained (markup, scoped CSS, vanilla JS) and safe to include more
+     than once on a page: each copy wires itself up, and the GA events fire
+     once per page view. Pricing rules: publish only the $25–$45/hr range. -->
+<div class="bh-est" data-bh-est>
+<style>
+  .bh-est{text-align:left;font-family:'Poppins',system-ui,sans-serif;color:var(--ink,#16324F);margin:0 auto;max-width:720px}
+  .bh-est *{box-sizing:border-box}
+  .bh-est-card{background:var(--white,#fff);border:1px solid var(--line,#DCD5C9);border-radius:var(--radius,14px);box-shadow:var(--shadow,0 10px 30px rgba(22,50,79,.10));padding:28px 24px}
+  .bh-est fieldset{border:0;margin:0 0 22px;padding:0;min-width:0}
+  .bh-est legend,.bh-est .bh-est-label{display:block;font-weight:600;font-size:1rem;margin:0 0 10px;padding:0}
+  .bh-est .bh-est-help{font-size:.875rem;color:#3C5166;margin:8px 0 0;line-height:1.5}
+  .bh-est .bh-est-help a{color:var(--heart,#B23A48);font-weight:600}
+  .bh-est-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .bh-est-chip{min-height:44px;min-width:56px;padding:8px 14px;border:1.5px solid var(--line,#DCD5C9);border-radius:999px;background:var(--paper,#FBF9F5);color:var(--ink,#16324F);font:600 .95rem 'Poppins',system-ui,sans-serif;cursor:pointer;touch-action:manipulation;transition:background var(--dur-fast,180ms),border-color var(--dur-fast,180ms),color var(--dur-fast,180ms)}
+  .bh-est-chip:hover{border-color:var(--heart,#B23A48)}
+  .bh-est-chip[aria-pressed="true"]{background:var(--heart,#B23A48);border-color:var(--heart,#B23A48);color:#fff}
+  .bh-est-chip.bh-est-all{min-width:0}
+  .bh-est-field{margin:0 0 22px}
+  .bh-est select,.bh-est input[type="number"],.bh-est input[type="text"],.bh-est input[type="email"],.bh-est input[type="tel"]{display:block;width:100%;min-height:48px;padding:10px 14px;border:1.5px solid var(--line,#DCD5C9);border-radius:10px;background:var(--white,#fff);color:var(--ink,#16324F);font:400 1rem 'Poppins',system-ui,sans-serif}
+  .bh-est select:focus,.bh-est input:focus{outline:3px solid var(--heart,#B23A48);outline-offset:1px;border-color:var(--heart,#B23A48)}
+  .bh-est-radios{display:flex;flex-wrap:wrap;gap:8px}
+  .bh-est-radio{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1.5px solid var(--line,#DCD5C9);border-radius:999px;background:var(--paper,#FBF9F5);font-weight:600;font-size:.95rem;cursor:pointer}
+  .bh-est-radio input{width:18px;height:18px;accent-color:var(--heart,#B23A48);margin:0}
+  .bh-est-radio:has(input:checked){border-color:var(--heart,#B23A48)}
+  .bh-est-result{margin-top:6px;padding:22px 20px;border-radius:12px;background:var(--paper-dim,#F2EEE6);line-height:1.6}
+  .bh-est-result p{margin:0 0 10px;color:#2C4257;font-size:1rem}
+  .bh-est-result p:last-child{margin-bottom:0}
+  .bh-est-result .bh-est-cost{font-size:1.15rem;color:var(--ink,#16324F)}
+  .bh-est-result .bh-est-cost strong{font-weight:800;color:var(--ink,#16324F)}
+  .bh-est-result .bh-est-hours{font-weight:600;color:var(--ink,#16324F)}
+  .bh-est-result .bh-est-note{font-size:.9rem;color:#3C5166}
+  .bh-est-result .bh-est-vip{font-size:.9rem;border-left:3px solid var(--heart,#B23A48);padding-left:12px}
+  .bh-est-result a{color:var(--heart,#B23A48);font-weight:600}
+  .bh-est-lead{margin-top:20px;padding-top:22px;border-top:1px solid var(--line,#DCD5C9)}
+  .bh-est-lead h3{font-size:1.25rem;font-weight:800;margin:0 0 8px;line-height:1.25}
+  .bh-est-lead [data-leadform] > p{font-size:.95rem;color:#3C5166;margin:0 0 18px;line-height:1.55}
+  .bh-est-lead label.bh-est-in{display:block;font-weight:600;font-size:.95rem;margin:0 0 14px}
+  .bh-est-lead label.bh-est-in > span{display:block;margin-bottom:6px}
+  .bh-est-lead .bh-est-opt{font-weight:400;color:var(--sage,#5E7268)}
+  .bh-est-consent{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;line-height:1.5;color:#2C4257;margin:4px 0 18px;cursor:pointer}
+  .bh-est-consent input{width:22px;height:22px;flex-shrink:0;margin:1px 0 0;accent-color:var(--heart,#B23A48)}
+  .bh-est-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+  .bh-est .bh-est-submit{display:block;width:100%;min-height:52px;font-size:1.02rem;border:none;cursor:pointer;font-family:'Poppins',system-ui,sans-serif;color:#fff}
+  .bh-est .bh-est-submit[disabled]{opacity:.7;cursor:wait;transform:none}
+  .bh-est-privacy{font-size:.825rem;color:var(--sage,#5E7268);margin:10px 0 0;text-align:center}
+  .bh-est-privacy a{color:inherit}
+  .bh-est-error{margin:12px 0 0;padding:12px 14px;border-radius:10px;background:#FBEAEC;color:var(--heart-deep,#8E2C38);font-size:.95rem;font-weight:600}
+  .bh-est-error a{color:inherit}
+  .bh-est-done{padding:18px;border-radius:12px;background:#EAF3EE;color:#1F4A35;font-weight:600;line-height:1.55}
+  .bh-est-book{margin-top:22px;text-align:center}
+  .bh-est .bh-est-book .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;background:transparent;color:var(--heart,#B23A48);border:2px solid var(--heart,#B23A48);box-shadow:none}
+  .bh-est .bh-est-book .btn:hover{background:var(--heart,#B23A48);color:#fff}
+  .bh-est [hidden]{display:none!important}
+  /* Under 768 px the chat bubble sits bottom-right: leave room under the last button. */
+  @media (max-width:767px){
+    .bh-est-card{padding-bottom:104px}
+  }
+  @media (max-width:480px){
+    .bh-est-card{padding:22px 16px 104px}
+    .bh-est-chip{min-width:0;flex:1 0 calc(25% - 8px);padding:8px 6px}
+    .bh-est-chip.bh-est-all{flex:1 0 calc(50% - 8px)}
+  }
+</style>
+<div class="bh-est-card">
+  <fieldset>
+    <legend>Which days do you need care?</legend>
+    <div class="bh-est-chips" data-days>
+      <button type="button" class="bh-est-chip" data-day="Mon" aria-pressed="false" aria-label="Monday">Mon</button>
+      <button type="button" class="bh-est-chip" data-day="Tue" aria-pressed="false" aria-label="Tuesday">Tue</button>
+      <button type="button" class="bh-est-chip" data-day="Wed" aria-pressed="false" aria-label="Wednesday">Wed</button>
+      <button type="button" class="bh-est-chip" data-day="Thu" aria-pressed="false" aria-label="Thursday">Thu</button>
+      <button type="button" class="bh-est-chip" data-day="Fri" aria-pressed="false" aria-label="Friday">Fri</button>
+      <button type="button" class="bh-est-chip" data-day="Sat" aria-pressed="false" aria-label="Saturday">Sat</button>
+      <button type="button" class="bh-est-chip" data-day="Sun" aria-pressed="false" aria-label="Sunday">Sun</button>
+      <button type="button" class="bh-est-chip bh-est-all" data-all aria-pressed="false">Every day</button>
+    </div>
+  </fieldset>
+
+  <div class="bh-est-field">
+    <label class="bh-est-label" data-for="hours">Hours per day</label>
+    <select data-hours>
+      <option value="2">2 hours</option>
+      <option value="3">3 hours</option>
+      <option value="4" selected>4 hours</option>
+      <option value="5">5 hours</option>
+      <option value="6">6 hours</option>
+      <option value="7">7 hours</option>
+      <option value="8">8 hours</option>
+      <option value="9">9 hours</option>
+      <option value="10">10 hours</option>
+      <option value="11">11 hours</option>
+      <option value="12">12 hours</option>
+    </select>
+    <p class="bh-est-help">Need more than 12 hours a day or overnight care? <a href="/get-in-touch">Let&rsquo;s build a custom quote</a>.</p>
+  </div>
+
+  <div class="bh-est-field">
+    <label class="bh-est-label" data-for="wrha">Hours WRHA home care already covers per week <span style="font-weight:400;color:var(--sage,#5E7268)">(optional)</span></label>
+    <input type="number" data-wrha min="0" max="84" step="1" inputmode="numeric" placeholder="0">
+    <p class="bh-est-help">Not assessed yet? Call WRHA Home Care Intake at <a href="tel:+12047888330">204-788-8330</a>.</p>
+  </div>
+
+  <fieldset>
+    <legend>Is your loved one a Veteran?</legend>
+    <div class="bh-est-radios">
+      <label class="bh-est-radio"><input type="radio" name="bh-est-vet" value="Yes"> Yes</label>
+      <label class="bh-est-radio"><input type="radio" name="bh-est-vet" value="No"> No</label>
+      <label class="bh-est-radio"><input type="radio" name="bh-est-vet" value="Not sure"> Not sure</label>
+    </div>
+  </fieldset>
+
+  <div class="bh-est-result" data-result aria-live="polite">
+    <p class="bh-est-note" data-empty>Pick the days you need care to see your estimate.</p>
+    <div data-filled hidden>
+      <p class="bh-est-cost" data-cost></p>
+      <p data-allcovered hidden>WRHA covers the hours you selected. We can add extra hours, or step in while you wait for services to start.</p>
+      <p class="bh-est-hours" data-hoursline></p>
+      <p class="bh-est-note">Every plan is custom. Your exact rate is set at your free consultation.</p>
+      <p class="bh-est-vip" data-vip hidden>Veterans may qualify for the Veterans Independence Program, which can cover up to $13,779.63 a year for home care services in 2026 (about $265 a week), depending on eligibility. <a href="https://public.cdn.cloud.veterans.gc.ca/pdf/resources/rates/vip-max-rates-table-2026.pdf" target="_blank" rel="noopener">See VAC&rsquo;s 2026 rates</a>.</p>
+    </div>
+  </div>
+
+  <div class="bh-est-lead" data-lead hidden>
+    <div data-leadform>
+      <h3>Get your personalized cost breakdown</h3>
+      <p>We&rsquo;ll email you your estimate with your schedule, what WRHA and funding programs may cover, tax credits you may qualify for, and ways to lower the cost.</p>
+      <form novalidate>
+        <label class="bh-est-in"><span>First name</span><input type="text" name="first_name" autocomplete="given-name" required></label>
+        <label class="bh-est-in"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+        <label class="bh-est-in"><span>Phone <span class="bh-est-opt">(optional)</span></span><input type="tel" name="phone" autocomplete="tel"></label>
+        <div class="bh-est-hp" aria-hidden="true"><label>Leave this empty <input type="text" name="bh_hp" tabindex="-1" autocomplete="off"></label></div>
+        <label class="bh-est-consent"><input type="checkbox" name="consent_followup"> <span>Yes, David from Bonhearts can follow up with me by email about my care options. I can unsubscribe anytime.</span></label>
+        <button type="submit" class="btn bh-est-submit">Email me my breakdown</button>
+        <p class="bh-est-privacy">See our <a href="/privacy-policy">Privacy Policy</a>.</p>
+        <p class="bh-est-error" data-error role="alert" hidden></p>
+      </form>
+    </div>
+    <p class="bh-est-done" data-done role="status" hidden></p>
+  </div>
+
+  <div class="bh-est-book" data-book hidden><a class="btn" href="/get-in-touch">Book a free consultation</a></div>
+</div>
+<script>
+(function(){
+  // Make.com webhook that receives estimator leads (source: "cost_estimator").
+  const ESTIMATOR_ENDPOINT = 'https://hook.us2.make.com/qwx8ojqepdakasaj0g7bfyjrskal5u7e';
+  const RATE_LOW = 25, RATE_HIGH = 45;
+  // Spam guard (same approach as get-in-touch.html): a filled honeypot or a
+  // submit sooner than this after page load shows success but sends nothing.
+  const MIN_SUBMIT_MS = 2500;
+  const PAGE_LOADED_AT = Date.now();
+  const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  // Shared across every copy on the page, so each event fires once per view.
+  const shared = window.__bhEst = window.__bhEst || { count: 0, calcFired: false };
+  const money = n => '$' + n.toLocaleString('en-CA');
+  const hrs = n => n + (n === 1 ? ' hour' : ' hours');
+  const track = (name, params) => { if (typeof gtag === 'function') gtag('event', name, params); };
+
+  document.querySelectorAll('[data-bh-est]:not([data-bh-ready])').forEach(root => {
+    root.setAttribute('data-bh-ready', '');
+    const n = ++shared.count;
+    const $ = sel => root.querySelector(sel);
+
+    // Unique ids and radio names per copy.
+    const hoursSel = $('[data-hours]'), wrhaIn = $('[data-wrha]');
+    hoursSel.id = 'bh-est-' + n + '-hours';
+    wrhaIn.id = 'bh-est-' + n + '-wrha';
+    root.querySelector('[data-for="hours"]').setAttribute('for', hoursSel.id);
+    root.querySelector('[data-for="wrha"]').setAttribute('for', wrhaIn.id);
+    root.querySelectorAll('.bh-est-field').forEach((f, i) => {
+      const help = f.querySelector('.bh-est-help'), ctl = f.querySelector('select, input');
+      help.id = 'bh-est-' + n + '-help' + i;
+      ctl.setAttribute('aria-describedby', help.id);
+    });
+    root.querySelectorAll('input[name="bh-est-vet"]').forEach(r => { r.name = 'bh-est-vet-' + n; });
+
+    const dayBtns = [...root.querySelectorAll('[data-day]')];
+    const allBtn = $('[data-all]');
+    let est = null;
+
+    function calc(){
+      const days = dayBtns.filter(b => b.getAttribute('aria-pressed') === 'true').map(b => b.dataset.day);
+      allBtn.setAttribute('aria-pressed', String(days.length === 7));
+      const vetIn = root.querySelector('input[type="radio"]:checked');
+      const veteran = vetIn ? vetIn.value : '';
+      $('[data-vip]').hidden = !(veteran === 'Yes' || veteran === 'Not sure');
+      if (!days.length){
+        est = null;
+        $('[data-empty]').hidden = false;
+        $('[data-filled]').hidden = true;
+        $('[data-lead]').hidden = true;
+        $('[data-book]').hidden = true;
+        return;
+      }
+      const hoursPerDay = parseInt(hoursSel.value, 10);
+      let wrha = parseInt(wrhaIn.value, 10);
+      wrha = isNaN(wrha) ? 0 : Math.min(84, Math.max(0, wrha));
+      const weekly = days.length * hoursPerDay;
+      const priv = Math.max(0, weekly - wrha);
+      est = {
+        days, hours_per_day: hoursPerDay, weekly_hours: weekly, wrha_hours: wrha, private_hours: priv,
+        weekly_low: priv * RATE_LOW, weekly_high: priv * RATE_HIGH,
+        monthly_low: Math.round(priv * RATE_LOW * 52 / 12), monthly_high: Math.round(priv * RATE_HIGH * 52 / 12),
+        veteran
+      };
+      $('[data-empty]').hidden = true;
+      $('[data-filled]').hidden = false;
+      $('[data-cost]').hidden = priv === 0;
+      $('[data-allcovered]').hidden = priv !== 0;
+      $('[data-cost]').innerHTML = 'About <strong>' + money(est.weekly_low) + '–' + money(est.weekly_high) +
+        ' per week</strong> · about <strong>' + money(est.monthly_low) + '–' + money(est.monthly_high) + ' per month</strong>';
+      $('[data-hoursline]').textContent = wrha > 0
+        ? hrs(weekly) + ' a week, ' + wrha + ' covered by WRHA → ' + priv + ' private ' + (priv === 1 ? 'hour' : 'hours')
+        : hrs(weekly) + ' a week → ' + priv + ' private ' + (priv === 1 ? 'hour' : 'hours');
+      $('[data-lead]').hidden = false;
+      $('[data-book]').hidden = false;
+      if (!shared.calcFired){
+        shared.calcFired = true;
+        track('estimate_calculated', { weekly_hours: weekly, private_hours: priv });
+      }
+    }
+
+    dayBtns.forEach(b => b.addEventListener('click', () => {
+      b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+      calc();
+    }));
+    allBtn.addEventListener('click', () => {
+      const on = allBtn.getAttribute('aria-pressed') !== 'true';
+      dayBtns.forEach(b => b.setAttribute('aria-pressed', String(on)));
+      calc();
+    });
+    hoursSel.addEventListener('change', calc);
+    wrhaIn.addEventListener('input', calc);
+    root.querySelectorAll('input[type="radio"]').forEach(r => r.addEventListener('change', calc));
+
+    const form = root.querySelector('form');
+    const errEl = $('[data-error]');
+    const submitBtn = form.querySelector('.bh-est-submit');
+
+    function showDone(email){
+      $('[data-leadform]').hidden = true;
+      const done = $('[data-done]');
+      done.textContent = 'Done! Your breakdown is on its way to ' + email + '. Check your inbox (and spam folder) in the next few minutes.';
+      done.hidden = false;
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      errEl.hidden = true;
+      if (!est) return;
+      const first = form.elements.first_name, email = form.elements.email;
+      first.value = first.value.trim(); email.value = email.value.trim();
+      if (!form.reportValidity()) return;
+      const payload = {
+        first_name: first.value,
+        email: email.value,
+        phone: form.elements.phone.value.trim(),
+        consent_followup: form.elements.consent_followup.checked,
+        days: est.days,
+        hours_per_day: est.hours_per_day,
+        weekly_hours: est.weekly_hours,
+        wrha_hours: est.wrha_hours,
+        private_hours: est.private_hours,
+        weekly_low: est.weekly_low,
+        weekly_high: est.weekly_high,
+        monthly_low: est.monthly_low,
+        monthly_high: est.monthly_high,
+        veteran: est.veteran,
+        page_url: location.href,
+        submitted_at: new Date().toISOString(),
+        source: 'cost_estimator'
+      };
+      const isSpam = !!form.elements.bh_hp.value || (Date.now() - PAGE_LOADED_AT) < MIN_SUBMIT_MS;
+      if (isSpam){ showDone(payload.email); return; }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      try {
+        const res = await fetch(ESTIMATOR_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+      } catch (err) {
+        console.error('Estimator webhook failed:', err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Email me my breakdown';
+        errEl.innerHTML = 'Something went wrong. Call or text us 24/7 at <a href="tel:+14318149914">(431) 814-9914</a>.';
+        errEl.hidden = false;
+        return;
+      }
+      track('generate_lead', { form: 'cost_estimator' });
+      showDone(payload.email);
+    });
+  });
+})();
+</script>
+</div>

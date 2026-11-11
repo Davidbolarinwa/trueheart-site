@@ -8,6 +8,7 @@ category: "Funding"
 card_text: "Most cost articles dodge the number. This one shows the math: what WRHA covers, what private hours cost per week, and 5 ways Winnipeg families pay less."
 teaser: "Real numbers for dementia care at home, and the funding families use to pay less."
 read_time: "7 min"
+show_estimator: true
 related_services:
   - "/dementia-care.html"
   - "/overnight-respite-care.html"
@@ -28,7 +29,7 @@ Most articles about home care costs never give you a number. This one does. Here
 
 ## The short answer
 
-Start with WRHA. Call the Home Care Intake Line at **204-788-8330** to get your loved one assessed. The assessment tells you whether they qualify and what public home care will cover. Private care fills the gaps and is billed by the hour. At Bonhearts, that runs roughly **$25 to $45 an hour** depending on the care needed, and every plan is built around your family.
+Start with WRHA. Call the Home Care Intake Line at **204-788-8330** to get your loved one assessed. The assessment tells you whether they qualify and what public home care will cover. Private care fills the gaps and is billed by the hour. At Bonhearts, that runs roughly **$25 to $45 an hour** depending on the care needed, and every plan is built around your family. For typical plans and a quick estimate, see our [home care cost page](/home-care-cost-winnipeg.html).
 
 ## Step one: what WRHA home care covers, and where families hit gaps
 

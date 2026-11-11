@@ -16,6 +16,9 @@ GitHub account that owns this repo. This file isn't published on the site.
    - **Date published**, **Category label**, **Read time**, **Related services** (1 to 5).
    - Optional: browser-tab title, card text, keep-reading text and posts, end box heading
      and text, social share image.
+   - **Show cost estimator**: switch it on for cost and funding posts. The home care cost
+     estimator then appears under "Estimate your cost", after the article and before Related
+     services. Off by default.
    - **Article**: the post itself. Use headings (H2 for sections, H3 under them), lists,
      bold, links and tables.
 3. Callouts ("Tip from Mary, RN:") are quotes: use the quote button and start with the label

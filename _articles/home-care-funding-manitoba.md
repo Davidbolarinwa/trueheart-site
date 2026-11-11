@@ -59,7 +59,7 @@ If your loved one holds a long-term care or critical illness policy — sometime
 
 ## 4. Private pay — and how families make it sustainable
 
-Many families simply pay directly, and the flexibility is the point: no waitlists, your choice of caregiver, hours that fit your life. Sustainable private-pay care usually starts small — a few respite visits a week — and grows only as needs grow. Some families also blend streams: publicly delivered WRHA home care for some services, private hours to top up evenings and weekends.
+Many families simply pay directly, and the flexibility is the point: no waitlists, your choice of caregiver, hours that fit your life. Sustainable private-pay care usually starts small — a few respite visits a week — and grows only as needs grow. Some families also blend streams: publicly delivered WRHA home care for some services, private hours to top up evenings and weekends. To see what a schedule would cost, try our [home care cost estimator](/home-care-cost-winnipeg.html).
 
 ## Which route is right for your family?
 

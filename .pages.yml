@@ -108,6 +108,11 @@ content:
               label: Palliative Care
             - name: /disability-support-services.html
               label: Disability Support Services
+      - name: show_estimator
+        label: Show cost estimator
+        type: boolean
+        default: false
+        description: "On = the home care cost estimator appears after the article, before Related services."
       - name: keep_reading
         label: Keep reading (other posts)
         type: string
